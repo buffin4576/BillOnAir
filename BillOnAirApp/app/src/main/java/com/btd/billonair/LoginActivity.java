@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -95,7 +98,13 @@ public class LoginActivity extends AppCompatActivity {
             String p2 = ((EditText)findViewById(R.id.txtRegisterConfirmPassword)).getText().toString();
             if(p1.compareTo(p2)==0)
             {
-                resp = connectionController.execute("POST", "http://10.196.75.26:3000/api/users/register", json).get();
+                resp = connectionController.execute("POST", "http://10.196.175.26:3000/api/users/register", json).get();
+                json = new JSONObject(resp);
+                String res = json.get("Message").toString();
+                if(res.compareTo("Utente inserito")==0)
+                {
+                    startActivity(intent);
+                }
             }
             else
             {
@@ -129,7 +138,13 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject json = new JSONObject();
             json.put("password",((EditText)findViewById(R.id.txtLoginPassword)).getText());
             json.put("username",((EditText)findViewById(R.id.txtLoginUsername)).getText());
-            resp = connectionController.execute("POST","http://httpbin.org/post",json).get();
+            resp = connectionController.execute("POST","http://10.196.175.26:3000/api/users/login",json).get();
+            json = new JSONObject(resp);
+            String res = json.get("Message").toString();
+            if(res.compareTo("Login")==0)
+            {
+                startActivity(intent);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
