@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             String p2 = ((EditText)findViewById(R.id.txtRegisterConfirmPassword)).getText().toString();
             if(p1.compareTo(p2)==0)
             {
-                resp = connectionController.execute("POST", "http://10.196.75.26:3000/api/users/register", json).get();
+                resp = connectionController.execute("POST", "http://10.196.175.26:3000/api/users/register", json).get();
             }
             else
             {
