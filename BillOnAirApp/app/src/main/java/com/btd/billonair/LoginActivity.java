@@ -91,8 +91,12 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject json = new JSONObject();
             json.put("password",((EditText)findViewById(R.id.txtRegisterPassword)).getText());
             json.put("username", ((EditText) findViewById(R.id.txtRegisterUsername)).getText());
-            if(((EditText)findViewById(R.id.txtRegisterPassword)).getText()==((EditText)findViewById(R.id.txtRegisterConfirmPassword)).getText())
-                resp = connectionController.execute("POST","http://httpbin.org/post",json).get();
+            String p1 = ((EditText)findViewById(R.id.txtRegisterPassword)).getText().toString();
+            String p2 = ((EditText)findViewById(R.id.txtRegisterConfirmPassword)).getText().toString();
+            if(p1.compareTo(p2)==0)
+            {
+                resp = connectionController.execute("POST", "http://10.196.75.26:3000/api/users/register", json).get();
+            }
             else
             {
                 Toast.makeText(getApplicationContext(),"Password non coincidenti",Toast.LENGTH_LONG);
@@ -104,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("Debug", resp);
+        Log.d("Debug","Resp: "+ resp);
 
 
         //startActivity(intent);

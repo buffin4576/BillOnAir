@@ -139,7 +139,9 @@
                 android:layout_alignLeft="@+id/txtRegisterPassword"
                 android:layout_alignStart="@+id/txtRegisterPassword"
                 android:layout_alignRight="@+id/txtRegisterPassword"
-                android:layout_alignEnd="@+id/txtRegisterPassword" />
+                android:layout_alignEnd="@+id/txtRegisterPassword"
+                android:clickable="true"
+                android:onClick="OnRegister" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
