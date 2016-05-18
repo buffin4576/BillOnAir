@@ -28,6 +28,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 	});
 
 	router.post('/users/register',function(req,res){
+        console.log('CHIAMATA');
 		var query = "INSERT INTO BillOnAir.Passwords (`password`) VALUES (?);";
 		//res.json({'body':req.body.password});
 		var params = [md5(req.body.password)];

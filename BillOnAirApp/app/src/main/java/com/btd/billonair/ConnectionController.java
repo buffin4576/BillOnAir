@@ -91,6 +91,7 @@ public class ConnectionController extends AsyncTask<Object, Void, String>
     public String doPost(String url, JSONObject json) throws IOException {
         InitConnection(url, "POST");
         connection.setDoOutput(true);
+        connection.setRequestProperty("Content-Type","application/json");
         connection.connect();
         OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
         out.write(json.toString());
