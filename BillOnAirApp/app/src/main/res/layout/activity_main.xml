@@ -14,7 +14,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
 
         <android.support.v7.widget.Toolbar android:id="@+id/my_toolbar"
             android:layout_width="fill_parent"
@@ -28,14 +29,6 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
-
-
-            </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
 
