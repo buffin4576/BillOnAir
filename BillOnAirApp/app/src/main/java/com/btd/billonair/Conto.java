@@ -11,6 +11,6 @@ public class Conto {
     boolean Attivo;
     ArrayList<Spesa> ListaSpese;
     Spesa UltimaSpesa;
-
+    int Colore;
     public Conto(){}
 }

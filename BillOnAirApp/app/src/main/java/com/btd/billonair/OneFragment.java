@@ -33,15 +33,14 @@ public class OneFragment extends Fragment
     }
 
 
-    //lv.setAdapter(new AdapterListaConti(this,R.layout.rigaconto,LConti);
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
-        //ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
-        //apertura db
+        //apro db
         //creazione array di tipo conto prendendo le info dal db
         //chiudo il db
+        //lv.setAdapter(new AdapterListaConti(this,R.layout.rigaconto,LConti);
     }
 
 }
