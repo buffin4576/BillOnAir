@@ -4,11 +4,13 @@ package com.btd.billonair;
  * Created by ernrico on 19/05/2016.
  */
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 public class OneFragment extends Fragment {
     public OneFragment() {
@@ -18,6 +20,13 @@ public class OneFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
+
+        //apertura db
+        //creazione array di tipo conto prendendo le info dal db
+        //chiudo il db
+
+        //lv.setAdapter(new AdapterListaConti(this,R.layout.rigaconto,LConti);
     }
 
     @Override
@@ -26,4 +35,8 @@ public class OneFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_one, container, false);
     }
+
+
+
+
 }

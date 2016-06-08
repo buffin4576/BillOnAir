@@ -7,9 +7,72 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
+        android:text="Spesa:"
+        android:id="@+id/TxtS"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="30dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entrata:"
+        android:id="@+id/TxtE"
+        android:textSize="30dp"
+        android:layout_below="@+id/TxtS"
+        android:layout_alignLeft="@+id/TxtS"
+        android:layout_alignStart="@+id/TxtS"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/BtSpesa"
+        android:layout_alignBottom="@+id/TxtS"
+        android:layout_toRightOf="@+id/TxtS"
+        android:layout_toEndOf="@+id/TxtS"
+        android:layout_marginLeft="120dp"
+        android:textSize="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/BtEntrata"
+        android:layout_alignBottom="@+id/TxtE"
+        android:layout_alignLeft="@+id/BtSpesa"
+        android:layout_alignStart="@+id/BtSpesa"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:id="@+id/TxtSpesa"
+        android:textSize="30dp"
+        android:layout_above="@+id/TxtE"
+        android:layout_toRightOf="@+id/TxtE"
+        android:layout_toEndOf="@+id/TxtE" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:id="@+id/TxtEntrata"
+        android:textSize="30dp"
+        android:layout_alignTop="@+id/TxtE"
+        android:layout_toRightOf="@+id/TxtE"
+        android:layout_toEndOf="@+id/TxtE" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListaConti"
+        android:layout_below="@+id/TxtE"
+        android:layout_alignLeft="@+id/TxtE"
+        android:layout_alignStart="@+id/TxtE"
+        android:layout_marginTop="42dp"
+        android:layout_alignRight="@+id/BtEntrata"
+        android:layout_alignEnd="@+id/BtEntrata" />
 </RelativeLayout>
