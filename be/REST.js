@@ -76,11 +76,11 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 		});
     });
     
-    router.get('/users/:username/query/:timestamp',function(req,res){
-		
+    router.get('/:username/query/:timestamp',function(req,res){
 		var query = 'select queries.query from queries where queries.username=? and timestamp>?';
 		var params = [req.params.username,req.params.timestamp];
 		query = mysql.format(query,params);
+        console.log(query);
 		connection.query(query,function(err,rows){
 			if(err)
 				res.json({'Error':true, 'Message':'Error executing MySQL query'});
