@@ -6,11 +6,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/ImgConto"
             android:src="#ff0000" />
 
@@ -19,10 +19,45 @@
             android:layout_height="wrap_content"
             android:text="TxtNomeConto"
             android:id="@+id/TxtNomeConto"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/ImgConto"
-            android:layout_toEndOf="@+id/ImgConto" />
+            android:layout_toEndOf="@+id/ImgConto"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saldo:0.00"
+            android:id="@+id/TxtSaldoConto"
+            android:textSize="22dp"
+            android:layout_below="@+id/ImgConto"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ultima Spesa:0.00"
+            android:id="@+id/TxtUltimaSpesa"
+            android:textSize="22dp"
+            android:layout_alignTop="@+id/TxtSaldoConto"
+            android:layout_toRightOf="@+id/TxtSaldoConto"
+            android:layout_toEndOf="@+id/TxtSaldoConto"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:src="#ff0000"
+            android:layout_alignBottom="@+id/TxtUltimaSpesa" />
+
     </RelativeLayout>
 
 </LinearLayout>

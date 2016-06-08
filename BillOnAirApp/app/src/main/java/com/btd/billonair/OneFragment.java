@@ -12,31 +12,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public class OneFragment extends Fragment {
-    public OneFragment() {
-        // Required empty public constructor
+public class OneFragment extends Fragment
+{
+    public OneFragment()
+    {
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    {
+        return inflater.inflate(R.layout.fragment_one, container, false);
+
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
+    }
 
+
+    //lv.setAdapter(new AdapterListaConti(this,R.layout.rigaconto,LConti);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
+        //ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
         //apertura db
         //creazione array di tipo conto prendendo le info dal db
         //chiudo il db
-
-        //lv.setAdapter(new AdapterListaConti(this,R.layout.rigaconto,LConti);
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_one, container, false);
-    }
-
-
-
 
 }
