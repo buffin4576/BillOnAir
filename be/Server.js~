@@ -12,12 +12,12 @@ function REST(){
 
 REST.prototype.connectMysql = function() {
     var self = this;
-    /*var pool      =    mysql.createPool({
+    var pool      =    mysql.createPool({
         connectionLimit : 100,
-        host     : 'localhost',
+        host     : '10.0.2.15',
         user     : 'root',
         password : '',
-        database : 'restful_api_demo',
+        database : 'BillOnAir',
         debug    :  false
     });
     pool.getConnection(function(err,connection){
@@ -26,7 +26,7 @@ REST.prototype.connectMysql = function() {
         } else {
           self.configureExpress(connection);
         }
-    });*/
+    });
 }
 
 REST.prototype.configureExpress = function(connection) {
