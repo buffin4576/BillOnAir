@@ -5,11 +5,13 @@ package com.btd.billonair;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class OneFragment extends Fragment
@@ -41,6 +43,14 @@ public class OneFragment extends Fragment
         //creazione array di tipo conto prendendo le info dal db
         //chiudo il db
         //lv.setAdapter(new AdapterListaConti(this,R.layout.rigaconto,LConti);
+        final Button NCButton=(Button)getView().findViewById(R.id.NCButton);
+        NCButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),Pop.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
 }
