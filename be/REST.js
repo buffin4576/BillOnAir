@@ -6,14 +6,14 @@ function REST_ROUTER(router,connection,md5) {
 }
 
 REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
-    router.get("/",function(req,res){
+    /*router.get("/",function(req,res){
         res.json({"Message" : "Hello World !"});
     });
     /*
 	router.get("/home",function(req,res){
 		res.json({"Message" : "Homepage!"})
 	});*/
-
+/*
 	router.get('/users',function(req,res){
         console.log("safdsfdasd");
 		var query = 'select utenti.username from Users';
@@ -27,7 +27,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 				res.json(rows[0]);
 			}
 		});
-	});
+	});*/
 
     /**************** UTENTI *****************///start
     
@@ -76,7 +76,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 		});
     });
     
-    router.get('/:username/query/:timestamp',function(req,res){
+    router.get('/query/:username/:timestamp',function(req,res){
 		var query = 'select queries.query from queries where queries.username=? and timestamp>?';
 		var params = [req.params.username,req.params.timestamp];
 		query = mysql.format(query,params);
@@ -130,9 +130,9 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     });
     
     //rimuovi utente dalla stanza
-    router.delete('/stanza/:idStanza/:nome',function(rew, res){
+    router.delete('/stanza/:idStanza/:username',function(rew, res){
         var query = "DELETE FROM `billonair`.`stanze` WHERE `idStanza`=? and`username`=?";
-        var params = [req.params.idStanza, req.params.nome];
+        var params = [req.params.idStanza, req.params.username];
         query = mysql.format(query,params);
         console.log(query);
 		connection.query(query,function(err,rows){
