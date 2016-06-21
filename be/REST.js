@@ -95,9 +95,138 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     
     /**************** STANZE ******************///start
     
+    //crea la stanza
+    router.post('/stanza',function(rew, res){
+        var query = "INSERT INTO `billonair`.`stanze` (`idStanza`, `username`, `nome`) VALUES ('-1', ?, ?)";
+        var params = [req.body.username, req.body.nome];
+        query = mysql.format(query,params);
+        console.log(query);
+		connection.query(query,function(err,rows){
+			if(err)
+				res.json({'Error':true, 'Message':'Error executing MySQL query', 'err':err});
+			else
+                res.json({'Message':'Stanza inserita'});
+		});
+    });
     
+    //aggiungi utente nella stanza
+    router.post('/stanza/:idStanza',function(rew, res){
+        var utenti = req.body.utenti;
+        
+        for(var i = 0; i < utenti.length;i++)
+        {
+            var query = "INSERT INTO `billonair`.`stanze` (`idStanza`, `username`, `nome`) VALUES (?, ?, ?)";
+            var params = [req.params.idStanza, utenti[i], req.body.nome];
+            query = mysql.format(query,params);
+            console.log(query);
+            connection.query(query,function(err,rows){
+                if(err)
+                    res.json({'Error':true, 'Message':'Error executing MySQL query', 'err':err});
+                else
+                    res.json({'Message':'Utente inserito nella stanza'});
+            });
+        }
+        
+    });
+    
+    //rimuovi utente dalla stanza
+    router.delete('/stanza/:idStanza/:nome',function(rew, res){
+        var query = "DELETE FROM `billonair`.`stanze` WHERE `idStanza`=? and`username`=?";
+        var params = [req.params.idStanza, req.params.nome];
+        query = mysql.format(query,params);
+        console.log(query);
+		connection.query(query,function(err,rows){
+			if(err)
+				res.json({'Error':true, 'Message':'Error executing MySQL query', 'err':err});
+			else
+                res.json({'Message':'Utente rimosso dalla stanza'});
+		});
+    });
+    
+    
+    
+    //rimuovi stanza
+    router.delete('/stanza/:idStanza',function(rew, res){
+        var query = "DELETE FROM `billonair`.`stanze` WHERE `idStanza`=?";
+        var params = [req.params.idStanza];
+        query = mysql.format(query,params);
+        console.log(query);
+		connection.query(query,function(err,rows){
+			if(err)
+				res.json({'Error':true, 'Message':'Error executing MySQL query', 'err':err});
+			else
+                res.json({'Message':'Stanza eliminata'});
+		});
+    });
     
     //close
+    
+    /**************** SPESESTANZE ******************///start
+    
+    //ottieni tutte le spese di una stanza
+    router.get('/spesestanza/:idStanza',function(req,res){
+		var query = 'select * from spesestanza where spesestanza.idStanza=?';
+		var params = [req.params.idStanza];
+		query = mysql.format(query,params);
+        console.log(query);
+		connection.query(query,function(err,rows){
+			if(err)
+				res.json({'Error':true, 'Message':'Error executing MySQL query'});
+			else
+			{
+				res.json(rows);
+			}
+		});
+	});
+    
+    //aggiorna una spesa
+    router.put('/spesestanza/spesa/:idSpesa',function(rew, res){
+        var query = "UPDATE `billonair`.`spesestanza` SET `dovuto`=? WHERE `idSpesa`=? and`debitore`=?";
+        var params = [req.params.idStanza,req.body.dovuto, req.body.debitore];
+        query = mysql.format(query,params);
+        console.log(query);
+        connection.query(query,function(err,rows){
+            if(err)
+                res.json({'Error':true, 'Message':'Error executing MySQL query', 'err':err});
+            else
+                res.json({'Message':'Dovuto modificato'});
+        });
+        
+    });
+    
+    
+    //aggiunge una spesa
+    router.post('/spesestanza/spesa',function(rew, res){
+        var query = "INSERT INTO `billonair`.`spesestanza` (`idSpesa`, `creditore`, `debitore`, `nome`, `dovuto`, `idStanza`, `importo`) VALUES ('-1', ?, ?, ?, ?, ?, ?)";
+        var params = [req.body.creditore,req.body.debitore, req.body.nome, req.body.dovuto, req.body.idStanza,req.body.importo];
+        query = mysql.format(query,params);
+        console.log(query);
+        connection.query(query,function(err,rows){
+            if(err)
+                res.json({'Error':true, 'Message':'Error executing MySQL query', 'err':err});
+            else
+                res.json({'Message':'Spesa inserita'});
+        });
+        
+    });
+    
+    //elimina una spesa
+    router.delete('/spesestanza/:idSpesa',function(rew, res){
+        var query = "DELETE FROM `billonair`.`spesestanza` WHERE `idSpesa`='1'";
+        var params = [req.params.idSpesa];
+        query = mysql.format(query,params);
+        console.log(query);
+        connection.query(query,function(err,rows){
+            if(err)
+                res.json({'Error':true, 'Message':'Error executing MySQL query', 'err':err});
+            else
+                res.json({'Message':'Spesa eliminata'});
+        });
+        
+    });
+    
+    //close
+    
 }
 
 module.exports = REST_ROUTER;
