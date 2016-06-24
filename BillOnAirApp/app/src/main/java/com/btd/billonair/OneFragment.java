@@ -46,7 +46,7 @@ public class OneFragment extends Fragment
         final Button NCButton=(Button)getView().findViewById(R.id.NCButton);
         NCButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),Pop.class);
+                Intent intent = new Intent(getActivity(),NuovoConto.class);
                 startActivity(intent);
             }
         });
