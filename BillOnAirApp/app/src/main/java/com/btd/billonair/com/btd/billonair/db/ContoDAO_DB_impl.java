@@ -60,6 +60,6 @@ public class ContoDAO_DB_impl implements ContoDAO{
     {
         String nomeConto = cursor.getString(0);
         String colore = cursor.getString(1);
-        return new Conto(nomeConto,colore);
+        return new Conto(nomeConto,0.0,colore);
     }
 }
