@@ -1,6 +1,9 @@
 package com.btd.billonair;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
+
+import com.btd.billonair.com.btd.billonair.db.MySQLiteHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,8 +58,20 @@ public class LoginActivity extends AppCompatActivity {
         linkOffline2 = (TextView)findViewById(R.id.linkOffline2);
 
         //logout per prevenire il pulsante back ?
-    }
 
+        //TEST db
+        /*SQLiteDatabase database;
+        MySQLiteHelper dbHelper=new MySQLiteHelper(getApplicationContext());
+        database = dbHelper.getWritableDatabase();
+        String[] columns = {"nomeConto","colore"};
+        Cursor cursor = database.query("conti",columns,null,null,null,null,null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            String s = "nomeConto: "+cursor.getString(0)+"   colore: "+cursor.getString(1);
+            System.out.println(s);
+            cursor.moveToNext();
+        }*/
+    }
 
     public void OnClickLink(View v){
         if((TextView)v==linkLogin)
