@@ -37,10 +37,10 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
         TextView saldocondo=(TextView)view.findViewById(R.id.TxtSaldoConto);
         TextView ultimaspesa=(TextView)view.findViewById(R.id.TxtUltimaSpesa);
         final ImageView imgconto=(ImageView)view.findViewById(R.id.ImgConto);
-        nomeconto.setText(conto.GetNomeCOnto());
-        saldocondo.setText("Saldo:"+conto.GetSaldo());
-        ultimaspesa.setText("Ultima Spesa:"+conto.GetUltimaSpesa().GetCosto());
-        imgconto.setColorFilter(Color.parseColor(conto.GetColore()));
+        nomeconto.setText(conto.getNomeConto());
+        saldocondo.setText("Saldo:"+conto.getSaldo());
+        ultimaspesa.setText("Ultima Spesa:"+conto.getUltimaSpesa().getCosto());
+        imgconto.setColorFilter(Color.parseColor(conto.getColore()));
 
         return view;
 

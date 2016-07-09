@@ -75,11 +75,11 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore2"
-            android:src="#ff0000"
+            android:src="#00ddff"
             android:layout_alignTop="@+id/colore3"
             android:layout_toLeftOf="@+id/colore3"
             android:layout_marginRight="20dp"
-            android:background="#ff0000"/>
+            android:background="#00ddff"/>
 
         <ImageView
             android:layout_width="30dp"

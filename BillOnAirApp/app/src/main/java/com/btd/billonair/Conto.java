@@ -6,7 +6,8 @@ import java.util.ArrayList;
 /**
  * Created by ernrico on 08/06/2016.
  */
-<<<<<<< HEAD
+
+
 public class Conto implements Serializable{
     private String NomeConto;
     private Double Saldo;
@@ -25,79 +26,83 @@ public class Conto implements Serializable{
         Colore=ColoreC;
     }
 
-    public int SetNomeConto(String s)
+    public int setNomeConto(String s)
     {
         NomeConto=s;
         return 1;
     }
 
-    public String GetNomeCOnto()
+    public String getNomeConto()
     {
         return NomeConto;
     }
-    public int SetSaldo(Double d)
+    public int setSaldo(Double d)
     {
         Saldo=d;
         return 1;
     }
 
-    public double GetSaldo()
+    public double getSaldo()
     {
         return Saldo;
     }
 
-    public int SetAttivo(Boolean b)
+    public int setAttivo(Boolean b)
     {
         Attivo=b;
         return 0;
     }
 
-    public boolean GetAttivo()
+    public boolean getAttivo()
     {
         return Attivo;
     }
 
-    public int SetListaSpese(ArrayList<Spesa> AS)
+    public int setListaSpese(ArrayList<Spesa> AS)
     {
         ListaSpese=AS;
         return 0;
     }
 
-    public ArrayList<Spesa> GetListaSpese()
+    public ArrayList<Spesa> getListaSpese()
     {
         return ListaSpese;
     }
 
-    public int SetUltimaSpesa(Spesa s)
+    public int setUltimaSpesa(Spesa s)
     {
         UltimaSpesa=s;
         return 0;
     }
 
-    public Spesa GetUltimaSpesa()
+    public Spesa getUltimaSpesa()
     {
         return UltimaSpesa;
     }
 
-    public int SetColore(String s)
+    public int setColore(String s)
     {
         Colore=s;
         return 0;
     }
 
-    public String GetColore()
+    public String getColore()
     {
         return Colore;
     }
+
+    public String toString(){
+        return "Nome Conto: "+NomeConto+" "+"Colore: "+Colore;
+    };/*
 =======
-public class Conto {
+public class Conto implements Serializable{
     /*String NomeConto;
     double Saldo;
     boolean Attivo;
     ArrayList<Spesa> ListaSpese;
     Spesa UltimaSpesa;
     int Colore;
-    public Conto(){}*/
+    public Conto(){}
 
     private String nomeConto;
     private String colore;
@@ -131,6 +136,5 @@ public class Conto {
 
     public String toString(){
         return "Nome Conto: "+nomeConto+" "+"Colore: "+colore;
-    };
->>>>>>> 11f3879dd30f58b0f4b124f622975b0dd8fb770b
+    };*/
 }

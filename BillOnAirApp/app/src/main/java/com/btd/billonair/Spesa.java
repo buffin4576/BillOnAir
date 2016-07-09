@@ -17,22 +17,22 @@ public class Spesa {
         Id=IdS;
     }
 
-    public String GetNome()
+    public String getNome()
     {
         return Nome;
     }
 
-    public Double GetCosto()
+    public Double getCosto()
     {
         return Costo;
     }
 
-    public String GetData()
+    public String getData()
     {
         return Data;
     }
 
-    public Integer GetId()
+    public Integer getId()
     {
         return Id;
     }
