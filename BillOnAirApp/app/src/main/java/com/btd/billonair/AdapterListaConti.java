@@ -1,7 +1,11 @@
 package com.btd.billonair;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +44,12 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
         nomeconto.setText(conto.getNomeConto());
         saldocondo.setText("Saldo:"+conto.getSaldo());
         ultimaspesa.setText("Ultima Spesa:"+conto.getUltimaSpesa().getCosto());
-        imgconto.setColorFilter(Color.parseColor(conto.getColore()));
+
+        imgconto.setBackgroundColor(Color.parseColor("#"+conto.getColore()));
 
         return view;
 
     }
+
+
 }

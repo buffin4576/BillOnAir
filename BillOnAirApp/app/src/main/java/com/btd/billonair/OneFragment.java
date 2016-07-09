@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-
+import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
+import com.btd.billonair.com.btd.billonair.db.ContoDAO;
+import android.widget.SimpleAdapter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OneFragment extends Fragment
@@ -41,11 +44,21 @@ public class OneFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
-        ArrayList <Conto> LConti=new ArrayList<Conto>();
+        //DBOperations.getInstance(getActivity().getApplicationContext()).open();
+
+        ContoDAO dao=new ContoDAO_DB_impl();
+
+        try {
+            dao.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Conto> LConti= (ArrayList<Conto>) dao.getAllConti();
         //apro db
         //creazione array di tipo conto prendendo le info dal db
+
         //chiudo il db
-        //lv.setAdapter(new AdapterListaConti(this,R.layout.rigaconto,LConti);
+        lv.setAdapter(new AdapterListaConti(getContext(),R.layout.rigaconto,LConti));
         final Bundle info=new Bundle();
         info.putSerializable("listaconti",LConti);
         final Button NCButton=(Button)getView().findViewById(R.id.NCButton);

@@ -1,7 +1,10 @@
 package com.btd.billonair;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by ernrico on 08/06/2016.
@@ -22,7 +25,11 @@ public class Conto implements Serializable{
         Saldo= SaldoC;
         Attivo=true;
         ListaSpese=new ArrayList<Spesa>();
-        UltimaSpesa=null;
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+        SimpleDateFormat df= new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
+        UltimaSpesa=new Spesa("creazione conto",0.0,formattedDate,0);
         Colore=ColoreC;
     }
 
