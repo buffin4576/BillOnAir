@@ -1,6 +1,7 @@
 package com.btd.billonair;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +37,10 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
         TextView saldocondo=(TextView)view.findViewById(R.id.TxtSaldoConto);
         TextView ultimaspesa=(TextView)view.findViewById(R.id.TxtUltimaSpesa);
         final ImageView imgconto=(ImageView)view.findViewById(R.id.ImgConto);
-        nomeconto.setText(conto.NomeConto);
-        saldocondo.setText("Saldo:"+conto.Saldo);
-        ultimaspesa.setText("Ultima Spesa:"+conto.UltimaSpesa);
-        imgconto.setColorFilter(conto.Colore);
+        nomeconto.setText(conto.GetNomeCOnto());
+        saldocondo.setText("Saldo:"+conto.GetSaldo());
+        ultimaspesa.setText("Ultima Spesa:"+conto.GetUltimaSpesa().GetCosto());
+        imgconto.setColorFilter(Color.parseColor(conto.GetColore()));
 
         return view;
 

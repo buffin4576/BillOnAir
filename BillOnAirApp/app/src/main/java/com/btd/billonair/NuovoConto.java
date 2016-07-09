@@ -12,12 +12,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by ernrico on 24/06/2016.
  */
 public class NuovoConto extends Activity implements View.OnClickListener {
 
-    String Color;
+    String Colore;
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
@@ -33,7 +35,10 @@ public class NuovoConto extends Activity implements View.OnClickListener {
         getWindow().setLayout((int)(width*0.8),(int)(height*0.7));
 
         ((EditText)findViewById(R.id.TxtSaldoNuovoConto)).setText("0");
+
         final Button AggiungiButton = (Button)findViewById(R.id.ButtonAggiungi);
+        final Button CloseButton = (Button)findViewById(R.id.ButtonClose);
+
         final ImageView colore1 = (ImageView)findViewById(R.id.colore1);
         colore1.setOnClickListener(this);
         final ImageView colore2 = (ImageView)findViewById(R.id.colore2);
@@ -58,7 +63,18 @@ public class NuovoConto extends Activity implements View.OnClickListener {
         AggiungiButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String Nome=((EditText)findViewById(R.id.TxtNomeNuovoConto)).getText().toString();
-                String Saldo=((EditText)findViewById(R.id.TxtSaldoNuovoConto)).getText().toString();
+                String SaldoS=((EditText)findViewById(R.id.TxtSaldoNuovoConto)).getText().toString();
+                Double Saldo=Double.parseDouble(SaldoS);
+                Conto NConto=new Conto(Nome,Saldo,Colore);
+                ArrayList<Conto> LConti= (ArrayList<Conto>) getIntent().getSerializableExtra("listaconti");
+                LConti.add(NConto);
+                //Aggiunta conto nel database
+                finish();
+            }
+        });
+        CloseButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -69,8 +85,8 @@ public class NuovoConto extends Activity implements View.OnClickListener {
       //  Color=((ImageView)v).getBackground().toString();
         ColorDrawable BGColor=(ColorDrawable)(((ImageView)v).getBackground());
         int Cl =BGColor.getColor();
-        Color = String.format("#%06X", 0xFFFFFF & Cl);
-        ((TextView)findViewById(R.id.textView5)).setText(Color);
+        Colore = String.format("#%06X", 0xFFFFFF & Cl);
+        ((TextView)findViewById(R.id.textView5)).setText(Colore);
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState)

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class OneFragment extends Fragment
 {
     public OneFragment()
@@ -39,14 +41,18 @@ public class OneFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
+        ArrayList <Conto> LConti=new ArrayList<Conto>();
         //apro db
         //creazione array di tipo conto prendendo le info dal db
         //chiudo il db
         //lv.setAdapter(new AdapterListaConti(this,R.layout.rigaconto,LConti);
+        final Bundle info=new Bundle();
+        info.putSerializable("listaconti",LConti);
         final Button NCButton=(Button)getView().findViewById(R.id.NCButton);
         NCButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),NuovoConto.class);
+                intent.putExtras(info);
                 startActivity(intent);
             }
         });
