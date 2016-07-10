@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,17 @@ public class AggiuntaSpesaEntrata extends Activity {
         int height= DM.heightPixels;
         getWindow().setLayout((int)(width*0.8),(int)(height*0.7));
 
+        TextView Titolo=(TextView)findViewById(R.id.AggSETitolo);
+        Spinner SpinnerConti=(Spinner)findViewById(R.id.SpinnerConti);
+        String tipo= (String) getIntent().getCharSequenceExtra("tipo");
+        
+        Titolo.setText(tipo);
+        if(tipo.equals("Entrata"))
+        {
+        }
+        else
+        {
 
+        }
     }
 }

@@ -75,7 +75,7 @@ public class OneFragment extends Fragment
         BTEntrata.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),AggiuntaSpesaEntrata.class);
-                bund.putCharSequence("tipo","entrata");
+                bund.putCharSequence("tipo","Entrata");
                 intent.putExtras(bund);
                 startActivity(intent);
             }
@@ -83,7 +83,7 @@ public class OneFragment extends Fragment
         BTSpesa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),AggiuntaSpesaEntrata.class);
-                bund.putCharSequence("tipo","spesa");
+                bund.putCharSequence("tipo","Spesa");
                 intent.putExtras(bund);
                 startActivity(intent);
             }
