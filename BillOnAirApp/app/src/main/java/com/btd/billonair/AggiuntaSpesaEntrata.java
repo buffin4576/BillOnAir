@@ -34,7 +34,7 @@ public class AggiuntaSpesaEntrata extends Activity {
         TextView Titolo=(TextView)findViewById(R.id.AggSETitolo);
         Spinner SpinnerConti=(Spinner)findViewById(R.id.SpinnerConti);
         String tipo= (String) getIntent().getCharSequenceExtra("tipo");
-        
+
         Titolo.setText(tipo);
         if(tipo.equals("Entrata"))
         {
