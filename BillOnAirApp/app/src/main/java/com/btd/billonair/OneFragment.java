@@ -45,6 +45,9 @@ public class OneFragment extends Fragment
     {
         ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
         //DBOperations.getInstance(getActivity().getApplicationContext()).open();
+        final Button NCButton=(Button)getView().findViewById(R.id.NCButton);
+        final Button BTEntrata=(Button)getView().findViewById(R.id.BtEntrata);
+        final Button BTSpesa=(Button)getView().findViewById(R.id.BtSpesa);
 
         ContoDAO dao=new ContoDAO_DB_impl();
 
@@ -61,10 +64,26 @@ public class OneFragment extends Fragment
         lv.setAdapter(new AdapterListaConti(getContext(),R.layout.rigaconto,LConti));
         final Bundle bund=new Bundle();
         bund.putSerializable("ListaConti",LConti);
-        final Button NCButton=(Button)getView().findViewById(R.id.NCButton);
         NCButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),NuovoConto.class);
+                intent.putExtras(bund);
+                startActivity(intent);
+            }
+        });
+
+        BTEntrata.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AggiuntaSpesaEntrata.class);
+                bund.putCharSequence("tipo","entrata");
+                intent.putExtras(bund);
+                startActivity(intent);
+            }
+        });
+        BTSpesa.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AggiuntaSpesaEntrata.class);
+                bund.putCharSequence("tipo","spesa");
                 intent.putExtras(bund);
                 startActivity(intent);
             }
