@@ -31,7 +31,6 @@ public class DettagliConto extends AppCompatActivity {
         setContentView(R.layout.dettagliconto);
 
         Conto conto=(Conto) getIntent().getSerializableExtra("Conto");
-        ArrayList<Spesa>Listaspese= (ArrayList<Spesa>) getIntent().getSerializableExtra("ListaSpese");
         TextView DNomeConto=(TextView)findViewById(R.id.DettagliNomeConto);
         TextView DSaldoConto=(TextView)findViewById(R.id.DettagliSaldoConto);
         ListView lv= (ListView)findViewById(R.id.DettagliListaSpese);

@@ -55,9 +55,7 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
         freccia.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent=new Intent(mContext,DettagliConto.class);
-                ArrayList<Spesa>Ls=conto.getListaSpese();
                 bund.putSerializable("Conto",conto);
-                bund.putSerializable("ListaSpese",Ls);
                 intent.putExtras(bund);
                 mContext.startActivity(intent);
             }
