@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-
+        <activity android:name=".DettagliConto"></activity>
         <activity android:name=".NuovoConto" android:theme="@style/AppTheme.CustomTheme">
         </activity>
     </application>

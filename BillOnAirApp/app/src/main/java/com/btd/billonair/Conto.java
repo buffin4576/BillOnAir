@@ -1,5 +1,8 @@
 package com.btd.billonair;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -16,7 +19,6 @@ public class Conto implements Serializable{
     private Double Saldo;
     private Boolean Attivo;
     private ArrayList<Spesa> ListaSpese;
-    private Spesa UltimaSpesa;
     private String Colore;
 
     public Conto(String NConto,Double SaldoC,String ColoreC)
@@ -29,9 +31,16 @@ public class Conto implements Serializable{
         System.out.println("Current time => " + c.getTime());
         SimpleDateFormat df= new SimpleDateFormat("dd-MMM-yyyy");
         String formattedDate = df.format(c.getTime());
-        UltimaSpesa=new Spesa("creazione conto",0.0,formattedDate,0);
+        Spesa UltimaSpesa=new Spesa("creazione conto",0.0,formattedDate,0);
+        ListaSpese.add(UltimaSpesa);
         Colore=ColoreC;
     }
+
+    protected Conto(Parcel in) {
+        NomeConto = in.readString();
+        Colore = in.readString();
+    }
+
 
     public int setNomeConto(String s)
     {
@@ -76,20 +85,21 @@ public class Conto implements Serializable{
         return ListaSpese;
     }
 
-    public int setUltimaSpesa(Spesa s)
-    {
-        UltimaSpesa=s;
-        return 0;
-    }
 
     public Spesa getUltimaSpesa()
     {
-        return UltimaSpesa;
+        return ListaSpese.get(ListaSpese.size()-1);
     }
 
     public int setColore(String s)
     {
         Colore=s;
+        return 0;
+    }
+
+    public int addSpesa(Spesa s)
+    {
+        ListaSpese.add(s);
         return 0;
     }
 
@@ -99,7 +109,7 @@ public class Conto implements Serializable{
     }
 
     public String toString(){
-        return "Nome Conto: "+NomeConto+" "+"Colore: "+Colore;
+        return "Nome Conto: "+NomeConto+" Saldo: "+Saldo+" Colore: "+Colore;
     };/*
 =======
 public class Conto implements Serializable{

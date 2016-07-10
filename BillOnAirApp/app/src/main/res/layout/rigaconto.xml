@@ -51,11 +51,11 @@
 
         <ImageView
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
+            android:id="@+id/Imagefreccia"
             android:layout_width="30dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:src="#ff0000"
+            android:src="@drawable/frecciac"
             android:layout_alignBottom="@+id/TxtUltimaSpesa" />
 
     </RelativeLayout>

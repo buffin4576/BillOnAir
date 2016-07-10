@@ -1,9 +1,14 @@
 package com.btd.billonair;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by ernrico on 08/06/2016.
  */
-public class Spesa {
+public class Spesa implements Serializable {
     private String Nome;
     private Double Costo;
     private String Data;
@@ -16,6 +21,13 @@ public class Spesa {
         Data=DataS;
         Id=IdS;
     }
+
+    protected Spesa(Parcel in) {
+        Nome = in.readString();
+        Data = in.readString();
+    }
+
+
 
     public String getNome()
     {
@@ -36,4 +48,6 @@ public class Spesa {
     {
         return Id;
     }
+
+
 }

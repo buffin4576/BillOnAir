@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome Conto"
+            android:id="@+id/DettagliNomeConto"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saldo:"
+            android:id="@+id/DettagliSaldoConto"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
+            android:layout_below="@+id/DettagliNomeConto"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lista Spese"
+            android:id="@+id/DettagliListaSpesetext"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
+            android:layout_below="@+id/DettagliSaldoConto"
+            android:layout_centerHorizontal="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/DettagliListaSpesetext"
+            android:layout_above="@+id/buttonIndietro">
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/DettagliListaSpese"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="indietro"
+            android:id="@+id/buttonIndietro"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/DettagliListaSpesetext"
+            android:layout_toStartOf="@+id/DettagliListaSpesetext" />
+    </RelativeLayout>
+
+</LinearLayout>

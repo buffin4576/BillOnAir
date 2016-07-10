@@ -6,7 +6,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:clickable="false">
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,28 +65,25 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore3"
-            android:src="#ff0000"
             android:state_selected="true"
             android:layout_below="@+id/textView5"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:background="#ff0000"/>
+            android:background="#0000ff"/>
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore2"
-            android:src="#00ddff"
             android:layout_alignTop="@+id/colore3"
             android:layout_toLeftOf="@+id/colore3"
             android:layout_marginRight="20dp"
-            android:background="#00ddff"/>
+            android:background="#ff00ff"/>
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore1"
-            android:src="#ff0000"
             android:layout_alignTop="@+id/colore2"
             android:layout_toLeftOf="@+id/colore2"
             android:layout_marginRight="20dp"
@@ -95,73 +93,66 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore4"
-            android:src="#ff0000"
             android:layout_alignTop="@+id/colore3"
             android:layout_toRightOf="@+id/colore3"
             android:layout_marginLeft="20dp"
-            android:background="#ff0000"/>
+            android:background="#00ffff"/>
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore5"
-            android:src="#ff0000"
             android:layout_alignTop="@+id/colore3"
             android:layout_toRightOf="@+id/colore4"
             android:layout_marginLeft="20dp"
-            android:background="#ff0000"/>
+            android:background="#00ff00"/>
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore8"
-            android:src="#ff0000"
             android:layout_marginTop="30dp"
             android:layout_below="@+id/colore3"
             android:layout_toRightOf="@+id/colore2"
             android:layout_toEndOf="@+id/colore2"
-            android:background="#ff0000"/>
+            android:background="#7f007f"/>
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore7"
-            android:src="#ff0000"
             android:layout_alignTop="@+id/colore8"
             android:layout_toLeftOf="@+id/colore8"
             android:layout_marginRight="20dp"
-            android:background="#ff0000"/>
+            android:background="#7f0000"/>
 
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore6"
-            android:src="#ff0000"
             android:layout_alignTop="@+id/colore8"
             android:layout_toLeftOf="@+id/colore7"
             android:layout_marginRight="20dp"
-            android:background="#ff0000"/>
+            android:background="#ffff00"/>
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore9"
-            android:src="#ff0000"
             android:layout_alignTop="@+id/colore8"
             android:layout_toRightOf="@+id/colore8"
             android:layout_marginLeft="20dp"
-            android:background="#ff0000"/>
+            android:background="#ffffff"/>
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/colore10"
-            android:src="#ff0000"
             android:layout_alignTop="@+id/colore8"
             android:layout_toRightOf="@+id/colore9"
             android:layout_marginLeft="20dp"
-            android:background="#ff0000"/>
+            android:background="#000000"/>
 
         <Button
             android:layout_width="wrap_content"

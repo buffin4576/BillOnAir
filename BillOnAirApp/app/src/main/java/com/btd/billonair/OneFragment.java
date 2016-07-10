@@ -56,16 +56,16 @@ public class OneFragment extends Fragment
         ArrayList<Conto> LConti= (ArrayList<Conto>) dao.getAllConti();
         //apro db
         //creazione array di tipo conto prendendo le info dal db
-
+        dao.close();
         //chiudo il db
         lv.setAdapter(new AdapterListaConti(getContext(),R.layout.rigaconto,LConti));
-        final Bundle info=new Bundle();
-        info.putSerializable("listaconti",LConti);
+        final Bundle bund=new Bundle();
+        bund.putSerializable("ListaConti",LConti);
         final Button NCButton=(Button)getView().findViewById(R.id.NCButton);
         NCButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),NuovoConto.class);
-                intent.putExtras(info);
+                intent.putExtras(bund);
                 startActivity(intent);
             }
         });
