@@ -62,14 +62,14 @@ public class NuovoConto extends Activity implements View.OnClickListener {
 
         AggiungiButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-              /*String Nome=((EditText)findViewById(R.id.TxtNomeNuovoConto)).getText().toString();
-                String SaldoS=((EditText)findViewById(R.id.TxtSaldoNuovoConto)).getText().toString();
-                Double Saldo=Double.parseDouble(SaldoS);
-                Conto NConto=new Conto(Nome,Saldo,Colore);
-              */ArrayList<Conto> LConti= (ArrayList<Conto>) getIntent().getSerializableExtra("ListaConti");
-              /* LConti.add(NConto);
-              *///Aggiunta conto nel database
-                finish();
+              String Nome=((EditText)findViewById(R.id.TxtNomeNuovoConto)).getText().toString();
+              String SaldoS=((EditText)findViewById(R.id.TxtSaldoNuovoConto)).getText().toString();
+              Double Saldo=Double.parseDouble(SaldoS);
+              Conto NConto=new Conto(Nome,Saldo,Colore);
+              ArrayList<Conto> LConti= (ArrayList<Conto>) getIntent().getSerializableExtra("ListaConti");
+              LConti.add(NConto);
+              //Aggiunta conto nel database
+              finish();
             }
         });
         CloseButton.setOnClickListener(new View.OnClickListener() {
