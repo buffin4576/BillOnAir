@@ -95,6 +95,20 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     
     /**************** STANZE ******************///start
     
+    //ottiene lista stanze
+    router.get('/stanza/user/:username',function(rew, res){
+        var query = "select * FROM billonair.stanze where username=?;";
+        var params = [req.params.username];
+        query = mysql.format(query,params);
+        console.log(query);
+		connection.query(query,function(err,rows){
+			if(err)
+				res.json({'Error':true, 'Message':'Error executing MySQL query', 'err':err});
+			else
+                res.json(rows);
+		});
+    });
+    
     //crea la stanza
     router.post('/stanza',function(rew, res){
         var query = "INSERT INTO `billonair`.`stanze` (`idStanza`, `username`, `nome`) VALUES ('-1', ?, ?)";
