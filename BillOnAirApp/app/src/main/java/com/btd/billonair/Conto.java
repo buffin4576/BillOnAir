@@ -3,7 +3,10 @@ package com.btd.billonair;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
+
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,7 +17,7 @@ import java.util.Calendar;
  */
 
 
-public class Conto implements Serializable{
+/*public class Conto implements Serializable{
     private String NomeConto;
     private Double Saldo;
     private Boolean Attivo;
@@ -110,48 +113,63 @@ public class Conto implements Serializable{
 
     public String toString(){
         return "Nome Conto: "+NomeConto+" Saldo: "+Saldo+" Colore: "+Colore;
-    };/*
-=======
+    };*/
+///=======
 public class Conto implements Serializable{
     /*String NomeConto;
     double Saldo;
     boolean Attivo;
     ArrayList<Spesa> ListaSpese;
     Spesa UltimaSpesa;
-    int Colore;
-    public Conto(){}
+    int Colore;*/
 
     private String nomeConto;
     private String colore;
+    private double saldo;
+    private ArrayList<SpesaConto> spese = new ArrayList<>();
 
     public Conto(){
 
     };
 
-    public Conto(String nomeConto, String colore){
+    public Conto(String nomeConto, double saldo, String colore) throws SQLException {
         this.nomeConto = nomeConto;
         this.colore = colore;
+        this.saldo = saldo;
+
+        SpesaContoDAO_DB_impl spesaContoDAODbImpl = new SpesaContoDAO_DB_impl();
+        spesaContoDAODbImpl.open();
+        this.spese.addAll(spesaContoDAODbImpl.getAllSpeseByConto(this.nomeConto));
+        spesaContoDAODbImpl.close();
     };
 
     public String getNomeConto(){
         return nomeConto;
-    };
+    }
 
     public String getColore(){
         return colore;
-    };
+    }
+
+    public double getSaldo() { return  saldo; }
+
+    public ArrayList<SpesaConto> getSpeseConto(){
+        return spese;
+    }
 
     public void setNomeConto(String nomeConto)
     {
         this.nomeConto=nomeConto;
-    };
+    }
 
     public void setColore(String colore)
     {
         this.colore = colore;
-    };
+    }
+
+    public void setSaldo(double saldo) { this.saldo = saldo; }
 
     public String toString(){
-        return "Nome Conto: "+nomeConto+" "+"Colore: "+colore;
-    };*/
+        return "Nome Conto: "+nomeConto+" Saldo: "+saldo+" Colore: "+colore;
+    };
 }

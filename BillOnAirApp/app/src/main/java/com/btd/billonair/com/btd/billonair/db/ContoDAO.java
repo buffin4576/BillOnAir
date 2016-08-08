@@ -18,4 +18,5 @@ public interface ContoDAO {
     public Conto insertConto(Conto conto);
     public void deleteConto(Conto conto);
     public List<Conto> getAllConti();
+    public Conto getContoByName(String nomeConto);
 }

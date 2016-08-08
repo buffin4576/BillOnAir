@@ -28,6 +28,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         TABLE_CONTI="create table conti("
                 +"nomeConto text primary key,"
+                +"saldo decimal(10,2) not null default 0,"
                 +"colore text not null default 'fff'"
                 +" );";
         TABLE_SPESECONTI="create table speseconti("
