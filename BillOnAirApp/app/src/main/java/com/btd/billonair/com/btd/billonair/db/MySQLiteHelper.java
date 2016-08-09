@@ -15,6 +15,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static String TABLE_CONTI = "";
     public static String TABLE_SPESECONTI = "";
 
+    public static String TABLE_STANZE = "";
+    public static String TABLE_SPESESTANZA="";
+
     private static final String DATABASE_NAME = "billonair.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -40,7 +43,25 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 +"foreign key(nomeConto) references conti(nomeConto) on delete cascade on update cascade"
                 +");";
         //PRAGMA foreign_keys = ON; da settare ogni volata che si fa la connessione
-        DATABASE_CREATE=TABLE_CONTI+" "+TABLE_SPESECONTI;
+
+        TABLE_STANZE="create table stanze(" +
+                "idStanza integer," +
+                "username text," +
+                "nome text" +
+                ");";
+
+        TABLE_SPESESTANZA="create table spesestanza(" +
+                "idSpesa integer," +
+                "creditore text," +
+                "debitore text," +
+                "dovuto decimal(10,2)," +
+                "data datetime default CURRENT_TIMESTAMP," +
+                "importo decimal(10,2),"+
+                "idStanza integer," +
+                "nome text" +
+                ");";
+
+        DATABASE_CREATE=TABLE_CONTI+" "+TABLE_SPESECONTI+" "+TABLE_STANZE+" "+TABLE_SPESESTANZA;
         db.execSQL(DATABASE_CREATE);
         String myinsert= "insert into conti (nomeConto, colore) values('testConto','112233')";
         db.execSQL(myinsert);
