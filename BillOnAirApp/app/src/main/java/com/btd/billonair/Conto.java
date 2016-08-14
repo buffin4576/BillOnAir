@@ -132,7 +132,7 @@ public class Conto implements Serializable{
 
     };
 
-    public Conto(String nomeConto, double saldo, String colore) throws SQLException {
+    public Conto(String nomeConto, double saldo, String colore){
         this.nomeConto = nomeConto;
         this.colore = colore;
         this.saldo = saldo;
