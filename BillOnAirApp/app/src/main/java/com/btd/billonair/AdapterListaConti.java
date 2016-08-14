@@ -58,7 +58,7 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
         saldocondo.setText("Saldo:"+conto.getSaldo());
         ultimaspesa.setText("Ultima Spesa:"+conto.getUltimaSpesa().getCosto());
 
-        imgconto.setBackgroundColor(Color.parseColor("#"+conto.getColore()));
+        imgconto.setBackgroundColor(Color.parseColor(conto.getColore()));
         final ImageView freccia=(ImageView)view.findViewById(R.id.Imagefreccia);
         final Bundle bund=new Bundle();
         freccia.setOnClickListener(new View.OnClickListener() {

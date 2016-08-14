@@ -21,7 +21,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static String TABLE_QUERIES = "";
 
     private static final String DATABASE_NAME = "billonair.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
     private static String DATABASE_CREATE= "";
 
@@ -34,7 +34,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         TABLE_CONTI="create table conti("
                 +"nomeConto text primary key,"
                 +"saldo decimal(10,2) not null default 0,"
-                +"colore text not null default 'fff'"
+                +"colore text not null default '#fff'"
                 +" );";
         TABLE_SPESECONTI="create table speseconti("
                 +"idSC integer primary key autoincrement,"
@@ -75,8 +75,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.execSQL(TABLE_SPESESTANZA);
         db.execSQL(TABLE_QUERIES);
 
-        String myinsert= "insert into conti (nomeConto, colore) values('testConto','112233');";
-        db.execSQL(myinsert);
+        //String myinsert= "insert into conti (nomeConto, colore) values('testConto','#112233');";
+        //db.execSQL(myinsert);
     }
 
     @Override
