@@ -127,20 +127,23 @@ public class Conto implements Serializable{
     private String colore;
     private double saldo;
     private ArrayList<SpesaConto> spese = new ArrayList<>();
+    private SpesaConto ultimaSpesa;
 
     public Conto(){
 
     };
 
-    public Conto(String nomeConto, double saldo, String colore){
+    public Conto(String nomeConto, double saldo, String colore) throws SQLException {
         this.nomeConto = nomeConto;
         this.colore = colore;
         this.saldo = saldo;
 
-        /*SpesaContoDAO_DB_impl spesaContoDAODbImpl = new SpesaContoDAO_DB_impl();
+        SpesaContoDAO_DB_impl spesaContoDAODbImpl = new SpesaContoDAO_DB_impl();
         spesaContoDAODbImpl.open();
-        this.spese.addAll(spesaContoDAODbImpl.getAllSpeseByConto(this.nomeConto));
-        spesaContoDAODbImpl.close();*/
+        ArrayList<SpesaConto> s = new ArrayList<>();
+        s.addAll(spesaContoDAODbImpl.getAllSpeseByConto(this.nomeConto));
+        this.ultimaSpesa = s.get(s.size()-1);
+        spesaContoDAODbImpl.close();
     };
 
     public String getNomeConto(){
@@ -173,6 +176,15 @@ public class Conto implements Serializable{
     }
 
     public void setSaldo(double saldo) { this.saldo = saldo; }
+
+    public SpesaConto getUltimaSpesa()
+    {
+        return this.ultimaSpesa;
+    }
+
+    public void  setUltimaSpesa(SpesaConto ultimaSpesa){
+        this.ultimaSpesa = ultimaSpesa;
+    }
 
     public String toString(){
         return "Nome Conto: "+nomeConto+" Saldo: "+saldo+" Colore: "+colore;
