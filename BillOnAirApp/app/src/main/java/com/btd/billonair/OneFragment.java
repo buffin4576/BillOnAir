@@ -16,6 +16,8 @@ import android.widget.ListView;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO;
 import android.widget.SimpleAdapter;
+
+import java.security.PublicKey;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -43,7 +45,7 @@ public class OneFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
+        final ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
         //DBOperations.getInstance(getActivity().getApplicationContext()).open();
         final Button NCButton=(Button)getView().findViewById(R.id.NCButton);
         final Button BTEntrata=(Button)getView().findViewById(R.id.BtEntrata);
@@ -71,11 +73,13 @@ public class OneFragment extends Fragment
         bund.putSerializable("ListaConti",LConti);
         NCButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                int requestCode = 1; // Or some number you choose
                 Intent intent = new Intent(getActivity(),NuovoConto.class);
                 intent.putExtras(bund);
-                startActivity(intent);
+                startActivityForResult(intent, requestCode);
             }
         });
+
 
         BTEntrata.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -93,6 +97,12 @@ public class OneFragment extends Fragment
                 startActivity(intent);
             }
         });
+    }
+
+    public void onActivityResult (int requestCode, int resultCode, Intent data)
+    {
+        getActivity().finish();
+        startActivity(getActivity().getIntent());
     }
 
 

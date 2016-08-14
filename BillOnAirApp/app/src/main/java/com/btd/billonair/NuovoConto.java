@@ -88,9 +88,6 @@ public class NuovoConto extends Activity implements View.OnClickListener {
                dao.close();
                 if(Ret)
                 {
-                    LConti.add(NConto);
-                    ListView lv = (ListView)findViewById(R.id.ListaConti);
-                    lv.setAdapter(new AdapterListaConti(getApplicationContext(),R.layout.rigaconto,LConti));
 
                 }
                 else
