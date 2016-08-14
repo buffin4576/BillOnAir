@@ -1,6 +1,8 @@
 package com.btd.billonair;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -27,6 +29,7 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
     private ArrayList<Conto> LConti;
     private Context mContext= null;
     private int mRowLayout;
+    private AdapterListaConti myadapter;
 
 
     public AdapterListaConti(Context context, int resource, ArrayList<Conto> objects)
@@ -35,9 +38,10 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
         LConti=objects;
         mContext=context;
         mRowLayout=resource;
+        myadapter=this;
     }
     @Override
-    public View getView(int pos, View view, ViewGroup parent) {
+    public View getView(final int pos, View view, final ViewGroup parent) {
         LayoutInflater vi = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = vi.inflate(mRowLayout, null);
         final Conto conto = LConti.get(pos);
@@ -45,6 +49,7 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
         TextView saldocondo=(TextView)view.findViewById(R.id.TxtSaldoConto);
         TextView ultimaspesa=(TextView)view.findViewById(R.id.TxtUltimaSpesa);
         final ImageView imgconto=(ImageView)view.findViewById(R.id.ImgConto);
+        final ImageView deleteconto=(ImageView)view.findViewById(R.id.deleteconto);
         nomeconto.setText(conto.getNomeConto());
         saldocondo.setText("Saldo:"+conto.getSaldo());
         ultimaspesa.setText("Ultima Spesa:"+conto.getUltimaSpesa().getCosto());
@@ -58,6 +63,30 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
                 bund.putSerializable("Conto",conto);
                 intent.putExtras(bund);
                 mContext.startActivity(intent);
+            }
+        });
+        deleteconto.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                AlertDialog.Builder alertDlg=new AlertDialog.Builder(mContext);
+                alertDlg.setMessage("Sei sicuto di volere cancellare questo conto?");
+
+                alertDlg.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LConti.remove(pos);
+                        myadapter.notifyDataSetChanged();
+                    }
+                });
+
+                alertDlg.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDlg.create().show();
             }
         });
         return view;

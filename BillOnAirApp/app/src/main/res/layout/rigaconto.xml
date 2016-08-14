@@ -58,6 +58,17 @@
             android:src="@drawable/frecciac"
             android:layout_alignBottom="@+id/TxtUltimaSpesa" />
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/deleteconto"
+            android:src="@android:drawable/ic_menu_delete"
+            android:layout_alignTop="@+id/TxtNomeConto"
+            android:layout_toRightOf="@+id/TxtNomeConto"
+            android:layout_alignBottom="@+id/ImgConto"
+            android:layout_alignRight="@+id/TxtUltimaSpesa"
+            android:layout_alignEnd="@+id/TxtUltimaSpesa" />
+
     </RelativeLayout>
 
 </LinearLayout>
