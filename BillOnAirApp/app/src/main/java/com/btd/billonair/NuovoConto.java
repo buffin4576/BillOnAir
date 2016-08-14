@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -65,8 +66,13 @@ public class NuovoConto extends Activity implements View.OnClickListener {
               String Nome=((EditText)findViewById(R.id.TxtNomeNuovoConto)).getText().toString();
               String SaldoS=((EditText)findViewById(R.id.TxtSaldoNuovoConto)).getText().toString();
               Double Saldo=Double.parseDouble(SaldoS);
-              Conto NConto=new Conto(Nome,Saldo,Colore);
-              ArrayList<Conto> LConti= (ArrayList<Conto>) getIntent().getSerializableExtra("ListaConti");
+                Conto NConto= null;
+                try {
+                    NConto = new Conto(Nome,Saldo,Colore);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<Conto> LConti= (ArrayList<Conto>) getIntent().getSerializableExtra("ListaConti");
               LConti.add(NConto);
               //Aggiunta conto nel database
               finish();

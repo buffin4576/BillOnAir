@@ -18,14 +18,14 @@ import java.util.ArrayList;
 /**
  * Created by ernrico on 08/06/2016.
  */
-public class AdapterListaSpese extends ArrayAdapter<Spesa>
+public class AdapterListaSpese extends ArrayAdapter<SpesaConto>
 {
-    private ArrayList<Spesa> LSpese;
+    private ArrayList<SpesaConto> LSpese;
     private Context mContext= null;
     private int mRowLayout;
 
 
-    public AdapterListaSpese(Context context, int resource, ArrayList<Spesa> objects)
+    public AdapterListaSpese(Context context, int resource, ArrayList<SpesaConto> objects)
     {
         super(context, resource, objects);
         LSpese=objects;
@@ -36,7 +36,7 @@ public class AdapterListaSpese extends ArrayAdapter<Spesa>
     public View getView(int pos, View view, ViewGroup parent) {
         LayoutInflater vi = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = vi.inflate(mRowLayout, null);
-        final Spesa spesa = LSpese.get(pos);
+        final SpesaConto spesa = LSpese.get(pos);
         /*TextView nomeconto=(TextView)view.findViewById(R.id.TxtNomeConto);
         TextView saldocondo=(TextView)view.findViewById(R.id.TxtSaldoConto);
         TextView ultimaspesa=(TextView)view.findViewById(R.id.TxtUltimaSpesa);
@@ -51,7 +51,7 @@ public class AdapterListaSpese extends ArrayAdapter<Spesa>
         TextView CostoSpesa=(TextView)view.findViewById(R.id.CostoSpesa);
         TextView DataSpesa=(TextView)view.findViewById(R.id.DataSpesa);
 
-        NomeSpesa.setText(spesa.getNome());
+        NomeSpesa.setText(spesa.getNomeSpesa());
         CostoSpesa.setText(""+spesa.getCosto());
         DataSpesa.setText(spesa.getData());
 

@@ -56,7 +56,12 @@ public class OneFragment extends Fragment
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ArrayList<Conto> LConti= (ArrayList<Conto>) dao.getAllConti();
+        ArrayList<Conto> LConti= null;
+        try {
+            LConti = (ArrayList<Conto>) dao.getAllConti();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //apro db
         //creazione array di tipo conto prendendo le info dal db
         dao.close();

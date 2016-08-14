@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,11 @@ public class DettagliConto extends AppCompatActivity {
 
         DNomeConto.setText(conto.getNomeConto());
         DSaldoConto.setText(""+conto.getSaldo());
-        lv.setAdapter(new AdapterListaSpese(this,R.layout.dettaglispesa,conto.getListaSpese()));
+        try {
+            lv.setAdapter(new AdapterListaSpese(this,R.layout.dettaglispesa,conto.getSpeseConto()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         Indietro.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
