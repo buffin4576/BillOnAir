@@ -1,14 +1,9 @@
 package com.btd.billonair.com.btd.billonair.db;
 
-import android.app.Application;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.btd.billonair.Conto;
 import com.btd.billonair.MyApplication;
-import com.btd.billonair.SpesaConto;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +39,7 @@ public class ContoDAO_DB_impl implements ContoDAO{
     }
 
     @Override
-    public List<Conto> getAllConti() {
+    public List<Conto> getAllConti() throws SQLException {
         List<Conto> conti = new ArrayList<Conto>();
         Cursor cursor = database.query("conti",allColumns,null,null,null,null,null);
         cursor.moveToFirst();
@@ -57,8 +52,7 @@ public class ContoDAO_DB_impl implements ContoDAO{
         return conti;
     }
 
-    private Conto cursorToConto(Cursor cursor)
-    {
+    private Conto cursorToConto(Cursor cursor) throws SQLException {
         String nomeConto = cursor.getString(0);
         double saldo = Double.parseDouble(cursor.getString(1));
         String colore = cursor.getString(2);
@@ -66,7 +60,7 @@ public class ContoDAO_DB_impl implements ContoDAO{
     }
 
     @Override
-    public Conto getContoByName(String nomeConto){
+    public Conto getContoByName(String nomeConto) throws SQLException {
         Conto conto = null;
         String[] params = {nomeConto};
         Cursor cursor = database.query("conti", allColumns,"nomeConto=?",params,null,null,null);

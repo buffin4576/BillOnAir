@@ -18,6 +18,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static String TABLE_STANZE = "";
     public static String TABLE_SPESESTANZA="";
 
+    public static String TABLE_QUERIES = "";
+
     private static final String DATABASE_NAME = "billonair.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -61,7 +63,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 "nome text" +
                 ");";
 
-        DATABASE_CREATE=TABLE_CONTI+" "+TABLE_SPESECONTI+" "+TABLE_STANZE+" "+TABLE_SPESESTANZA;
+        TABLE_QUERIES="create table queries(" +
+                "query text not null," +
+                "data datetime not null default CURRENT_TIMESTAMP" +
+                ")";
+
+        DATABASE_CREATE=TABLE_CONTI+" "+TABLE_SPESECONTI+" "+TABLE_STANZE+" "+TABLE_SPESESTANZA+" "+TABLE_QUERIES;
         db.execSQL(DATABASE_CREATE);
         String myinsert= "insert into conti (nomeConto, colore) values('testConto','112233')";
         db.execSQL(myinsert);

@@ -137,10 +137,10 @@ public class Conto implements Serializable{
         this.colore = colore;
         this.saldo = saldo;
 
-        SpesaContoDAO_DB_impl spesaContoDAODbImpl = new SpesaContoDAO_DB_impl();
+        /*SpesaContoDAO_DB_impl spesaContoDAODbImpl = new SpesaContoDAO_DB_impl();
         spesaContoDAODbImpl.open();
         this.spese.addAll(spesaContoDAODbImpl.getAllSpeseByConto(this.nomeConto));
-        spesaContoDAODbImpl.close();
+        spesaContoDAODbImpl.close();*/
     };
 
     public String getNomeConto(){
@@ -153,7 +153,12 @@ public class Conto implements Serializable{
 
     public double getSaldo() { return  saldo; }
 
-    public ArrayList<SpesaConto> getSpeseConto(){
+    public ArrayList<SpesaConto> getSpeseConto() throws SQLException {
+        SpesaContoDAO_DB_impl spesaContoDAODbImpl = new SpesaContoDAO_DB_impl();
+        spesaContoDAODbImpl.open();
+        ArrayList<SpesaConto> spese = new ArrayList<>();
+        spese.addAll(spesaContoDAODbImpl.getAllSpeseByConto(this.nomeConto));
+        spesaContoDAODbImpl.close();
         return spese;
     }
 

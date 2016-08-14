@@ -5,8 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.btd.billonair.Conto;
 
+import org.json.JSONException;
+
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Buffin on 24/06/2016.
@@ -17,6 +20,6 @@ public interface ContoDAO {
 
     public Conto insertConto(Conto conto);
     public void deleteConto(Conto conto);
-    public List<Conto> getAllConti();
-    public Conto getContoByName(String nomeConto);
+    public List<Conto> getAllConti() throws SQLException;
+    public Conto getContoByName(String nomeConto) throws SQLException;
 }
