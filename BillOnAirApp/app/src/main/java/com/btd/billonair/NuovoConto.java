@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.btd.billonair.com.btd.billonair.db.ContoDAO;
+import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -73,7 +76,23 @@ public class NuovoConto extends Activity implements View.OnClickListener {
                     e.printStackTrace();
                 }
                 ArrayList<Conto> LConti= (ArrayList<Conto>) getIntent().getSerializableExtra("ListaConti");
-              LConti.add(NConto);
+
+               ContoDAO dao = new ContoDAO_DB_impl();
+               try {
+                   dao.open();
+               } catch (SQLException e) {
+                   e.printStackTrace();
+               }
+               Boolean Ret = dao.insertConto(NConto);
+               dao.close();
+                if(Ret)
+                {
+                    LConti.add(NConto);
+                }
+                else
+                {
+
+                }
               //Aggiunta conto nel database
               finish();
             }
@@ -93,6 +112,7 @@ public class NuovoConto extends Activity implements View.OnClickListener {
         int Cl =BGColor.getColor();
         Colore = String.format("#%06X", 0xFFFFFF & Cl);
         ((TextView)findViewById(R.id.textView5)).setText(Colore);
+
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState)

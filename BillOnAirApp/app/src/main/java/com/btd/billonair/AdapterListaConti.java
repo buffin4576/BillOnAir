@@ -19,6 +19,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.btd.billonair.com.btd.billonair.db.ContoDAO;
+import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -74,8 +78,23 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
                 alertDlg.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        LConti.remove(pos);
-                        myadapter.notifyDataSetChanged();
+                        ContoDAO dao = new ContoDAO_DB_impl();
+                        try {
+                            dao.open();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        Boolean Ret=dao.deleteConto(LConti.get(pos));
+
+                        if(Ret)
+                        {
+                            LConti.remove(pos);
+                            myadapter.notifyDataSetChanged();
+                        }
+                        else
+                        {
+
+                        }
                     }
                 });
 
