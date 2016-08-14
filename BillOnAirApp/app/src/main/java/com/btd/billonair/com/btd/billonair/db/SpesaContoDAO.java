@@ -14,8 +14,8 @@ public interface SpesaContoDAO {
     public void open() throws SQLException;
     public void close();
 
-    public SpesaConto insertSpesa(SpesaConto spesaConto);
-    public void deleteSpesa(SpesaConto spesaConto);
+    public boolean insertSpesa(SpesaConto spesaConto);
+    public boolean deleteSpesa(SpesaConto spesaConto);
     public List<SpesaConto> getAllSpese();
     public SpesaConto getSpesaById(int id);
     public List<SpesaConto> getAllSpeseByConto(String nomeConto);

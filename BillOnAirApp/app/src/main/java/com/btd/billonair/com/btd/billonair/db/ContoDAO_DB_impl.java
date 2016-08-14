@@ -1,5 +1,6 @@
 package com.btd.billonair.com.btd.billonair.db;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.btd.billonair.Conto;
@@ -29,13 +30,45 @@ public class ContoDAO_DB_impl implements ContoDAO{
     }
 
     @Override
-    public Conto insertConto(Conto conto) {
-        return null;
+    public boolean insertConto(Conto conto) {
+
+        ContentValues insertValues = new ContentValues();
+        insertValues.put("nomeConto",conto.getNomeConto());
+        insertValues.put("saldo",conto.getSaldo());
+        insertValues.put("colore",conto.getColore());
+
+        long i = database.insert("conti",null,insertValues);
+        if(i!=-1)
+            return true;
+
+        return false;
     }
 
     @Override
-    public void deleteConto(Conto conto) {
+    public boolean updateConto(Conto conto, String vecchioNomeConto) {
 
+        ContentValues insertValues = new ContentValues();
+        insertValues.put("nomeConto",conto.getNomeConto());
+        insertValues.put("saldo",conto.getSaldo());
+        insertValues.put("colore",conto.getColore());
+
+        String[] params = {vecchioNomeConto};
+
+        int i = database.update("conti",insertValues,"nomeConto=?",params);
+        if(i>0)
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public boolean deleteConto(Conto conto) {
+        String[] params = {conto.getNomeConto()};
+        int i = database.delete("conti","nomeConto=?",params);
+        if(i>0)
+            return true;
+
+        return false;
     }
 
     @Override

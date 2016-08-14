@@ -1,10 +1,10 @@
 package com.btd.billonair.com.btd.billonair.db;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.btd.billonair.Conto;
 import com.btd.billonair.MyApplication;
 import com.btd.billonair.SpesaConto;
 
@@ -33,13 +33,28 @@ public class SpesaContoDAO_DB_impl implements SpesaContoDAO{
     }
 
     @Override
-    public SpesaConto insertSpesa(SpesaConto spesaConto) {
-        return null;
+    public boolean insertSpesa(SpesaConto spesaConto) {
+        ContentValues insertValues = new ContentValues();
+        insertValues.put("nomeSpesa",spesaConto.getNomeSpesa());
+        insertValues.put("costo",spesaConto.getCosto());
+        insertValues.put("data",spesaConto.getData());
+        insertValues.put("nomeConto",spesaConto.getNomeConto());
+
+        long i = database.insert("speseconti",null,insertValues);
+        if(i!=-1)
+            return true;
+
+        return false;
     }
 
     @Override
-    public void deleteSpesa(SpesaConto spesaConto) {
+    public boolean deleteSpesa(SpesaConto spesaConto) {
+        String[] params = {spesaConto.getId()+""};
+        int i = database.delete("speseconti","idSC=?",params);
+        if(i>0)
+            return true;
 
+        return false;
     }
 
     @Override

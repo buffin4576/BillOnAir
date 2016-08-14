@@ -18,8 +18,11 @@ public interface ContoDAO {
     public void open() throws SQLException;
     public void close();
 
-    public Conto insertConto(Conto conto);
-    public void deleteConto(Conto conto);
+    public boolean insertConto(Conto conto);
+
+    public boolean updateConto(Conto conto, String vecchioNomeConto);
+
+    public boolean deleteConto(Conto conto);
     public List<Conto> getAllConti() throws SQLException;
     public Conto getContoByName(String nomeConto) throws SQLException;
 }
