@@ -2,6 +2,7 @@ package com.btd.billonair.com.btd.billonair.db;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.btd.billonair.Conto;
 import com.btd.billonair.MyApplication;
@@ -60,6 +61,7 @@ public class SpesaContoDAO_DB_impl implements SpesaContoDAO{
         List<SpesaConto> spese = new ArrayList<SpesaConto>();
         String[] params = {nomeConto};
         Cursor cursor = database.query("speseconti",allColumns,"nomeConto=?",params,null,null,null);
+        Log.w("MyDebug","nomeconto: "+nomeConto);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             SpesaConto spesa = cursorToSpesaConto(cursor);

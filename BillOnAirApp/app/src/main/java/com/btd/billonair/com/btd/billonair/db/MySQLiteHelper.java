@@ -21,7 +21,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static String TABLE_QUERIES = "";
 
     private static final String DATABASE_NAME = "billonair.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 6;
 
     private static String DATABASE_CREATE= "";
 
@@ -66,11 +66,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         TABLE_QUERIES="create table queries(" +
                 "query text not null," +
                 "data datetime not null default CURRENT_TIMESTAMP" +
-                ")";
+                ");";
 
-        DATABASE_CREATE=TABLE_CONTI+" "+TABLE_SPESECONTI+" "+TABLE_STANZE+" "+TABLE_SPESESTANZA+" "+TABLE_QUERIES;
-        db.execSQL(DATABASE_CREATE);
-        String myinsert= "insert into conti (nomeConto, colore) values('testConto','112233')";
+        //DATABASE_CREATE=TABLE_CONTI+" "+TABLE_SPESECONTI+" "+TABLE_STANZE+" "+TABLE_SPESESTANZA+" "+TABLE_QUERIES;
+        db.execSQL(TABLE_CONTI);
+        db.execSQL(TABLE_SPESECONTI);
+        db.execSQL(TABLE_STANZE);
+        db.execSQL(TABLE_SPESESTANZA);
+        db.execSQL(TABLE_QUERIES);
+
+        String myinsert= "insert into conti (nomeConto, colore) values('testConto','112233');";
         db.execSQL(myinsert);
     }
 
@@ -79,7 +84,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         Log.w(MySQLiteHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTI);
+        db.execSQL("DROP TABLE IF EXISTS 'conti';");
+        db.execSQL("DROP TABLE IF EXISTS 'speseconti';");
+        db.execSQL("DROP TABLE IF EXISTS 'stanze';");
+        db.execSQL("DROP TABLE IF EXISTS 'spesestanza';");
+        db.execSQL("DROP TABLE IF EXISTS 'queries';");
         onCreate(db);
     }
 }

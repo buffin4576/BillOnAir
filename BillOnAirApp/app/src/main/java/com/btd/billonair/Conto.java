@@ -3,6 +3,7 @@ package com.btd.billonair;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO;
 import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
 
 import java.io.Serializable;
@@ -138,12 +139,15 @@ public class Conto implements Serializable{
         this.colore = colore;
         this.saldo = saldo;
 
-        SpesaContoDAO_DB_impl spesaContoDAODbImpl = new SpesaContoDAO_DB_impl();
-        spesaContoDAODbImpl.open();
+        SpesaContoDAO dao = new SpesaContoDAO_DB_impl();
+        dao.open();
         ArrayList<SpesaConto> s = new ArrayList<>();
-        s.addAll(spesaContoDAODbImpl.getAllSpeseByConto(this.nomeConto));
-        this.ultimaSpesa = s.get(s.size()-1);
-        spesaContoDAODbImpl.close();
+        s.addAll(dao.getAllSpeseByConto(nomeConto));
+        if(s.size()>0)
+            this.ultimaSpesa = s.get(s.size()-1);
+        else
+            this.ultimaSpesa = new SpesaConto();
+        dao.close();
     };
 
     public String getNomeConto(){
