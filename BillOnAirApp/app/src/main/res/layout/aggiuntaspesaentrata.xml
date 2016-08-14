@@ -79,22 +79,17 @@
         android:layout_height="wrap_content"
         android:text="Annula"
         android:id="@+id/BTSEAnulla"
-        android:layout_below="@+id/txtDettagli"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:layout_toStartOf="@+id/AggSETitolo"
-        android:layout_toLeftOf="@+id/AggSETitolo" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Conferma"
         android:id="@+id/BTSEConferma"
-        android:layout_alignTop="@+id/BTSEAnulla"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/txtImporto"
-        android:layout_alignEnd="@+id/txtImporto"
-        android:layout_toEndOf="@+id/AggSETitolo"
-        android:layout_toRightOf="@+id/AggSETitolo" />
+        android:layout_alignEnd="@+id/txtImporto" />
 
 </RelativeLayout>

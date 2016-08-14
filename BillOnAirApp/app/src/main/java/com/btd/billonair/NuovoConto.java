@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.btd.billonair.com.btd.billonair.db.ContoDAO;
@@ -88,12 +89,14 @@ public class NuovoConto extends Activity implements View.OnClickListener {
                 if(Ret)
                 {
                     LConti.add(NConto);
+                    ListView lv = (ListView)findViewById(R.id.ListaConti);
+                    lv.setAdapter(new AdapterListaConti(getApplicationContext(),R.layout.rigaconto,LConti));
+
                 }
                 else
                 {
 
                 }
-              //Aggiunta conto nel database
               finish();
             }
         });
