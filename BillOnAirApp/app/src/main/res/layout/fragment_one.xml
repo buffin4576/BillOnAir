@@ -1,4 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/scrollView"
+    android:fillViewport="true" >
+
+<RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,17 +15,18 @@
         android:layout_height="wrap_content"
         android:text="Spesa:"
         android:id="@+id/TxtS"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"
-        android:textSize="24dp"
-        android:textIsSelectable="false" />
+        android:textSize="22dp"
+        android:textIsSelectable="false"
+        android:layout_below="@+id/TxtResoconto" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entrata: "
         android:id="@+id/TxtE"
-        android:textSize="24dp"
+        android:textSize="22dp"
         android:layout_marginTop="37dp"
         android:layout_below="@+id/TxtS"
         android:layout_alignLeft="@+id/TxtS"
@@ -30,32 +37,34 @@
         android:layout_height="wrap_content"
         android:text="@string/plus"
         android:id="@+id/BtSpesa"
-        android:layout_alignBottom="@+id/TxtS"
         android:layout_toRightOf="@+id/TxtS"
-        android:layout_toEndOf="@+id/TxtS"
         android:layout_marginLeft="120dp"
-        android:textSize="30sp"
-        android:layout_alignBaseline="@+id/TxtSpesa" />
+        android:textSize="22dp"
+        android:layout_alignBaseline="@+id/TxtSpesa"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="false" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/plus"
         android:id="@+id/BtEntrata"
-        android:textSize="30sp"
+        android:textSize="22dp"
         android:layout_above="@+id/Linea"
         android:layout_alignLeft="@+id/BtSpesa"
         android:layout_alignStart="@+id/BtSpesa"
         android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="false"
-        android:layout_alignBaseline="@+id/TxtEntrata" />
+        android:layout_alignBaseline="@+id/TxtEntrata"
+        android:layout_alignRight="@+id/BtSpesa"
+        android:layout_alignEnd="@+id/BtSpesa" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.0"
         android:id="@+id/TxtSpesa"
-        android:textSize="24dp"
+        android:textSize="22dp"
         android:layout_above="@+id/TxtE"
         android:layout_toRightOf="@+id/TxtE"
         android:layout_toEndOf="@+id/TxtE" />
@@ -65,7 +74,7 @@
         android:layout_height="wrap_content"
         android:text="0.0"
         android:id="@+id/TxtEntrata"
-        android:textSize="24dp"
+        android:textSize="22dp"
         android:layout_alignTop="@+id/TxtE"
         android:layout_toRightOf="@+id/TxtE"
         android:layout_toEndOf="@+id/TxtE" />
@@ -80,54 +89,67 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="30dp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I Tuoi Conti"
+        android:id="@+id/textView2"
+        android:textSize="28dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/Linea" />
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/ListaConti"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:fillViewport="true"
+        android:layout_marginBottom="0dp"
+        android:paddingBottom="20dp"/>
+
+    <Button
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="@string/plus"
+        android:id="@+id/NCButton"
+        android:textSize="16dp"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentStart="false"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="false"
         android:layout_alignParentTop="false"
-        android:layout_below="@+id/Linea"
-        android:layout_centerHorizontal="true">
+        android:layout_alignWithParentIfMissing="false"
+        android:background="@drawable/roundedbutton"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/Linea"
+        android:layout_marginTop="30dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="I Tuoi Conti"
-            android:id="@+id/textView2"
-            android:textSize="28dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ListaConti"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView2"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
-
-        <Button
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:text="@string/plus"
-            android:id="@+id/NCButton"
-            android:textSize="16dp"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentEnd="false"
-            android:layout_marginRight="20dp"
-            android:layout_alignParentStart="false"
-            android:layout_toRightOf="@+id/textView2"
-            android:layout_alignParentBottom="false"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:layout_alignWithParentIfMissing="false"
-            android:background="@drawable/roundedbutton"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="28dp" />
-    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Resoconto"
+        android:id="@+id/TxtResoconto"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/TxtS"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="28dp"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>
+
+</ScrollView>

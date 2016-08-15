@@ -54,11 +54,16 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
         TextView ultimaspesa=(TextView)view.findViewById(R.id.TxtUltimaSpesa);
         final ImageView imgconto=(ImageView)view.findViewById(R.id.ImgConto);
         final ImageView deleteconto=(ImageView)view.findViewById(R.id.deleteconto);
-        nomeconto.setText(conto.getNomeConto());
+
+        String upperNomeConto = conto.getNomeConto().substring(0,1).toUpperCase() + conto.getNomeConto().substring(1);
+        nomeconto.setText(upperNomeConto);
         saldocondo.setText("Saldo:"+conto.getSaldo());
         ultimaspesa.setText("Ultima Spesa:"+conto.getUltimaSpesa().getCosto());
 
-        imgconto.setBackgroundColor(Color.parseColor(conto.getColore()));
+        //imgconto.setBackgroundColor(Color.parseColor(conto.getColore()));
+        int color = Color.parseColor(conto.getColore()); //The color u want
+        imgconto.setColorFilter(color);
+
         final ImageView freccia=(ImageView)view.findViewById(R.id.Imagefreccia);
         final Bundle bund=new Bundle();
         freccia.setOnClickListener(new View.OnClickListener() {

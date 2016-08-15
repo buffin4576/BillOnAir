@@ -6,48 +6,58 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:id="@+id/ImgConto"
-            android:background="#ff0000" />
+            android:src="@drawable/ic_credit_card"
+            android:baselineAlignBottom="false"
+            android:contentDescription="@string/icon_conto"
+            android:layout_marginTop="-2dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TxtNomeConto"
             android:id="@+id/TxtNomeConto"
-            android:textSize="25dp"
+            android:textSize="22dp"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/ImgConto"
             android:layout_toEndOf="@+id/ImgConto"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_alignBaseline="@+id/ImgConto"
+            android:textStyle="bold"
+            android:elegantTextHeight="false" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Saldo:0.00"
             android:id="@+id/TxtSaldoConto"
-            android:textSize="22dp"
+            android:textSize="18dp"
             android:layout_below="@+id/ImgConto"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="false" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ultima Spesa:0.00"
             android:id="@+id/TxtUltimaSpesa"
-            android:textSize="22dp"
+            android:textSize="18dp"
             android:layout_alignTop="@+id/TxtSaldoConto"
             android:layout_toRightOf="@+id/TxtSaldoConto"
             android:layout_toEndOf="@+id/TxtSaldoConto"
             android:layout_marginLeft="10dp"
-            />
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="true" />
 
         <ImageView
             android:layout_height="wrap_content"
@@ -56,7 +66,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/frecciac"
-            android:layout_alignBottom="@+id/TxtUltimaSpesa" />
+            android:layout_alignBottom="@+id/TxtUltimaSpesa"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="false"
+            android:layout_marginTop="10dp" />
 
         <ImageView
             android:layout_width="30dp"
@@ -64,10 +77,13 @@
             android:id="@+id/deleteconto"
             android:src="@android:drawable/ic_menu_delete"
             android:layout_alignTop="@+id/TxtNomeConto"
-            android:layout_toRightOf="@+id/TxtNomeConto"
-            android:layout_alignBottom="@+id/ImgConto"
             android:layout_alignRight="@+id/TxtUltimaSpesa"
-            android:layout_alignEnd="@+id/TxtUltimaSpesa" />
+            android:layout_alignEnd="@+id/TxtUltimaSpesa"
+            android:layout_alignBaseline="@+id/ImgConto"
+            android:tint="@color/abc_color_highlight_material"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp" />
 
     </RelativeLayout>
 
