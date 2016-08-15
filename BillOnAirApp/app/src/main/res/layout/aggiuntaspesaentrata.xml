@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView"
+    android:background="@drawable/border_layout">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#22ffffff">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,15 +16,15 @@
         android:textSize="30dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Importo"
         android:id="@+id/textView6"
-        android:textSize="30dp"
-        android:layout_marginTop="43dp"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/AggSETitolo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -36,7 +41,9 @@
         android:layout_marginLeft="10dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"
+        android:textSize="22dp"
+        android:layout_alignBaseline="@+id/textView6" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -46,14 +53,15 @@
         android:layout_alignRight="@+id/txtImporto"
         android:layout_alignEnd="@+id/txtImporto"
         android:layout_alignLeft="@+id/txtImporto"
-        android:layout_alignStart="@+id/txtImporto" />
+        android:layout_alignStart="@+id/txtImporto"
+        android:layout_alignBaseline="@+id/textView7" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Conto"
         android:id="@+id/textView7"
-        android:textSize="30dp"
+        android:textSize="18dp"
         android:layout_below="@+id/txtImporto"
         android:layout_alignLeft="@+id/textView6"
         android:layout_alignStart="@+id/textView6" />
@@ -63,48 +71,63 @@
         android:layout_height="wrap_content"
         android:text="Nome"
         android:id="@+id/textView8"
-        android:textSize="30dp"
+        android:textSize="18dp"
         android:layout_below="@+id/SpinnerConti"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtDettagli"
-        android:layout_below="@+id/textView8"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"
+        android:layout_alignBaseline="@+id/textView8"
+        android:layout_alignLeft="@+id/SpinnerConti"
+        android:layout_alignStart="@+id/SpinnerConti" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Annula"
-        android:id="@+id/BTSEAnulla"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:layout_toStartOf="@+id/textView8"
-        android:layout_marginLeft="20dp"
-        android:layout_toLeftOf="@+id/textView8" />
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/txtDettagli">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Conferma"
-        android:id="@+id/BTSEConferma"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/txtImporto"
-        android:layout_alignEnd="@+id/txtImporto"
-        android:layout_toEndOf="@+id/textView8"
-        android:layout_toRightOf="@+id/textView8" />
-        android:layout_alignEnd="@+id/txtImporto" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Annula"
+            android:id="@+id/BTSEAnulla"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentEnd="false"
+            android:layout_alignLeft="@+id/textView6"
+            android:layout_weight="0.5"
+            android:layout_marginBottom="20dp" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conferma"
+            android:id="@+id/BTSEConferma"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_centerHorizontal="true"
+            android:layout_alignLeft="@+id/SpinnerConti"
+            android:layout_weight="0.5"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp" />
+    </LinearLayout><![CDATA[
+
+    android:layout_alignEnd="@+id/txtImporto" />
+
+]]>
 </RelativeLayout>
+</ScrollView>

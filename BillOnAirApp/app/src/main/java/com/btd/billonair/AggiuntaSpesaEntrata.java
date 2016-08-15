@@ -32,7 +32,7 @@ public class AggiuntaSpesaEntrata extends Activity {
 
         int width =DM.widthPixels;
         int height= DM.heightPixels;
-        getWindow().setLayout((int)(width*0.8),(int)(height*0.8));
+        getWindow().setLayout((int)(width*0.8),840);
 
         final TextView Titolo=(TextView)findViewById(R.id.AggSETitolo);
         final Spinner SpinnerConti=(Spinner)findViewById(R.id.SpinnerConti);

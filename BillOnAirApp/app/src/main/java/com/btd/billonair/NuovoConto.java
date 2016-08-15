@@ -37,7 +37,7 @@ public class NuovoConto extends Activity implements View.OnClickListener {
         int width =DM.widthPixels;
         int height= DM.heightPixels;
 
-        getWindow().setLayout((int)(width*0.8),(int)(height*0.7));
+        getWindow().setLayout((int)(width*0.8),840);
 
         ((EditText)findViewById(R.id.TxtSaldoNuovoConto)).setText("0");
 
@@ -64,6 +64,29 @@ public class NuovoConto extends Activity implements View.OnClickListener {
         colore9.setOnClickListener(this);
         final ImageView colore10 = (ImageView)findViewById(R.id.colore10);
         colore10.setOnClickListener(this);
+
+        final ImageView colore11 = (ImageView)findViewById(R.id.colore11);
+        colore11.setOnClickListener(this);
+        final ImageView colore12 = (ImageView)findViewById(R.id.colore12);
+        colore12.setOnClickListener(this);
+        final ImageView colore13 = (ImageView)findViewById(R.id.colore13);
+        colore13.setOnClickListener(this);
+        final ImageView colore14 = (ImageView)findViewById(R.id.colore14);
+        colore14.setOnClickListener(this);
+        final ImageView colore15 = (ImageView)findViewById(R.id.colore15);
+        colore15.setOnClickListener(this);
+        final ImageView colore16 = (ImageView)findViewById(R.id.colore16);
+        colore16.setOnClickListener(this);
+        final ImageView colore17 = (ImageView)findViewById(R.id.colore17);
+        colore17.setOnClickListener(this);
+        final ImageView colore18 = (ImageView)findViewById(R.id.colore18);
+        colore18.setOnClickListener(this);
+        final ImageView colore19 = (ImageView)findViewById(R.id.colore19);
+        colore19.setOnClickListener(this);
+        final ImageView colore20 = (ImageView)findViewById(R.id.colore20);
+        colore20.setOnClickListener(this);
+
+
 
         AggiungiButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
