@@ -12,7 +12,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.btd.billonair.com.btd.billonair.db.ContoDAO;
+import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO;
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -77,14 +84,30 @@ public class AggiuntaSpesaEntrata extends Activity {
                     return;
                 }
                 double importo=Double.parseDouble(TxtImporto.getText().toString());
-
+                SpesaContoDAO dao = new SpesaContoDAO_DB_impl();
+                    try {
+                    dao.open();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 if(tipo.equals("Entrata"))
                 {
                     //esecuzione entrata
+
                 }
                 else
                 {
                     //esecuzione spesa
+                    importo=importo*(-1);
+                }
+                Date data=new Date();
+                SpesaConto sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-"+data.getDate(),LConti.get(SpinnerConti.getSelectedItemPosition()).getNomeConto());
+
+                Boolean br=dao.insertSpesa(sc);
+                dao.close();
+                if(br)
+                {
+                    LConti.get(SpinnerConti.getSelectedItemPosition()).setUltimaSpesa(sc);
                 }
                 finish();
             }
