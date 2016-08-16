@@ -117,7 +117,8 @@ public class AggiuntaSpesaEntrata extends Activity {
                     e.printStackTrace();
                 }
                 selezionato.setSaldo(selezionato.getSaldo()+importo);
-                dao2.updateConto(selezionato,selezionato.getNomeConto());
+                br=dao2.updateConto(selezionato,selezionato.getNomeConto());
+                dao2.close();
                 finish();
             }
         });
