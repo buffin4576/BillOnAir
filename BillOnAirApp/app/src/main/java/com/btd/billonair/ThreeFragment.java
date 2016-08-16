@@ -47,7 +47,7 @@ public class ThreeFragment extends Fragment
         args.putBoolean(CaldroidFragment.SIX_WEEKS_IN_CALENDAR, true);
         caldroidFragment.setArguments(args);
         //setCustomResourceForDates();
-        TextDrawable myText = new TextDrawable("ciao");
+        TextDrawable myText = new TextDrawable(12.32,9.80);
         Date d = new Date();
         caldroidFragment.setBackgroundDrawableForDate(myText,d);
 
