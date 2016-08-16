@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO;
+import com.roomorama.caldroid.CaldroidFragment;
+
 import android.widget.SimpleAdapter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ThreeFragment extends Fragment
 {
@@ -25,12 +29,30 @@ public class ThreeFragment extends Fragment
     {
     }
 
+    private CaldroidFragment caldroidFragment;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_three, container, false);
+        View root = inflater.inflate(R.layout.fragment_three, container, false);
 
+        caldroidFragment = new CaldroidFragment();
+        Bundle args = new Bundle();
+        Calendar cal = Calendar.getInstance();
+        args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
+        args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
+        args.putBoolean(CaldroidFragment.ENABLE_SWIPE, true);
+        args.putBoolean(CaldroidFragment.SIX_WEEKS_IN_CALENDAR, true);
+        caldroidFragment.setArguments(args);
+        //setCustomResourceForDates();
+
+        // Attach to the activity
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.cal_container, caldroidFragment);
+        t.commit();
+
+        return root;
     }
 
     @Override

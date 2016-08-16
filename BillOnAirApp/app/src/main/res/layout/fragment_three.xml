@@ -11,18 +11,19 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <CalendarView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/calendarView"
-        android:layout_below="@+id/textView10"
-        android:layout_centerHorizontal="true" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/cal_container"
+        android:layout_weight="0.4"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="andamento"
         android:id="@+id/button"
-        android:layout_below="@+id/calendarView"
+        android:layout_below="@+id/cal_container"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
