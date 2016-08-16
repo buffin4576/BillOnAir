@@ -22,6 +22,7 @@ import android.widget.SimpleAdapter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ThreeFragment extends Fragment
 {
@@ -46,6 +47,9 @@ public class ThreeFragment extends Fragment
         args.putBoolean(CaldroidFragment.SIX_WEEKS_IN_CALENDAR, true);
         caldroidFragment.setArguments(args);
         //setCustomResourceForDates();
+        TextDrawable myText = new TextDrawable("ciao");
+        Date d = new Date();
+        caldroidFragment.setBackgroundDrawableForDate(myText,d);
 
         // Attach to the activity
         FragmentTransaction t = getFragmentManager().beginTransaction();
