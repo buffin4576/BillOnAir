@@ -32,4 +32,14 @@
         android:layout_below="@+id/NomeSpesa"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/deletespesa"
+        android:layout_alignBottom="@+id/DataSpesa"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@android:drawable/ic_menu_delete"
+        android:layout_alignParentTop="true" />
 </RelativeLayout>

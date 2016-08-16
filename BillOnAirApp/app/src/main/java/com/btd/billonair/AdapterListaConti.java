@@ -90,6 +90,7 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
                             e.printStackTrace();
                         }
                         Boolean Ret=dao.deleteConto(LConti.get(pos));
+                        dao.close();
 
                         if(Ret)
                         {

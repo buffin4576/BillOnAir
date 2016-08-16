@@ -125,11 +125,35 @@ public class OneFragment extends Fragment
         });
     }
 
-    public void onActivityResult (int requestCode, int resultCode, Intent data)
+    /*public void onActivityResult (int requestCode, int resultCode, Intent data)
     {
         getActivity().finish();
         startActivity(getActivity().getIntent());
-    }
+    }*/
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
+        ContoDAO dao=new ContoDAO_DB_impl();
+
+        try {
+            dao.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Conto> LConti= null;
+        try {
+            LConti = (ArrayList<Conto>) dao.getAllConti();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //apro db
+        //creazione array di tipo conto prendendo le info dal db
+        dao.close();
+        //chiudo il db
+        lv.setAdapter(new AdapterListaConti(getContext(),R.layout.rigaconto,LConti));
+
+    }
 
 }
