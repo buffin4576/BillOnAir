@@ -48,7 +48,7 @@ public class ThreeFragment extends Fragment
         caldroidFragment.setArguments(args);
         //setCustomResourceForDates();
         TextDrawable myText = new TextDrawable("ciao");
-        Date d = new Date();
+        Date d = new Date(); //
         caldroidFragment.setBackgroundDrawableForDate(myText,d);
 
         // Attach to the activity
