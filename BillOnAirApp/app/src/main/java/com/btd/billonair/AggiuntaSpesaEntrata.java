@@ -85,6 +85,7 @@ public class AggiuntaSpesaEntrata extends Activity {
                 }
                 double importo=Double.parseDouble(TxtImporto.getText().toString());
                 SpesaContoDAO dao = new SpesaContoDAO_DB_impl();
+                ContoDAO dao2=new ContoDAO_DB_impl();
                     try {
                     dao.open();
                 } catch (SQLException e) {
@@ -100,15 +101,23 @@ public class AggiuntaSpesaEntrata extends Activity {
                     //esecuzione spesa
                     importo=importo*(-1);
                 }
+                Conto selezionato=LConti.get(SpinnerConti.getSelectedItemPosition());
                 Date data=new Date();
-                SpesaConto sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-"+data.getDate(),LConti.get(SpinnerConti.getSelectedItemPosition()).getNomeConto());
+                SpesaConto sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-"+data.getDate(),selezionato.getNomeConto());
 
                 Boolean br=dao.insertSpesa(sc);
                 dao.close();
                 if(br)
                 {
-                    LConti.get(SpinnerConti.getSelectedItemPosition()).setUltimaSpesa(sc);
+                    selezionato.setUltimaSpesa(sc);
                 }
+                try {
+                    dao2.open();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                selezionato.setSaldo(selezionato.getSaldo()+importo);
+                dao2.updateConto(selezionato,selezionato.getNomeConto());
                 finish();
             }
         });
