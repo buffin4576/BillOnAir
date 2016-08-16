@@ -80,7 +80,7 @@
         android:layout_toEndOf="@+id/TxtE" />
 
     <ImageView
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_width="wrap_content"
         android:id="@+id/Linea"
         android:src="#a6b7b7b7"
