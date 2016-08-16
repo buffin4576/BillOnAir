@@ -56,9 +56,9 @@ public class TextDrawable extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-        canvas.drawText(entrate, 0, 28, paint);
-        canvas.drawText(uscite, 0, 28*2, paint2);
-        canvas.drawText(totale, 0, 28*3, paint3);
+        canvas.drawText(entrate, 4, 28, paint);
+        canvas.drawText(uscite, 4, 28*2, paint2);
+        canvas.drawText(totale, 4, 28*3, paint3);
     }
 
     @Override
