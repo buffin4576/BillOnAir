@@ -2,6 +2,7 @@ package com.btd.billonair;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -33,13 +34,16 @@ public class AggiuntaSpesaEntrata extends Activity {
 
         setContentView(R.layout.aggiuntaspesaentrata);
 
-
+/*
         DisplayMetrics DM=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(DM);
 
         int width =DM.widthPixels;
         int height= DM.heightPixels;
-        getWindow().setLayout((int)(width*0.8),840);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT)
+            getWindow().setLayout((int)(width*0.8),840);
+        else
+            getWindow().setLayout(width,height);*/
 
         final TextView Titolo=(TextView)findViewById(R.id.AggSETitolo);
         final Spinner SpinnerConti=(Spinner)findViewById(R.id.SpinnerConti);

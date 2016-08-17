@@ -71,6 +71,9 @@
             android:layout_alignParentLeft="false"
             android:layout_marginTop="10dp" />
 
+
+
+        <!--android:tint="@color/abc_color_highlight_material"-->
         <ImageView
             android:layout_width="30dp"
             android:layout_height="wrap_content"
@@ -80,7 +83,6 @@
             android:layout_alignRight="@+id/TxtUltimaSpesa"
             android:layout_alignEnd="@+id/TxtUltimaSpesa"
             android:layout_alignBaseline="@+id/ImgConto"
-            android:tint="@color/abc_color_highlight_material"
             android:layout_alignParentLeft="false"
             android:layout_alignParentRight="true"
             android:layout_marginRight="40dp" />

@@ -8,4 +8,9 @@
     <string name="action_settings">Settings</string>
     <string name="plus">+</string>
     <string name="icon_conto">icon conto</string>
+    <string name="importo">Importo</string>
+    <string name="conto">Conto</string>
+    <string name="nome">Nome</string>
+    <string name="annula">Annula</string>
+    <string name="conferma">Conferma</string>
 </resources>
