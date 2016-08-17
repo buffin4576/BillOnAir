@@ -3,6 +3,9 @@ package com.btd.billonair.com.btd.billonair.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
+
 import com.btd.billonair.Conto;
 import com.btd.billonair.MyApplication;
 import java.sql.SQLException;
@@ -73,6 +76,11 @@ public class ContoDAO_DB_impl implements ContoDAO{
 
     @Override
     public List<Conto> getAllConti() throws SQLException {
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        queryBuilder.setTables("conti");
+        String sql = queryBuilder.buildQuery(allColumns,null,null,null,null,null);
+        Log.w("SQL",sql);
+
         List<Conto> conti = new ArrayList<Conto>();
         Cursor cursor = database.query("conti",allColumns,null,null,null,null,null);
         cursor.moveToFirst();

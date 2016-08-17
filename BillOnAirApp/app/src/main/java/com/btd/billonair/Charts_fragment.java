@@ -2,6 +2,7 @@ package com.btd.billonair;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.CandleStickChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -26,6 +28,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -141,18 +144,43 @@ public class Charts_fragment extends Fragment {
             }
             LlineDataset.add(new LineDataSet(lentries.get(i),LConti.get(i).getNomeConto()));
             LlineDataset.get(i).setAxisDependency(YAxis.AxisDependency.LEFT);
+            int color = Color.parseColor(LConti.get(i).getColore());
+            LlineDataset.get(i).setColor(color);
+            LlineDataset.get(i).setCircleColor(color);
             ldataSets.add(LlineDataset.get(i));
-
         }
 
         LineData ldata = new LineData(ldataSets);
-
         lchart.setData(ldata);
+
+        Legend l = lchart.getLegend();
+        l.setEnabled(true);
+        l.setTypeface(Typeface.DEFAULT);
+        l.setFormSize(10f); // set the size of the legend forms/shapes
+        l.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+        l.setTextSize(12f);
+        l.setTextColor(Color.BLACK);
+        l.setXEntrySpace(5f); // set the space between the legend entries on the x-axis
+        l.setYEntrySpace(5f); // set the space between the legend entries on the y-axis
+        l.setYOffset(20f);
+
+        // set custom labels and colors
+        String[] legendLabels = new String[LConti.size()];
+        int[] legendColor = new int[LConti.size()];
+        for(int i = 0; i < LConti.size(); i++)
+        {
+            legendColor[i] = Color.parseColor(LConti.get(i).getColore());
+            legendLabels[i] = LConti.get(i).getNomeConto();
+        }
+        l.setCustom(legendColor, legendLabels);
+
         lchart.invalidate();
 
 
         //grafico barre
         BarChart chart = (BarChart)getView().findViewById(R.id.chart);
+
         List <BarEntry> bentriesIn=new ArrayList<BarEntry>();
         List <BarEntry> bentriesOut=new ArrayList<BarEntry>();
         ArrayList<Double>groupIn=new ArrayList<Double>();
@@ -240,16 +268,12 @@ public class Charts_fragment extends Fragment {
         chart.setDrawGridBackground(false);
         chart.setData(data);
         chart.groupBars(0, groupSpace, barSpace);
+
+        chart.getLegend().setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+        chart.getLegend().setYOffset(30f);
         chart.invalidate();
 
-        //chart 2//
-        /*
-        BarChart chart2 = (BarChart)getView().findViewById(R.id.chart2);
 
-        chart2.setDrawGridBackground(false);
-        chart2.setData(data);
-        chart2.groupBars(0, groupSpace, barSpace);
-        chart2.invalidate();*/
     }
 
     @Override
