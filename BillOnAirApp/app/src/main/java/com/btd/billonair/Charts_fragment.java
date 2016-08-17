@@ -59,7 +59,6 @@ public class Charts_fragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        BarChart chart = (BarChart)getView().findViewById(R.id.chart);
 
         LineChart lchart = (LineChart) getView().findViewById(R.id.lchart);
 
@@ -152,25 +151,66 @@ public class Charts_fragment extends Fragment {
         lchart.invalidate();
 
 
+        //grafico barre
+        BarChart chart = (BarChart)getView().findViewById(R.id.chart);
+        List <BarEntry> bentriesIn=new ArrayList<BarEntry>();
+        List <BarEntry> bentriesOut=new ArrayList<BarEntry>();
+        ArrayList<Double>groupIn=new ArrayList<Double>();
+        ArrayList<Double>groupOut=new ArrayList<Double>();
+        double spese;
+        double entrate;
+        int j=0;
+        for(j=0;j<LConti.size();j++)
+        {
 
+            spese=0;
+            entrate=0;
+            for (int y=0;y<LSpeseMese.get(j).size();y++)
+            {
+                if(LSpeseMese.get(j).get(y).getCosto()<0)
+                {
+                    spese-=LSpeseMese.get(j).get(y).getCosto();
+                }
+                else
+                {
+                    entrate+=LSpeseMese.get(j).get(y).getCosto();
+                }
+            }
+            BarEntry bIn=new BarEntry(j, (float) entrate);
+            BarEntry bOu=new BarEntry(j,(float) spese);
+            bentriesIn.add(bIn);
+            bentriesOut.add(bOu);
+        }
+        BarEntry bIn=new BarEntry(j+1, 0f);
+        BarEntry bOu=new BarEntry(j+1,0f);
+        bentriesIn.add(bIn);
+        bentriesOut.add(bOu);
 
-        List<BarEntry> entries1 = new ArrayList<>();
-        List<BarEntry> entries2 = new ArrayList<>();
+        String[] nomeConti=new String[LConti.size()];
 
+        for (int i=0;i<nomeConti.length;i++)
+        {
+            nomeConti[i]=LConti.get(i).getNomeConto();
+        }
+
+        /*
         int[] groupIn = {10,20,48,32,0};
         int[] groupOut = {30,22,18,9,0};
 
         String[] nomeConti = new String[]{"Conto 1","Conto 2","Conto 3","Conto 4"};
+
 
         for(int i = 0; i < groupIn.length; i++) {
             BarEntry bIn = new BarEntry(i,groupIn[i]);
             BarEntry bOut = new BarEntry(i,groupOut[i]);
             entries1.add(bIn);
             entries2.add(bOut);
-        }
+        }*/
 
-        BarDataSet set1 = new BarDataSet(entries1, "In");
-        BarDataSet set2 = new BarDataSet(entries2, "Out");
+
+
+        BarDataSet set1 = new BarDataSet(bentriesIn, "In");
+        BarDataSet set2 = new BarDataSet(bentriesOut, "Out");
 
         set1.setColor(Color.GREEN);
         set2.setColor(Color.RED);

@@ -44,12 +44,26 @@ public class AggiuntaSpesaEntrata extends Activity {
         final TextView Titolo=(TextView)findViewById(R.id.AggSETitolo);
         final Spinner SpinnerConti=(Spinner)findViewById(R.id.SpinnerConti);
         final String tipo= (String) getIntent().getCharSequenceExtra("tipo");
-        final ArrayList<Conto> LConti= (ArrayList<Conto>) getIntent().getSerializableExtra("ListaConti");
+        final ArrayList<Conto> LConti=new ArrayList<>();
+        ArrayList<Conto> LConti1= null;
         final Button BTAggiungi=(Button)findViewById(R.id.BTSEConferma);
         final Button BTAnnulla=(Button)findViewById(R.id.BTSEAnulla);
         final EditText TxtImporto=(EditText)findViewById(R.id.txtImporto);
         final EditText TxtDettagli=(EditText)findViewById(R.id.txtDettagli);
 
+        ContoDAO dao=new ContoDAO_DB_impl();
+
+        try {
+           dao.open();
+           LConti1=(ArrayList<Conto>) dao.getAllConti();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dao.close();
+        for (int i=0;i<LConti1.size();i++)
+        {
+            LConti.add(LConti1.get(i));
+        }
         List<String> list = new ArrayList<String>();
 
         for (int i=0;i<LConti.size();i++ )
