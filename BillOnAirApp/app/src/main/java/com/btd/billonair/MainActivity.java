@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new OneFragment(), "CONTI");
         adapter.addFragment(new TwoFragment(), "STANZE");
         adapter.addFragment(new ThreeFragment(), "MENSILE");
+        adapter.addFragment(new Charts_fragment(), "GRAFICO");
         viewPager.setAdapter(adapter);
     }
 
