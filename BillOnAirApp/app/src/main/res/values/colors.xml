@@ -5,7 +5,10 @@
     <color name="colorAccent">#8f9bde</color>-->
     <color name="colorPrimary">#5d75f5</color>
     <color name="colorPrimaryDark">#303f9f</color>
-    <color name="colorAccent">#c8d1ff</color>
+    <color name="colorAccent">#303f9f</color>
+
+    <color name="textColor">#808080</color>
+    <color name="buttonColor">#d6d7d7</color>
     //aggiunta tab
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>

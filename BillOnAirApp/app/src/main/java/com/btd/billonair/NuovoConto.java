@@ -2,15 +2,13 @@ package com.btd.billonair;
 
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
-import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.btd.billonair.com.btd.billonair.db.ContoDAO;
@@ -29,15 +27,23 @@ public class NuovoConto extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
 
-        setContentView(R.layout.nuovoconto);
 
+/*
         DisplayMetrics DM=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(DM);
 
         int width =DM.widthPixels;
         int height= DM.heightPixels;
 
-        getWindow().setLayout((int)(width*0.8),840);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+            //getWindow().setLayout((int) (width * 0.8), 840);
+            //setTheme(R.style.AppTheme_CustomTheme);
+            //getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        }
+        else
+            getWindow().setLayout(width,height);
+*/
+        setContentView(R.layout.nuovoconto);
 
         ((EditText)findViewById(R.id.TxtSaldoNuovoConto)).setText("0");
 
