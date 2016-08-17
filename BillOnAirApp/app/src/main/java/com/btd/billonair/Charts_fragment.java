@@ -10,18 +10,26 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.btd.billonair.com.btd.billonair.db.ContoDAO;
+import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO;
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.CandleStickChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,6 +60,99 @@ public class Charts_fragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         BarChart chart = (BarChart)getView().findViewById(R.id.chart);
+
+        LineChart lchart = (LineChart) getView().findViewById(R.id.lchart);
+
+        List<List<Entry>> lentries = new ArrayList<List<Entry>>();
+
+        ContoDAO dao= new ContoDAO_DB_impl();
+        SpesaContoDAO dao2= new SpesaContoDAO_DB_impl();
+        ArrayList<Conto> LConti=null;
+        ArrayList<SpesaConto>LSpese=null;
+        ArrayList<ArrayList<SpesaConto>>LSpeseMese=new ArrayList<ArrayList<SpesaConto>>();
+        ArrayList<Double> saldoMese= new ArrayList<Double>();
+        ArrayList<LineDataSet>LlineDataset=new ArrayList<LineDataSet>();
+        List<ILineDataSet> ldataSets = new ArrayList<ILineDataSet>();
+        double s;
+
+        String[] Data1;
+        String[]Data2;
+        String mese;
+        float giorno;
+        Date Now=new Date();
+        try {
+            dao.open();
+            LConti= (ArrayList<Conto>) dao.getAllConti();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dao.close();
+
+        try {
+            dao2.open();
+            LSpese= (ArrayList<SpesaConto>) dao2.getAllSpese();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dao2.close();
+
+        for (int i=0;i<LConti.size();i++)
+        {
+            saldoMese.add(LConti.get(i).getSaldo());
+            lentries.add(new ArrayList<Entry>());
+            LSpeseMese.add(new ArrayList<SpesaConto>());
+        }
+
+        for (int i=0;i<LSpese.size();i++)
+        {
+            Data1=(LSpese.get(i).getData()).split("-");
+            if(Now.getMonth() +1<10)
+            {
+                mese="0"+(Now.getMonth()+1);
+            }
+            else
+            {
+                mese=""+(Now.getMonth()+1);
+            }
+            if(mese.equals(mese))
+            {
+                for (int y=0;y<LConti.size();y++)
+                {
+                    if(LConti.get(y).getNomeConto().equals(LSpese.get(i).getNomeConto()))
+                    {
+                        s=saldoMese.get(y);
+                        saldoMese.set(y,(s-LSpese.get(i).getCosto()));
+                        LSpeseMese.get(y).add(LSpese.get(i));
+                    }
+                }
+            }
+        }
+
+        for (int i=0;i<saldoMese.size();i++)
+        {
+            Entry lentry=new Entry(0,Float.parseFloat(saldoMese.get(i).toString()));
+            lentries.get(i).add(lentry);
+            for (int y=0;y<LSpeseMese.get(i).size();y++)
+            {
+                s=saldoMese.get(i);
+                saldoMese.set(i,s+LSpeseMese.get(i).get(y).getCosto());
+                Data2=LSpeseMese.get(i).get(y).getData().split("-");
+                lentry=new Entry(Float.parseFloat(Data2[2]),Float.parseFloat(saldoMese.get(i).toString()));
+                lentries.get(i).add(lentry);
+            }
+            LlineDataset.add(new LineDataSet(lentries.get(i),LConti.get(i).getNomeConto()));
+            LlineDataset.get(i).setAxisDependency(YAxis.AxisDependency.LEFT);
+            ldataSets.add(LlineDataset.get(i));
+
+        }
+
+        LineData ldata = new LineData(ldataSets);
+
+        lchart.setData(ldata);
+        lchart.invalidate();
+
+
+
 
         List<BarEntry> entries1 = new ArrayList<>();
         List<BarEntry> entries2 = new ArrayList<>();
