@@ -139,7 +139,7 @@ public class NuovoConto extends Activity implements View.OnClickListener {
         ColorDrawable BGColor=(ColorDrawable)(((ImageView)v).getBackground());
         int Cl =BGColor.getColor();
         Colore = String.format("#%06X", 0xFFFFFF & Cl);
-        ((TextView)findViewById(R.id.textView5)).setText(Colore);
+        //((TextView)findViewById(R.id.textView5)).setText(Colore);
 
     }
 

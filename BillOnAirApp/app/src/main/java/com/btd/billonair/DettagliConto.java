@@ -1,6 +1,7 @@
 package com.btd.billonair;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -32,11 +33,12 @@ public class DettagliConto extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Conto conto;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dettagliconto);
-
+        context=this;
         conto=(Conto) getIntent().getSerializableExtra("Conto");
         final EditText DNomeConto=(EditText)findViewById(R.id.DettagliNomeConto);
         final TextView DSaldoConto=(TextView)findViewById(R.id.DettagliSaldoConto);
@@ -44,10 +46,16 @@ public class DettagliConto extends AppCompatActivity {
         Button Indietro=(Button) findViewById(R.id.buttonIndietro);
         AdapterListaSpese adapter=null;
         try {
-            adapter=new AdapterListaSpese(this,R.layout.dettaglispesa,conto.getSpeseConto());
+            adapter=new AdapterListaSpese(context,R.layout.dettaglispesa,conto.getSpeseConto());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+        DNomeConto.setText(conto.getNomeConto());
+        DSaldoConto.setText(""+conto.getSaldo());
+        lv.setAdapter(adapter);
+
 
         adapter.setOnDataChangeListener(new AdapterListaSpese.OnDataChangeListener(){
             public void onDataChanged(int size){
@@ -66,39 +74,48 @@ public class DettagliConto extends AppCompatActivity {
             }
         });
 
-        DNomeConto.addTextChangedListener(new TextWatcher() {
 
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-            }
 
+        DNomeConto.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void afterTextChanged(Editable s) {
-                String NuovoNome=DNomeConto.getText().toString();
-                String VecchioNome=conto.getNomeConto();
-                conto.setNomeConto(NuovoNome);
-                ContoDAO dao=new ContoDAO_DB_impl();
-                try {
-                    dao.open();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus)
+                {
+                    ArrayList<Conto> LC=null;
+                    String NuovoNome=DNomeConto.getText().toString();
+                    String VecchioNome=conto.getNomeConto();
+                    Boolean b=true;
+                    ContoDAO dao=new ContoDAO_DB_impl();
+                    try {
+                        dao.open();
+                        LC=(ArrayList<Conto>) dao.getAllConti();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    for (int i=0;i<LC.size() && b;i++)
+                    {
+                        if(LC.get(i).getNomeConto().equals(NuovoNome))
+                        {
+                            b=false;
+                        }
+                    }
+                    if(b)
+                    {
+                        conto.setNomeConto(NuovoNome);
+                        dao.updateConto(conto, VecchioNome);;
+                        AdapterListaSpese adapter = null;
+                        try {
+                            adapter = new AdapterListaSpese(context, R.layout.dettaglispesa, conto.getSpeseConto());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        ListView lv = (ListView) findViewById(R.id.DettagliListaSpese);
+                        lv.setAdapter(adapter);
+                    }
+                    dao.close();
                 }
-                dao.updateConto(conto,VecchioNome);
-                dao.close();
-
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-
             }
         });
-
-        DNomeConto.setText(conto.getNomeConto());
-        DSaldoConto.setText(""+conto.getSaldo());
-        lv.setAdapter(adapter);
-
-
 
         Indietro.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
