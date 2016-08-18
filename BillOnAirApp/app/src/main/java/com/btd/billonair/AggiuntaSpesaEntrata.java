@@ -121,7 +121,26 @@ public class AggiuntaSpesaEntrata extends Activity {
                 }
                 Conto selezionato=LConti.get(SpinnerConti.getSelectedItemPosition());
                 Date data=new Date();
-                SpesaConto sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-"+data.getDate(),selezionato.getNomeConto());
+                //SpesaConto sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-"+data.getDate(),selezionato.getNomeConto());
+
+                //Denis' work
+                SpesaConto sc;
+                if(data.getMonth()+1<10){
+                    if(data.getDate()<10){
+                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-0"+(data.getMonth()+1)+"-0"+data.getDate(),selezionato.getNomeConto());
+                    }
+                    else {
+                        sc = new SpesaConto(1, TxtDettagli.getText().toString(), importo, (data.getYear() + 1900) + "-0" + (data.getMonth() + 1) + "-" + data.getDate(), selezionato.getNomeConto());
+                    }
+                }
+                else{
+                    if(data.getDate()<10){
+                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-0"+data.getDate(),selezionato.getNomeConto());
+                    }
+                    else{
+                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-"+data.getDate(),selezionato.getNomeConto());
+                    }
+                }
 
                 Boolean br=dao.insertSpesa(sc);
                 dao.close();

@@ -60,7 +60,7 @@ public class SpesaContoDAO_DB_impl implements SpesaContoDAO{
     @Override
     public List<SpesaConto> getAllSpese() {
         List<SpesaConto> spese = new ArrayList<SpesaConto>();
-        Cursor cursor = database.query("speseconti",allColumns,null,null,null,null,null);
+        Cursor cursor = database.query("speseconti",allColumns,null,null,null,null,"data");
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             SpesaConto spesa = cursorToSpesaConto(cursor);

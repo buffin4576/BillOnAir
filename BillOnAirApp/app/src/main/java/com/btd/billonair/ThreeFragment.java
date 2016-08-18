@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.media.RatingCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO;
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO;
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
 import com.roomorama.caldroid.CaldroidFragment;
 
 import android.widget.SimpleAdapter;
@@ -28,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -60,7 +64,7 @@ public class ThreeFragment extends Fragment
         caldroidFragment.setBackgroundDrawableForDate(myText,d);
         */
 
-        HashMap<String, Object> extraData = (HashMap<String, Object>) caldroidFragment.getExtraData();
+        /*HashMap<String, Object> extraData = (HashMap<String, Object>) caldroidFragment.getExtraData();
         ArrayList<String> singleDayValue = new ArrayList<>();
         singleDayValue.add("10.45");
         singleDayValue.add("12.57");
@@ -73,7 +77,23 @@ public class ThreeFragment extends Fragment
         ArrayList<ArrayList> valori = new ArrayList<>();
         valori.add(singleDayValue);
         valori.add(singleDayValue2);
-        extraData.put("valori",valori);
+        extraData.put("valori",valori);*/
+
+        //Denis' work
+        SpesaContoDAO dao=new SpesaContoDAO_DB_impl();
+        try {
+            dao.open();
+            HashMap<String, Object> extraData = (HashMap<String, Object>) caldroidFragment.getExtraData();
+            List<SpesaConto> allconti;
+            allconti=dao.getAllSpese();
+            ArrayList<ArrayList> valoriv2=new ArrayList<>();
+            valoriv2=riempiValori(allconti);
+            extraData.put("valori",valoriv2);
+            dao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         // Attach to the activity
         FragmentTransaction t = getFragmentManager().beginTransaction();
@@ -81,6 +101,44 @@ public class ThreeFragment extends Fragment
         t.commit();
 
         return root;
+    }
+
+    ArrayList<ArrayList> riempiValori(List<SpesaConto> allconti){
+        double in=0;
+        double out=0;
+        String attualedata="0000-00-00";
+        ArrayList<String> singleDayValue = new ArrayList<>();
+        ArrayList<ArrayList> valoriv2=new ArrayList<>();
+        for(SpesaConto sc:allconti){
+            if(!sc.getData().equals(attualedata)){
+                if(attualedata!="0000-00-00"){
+                    singleDayValue.add(String.valueOf(in));
+                    singleDayValue.add(String.valueOf(out));
+                    singleDayValue.add(attualedata);
+                    valoriv2.add(singleDayValue);
+                    in=0;
+                    out=0;
+                    singleDayValue=new ArrayList<>();
+                }
+                attualedata=sc.getData();
+                if(sc.getCosto()>=0)
+                    in+=sc.getCosto();
+                else
+                    out+=(sc.getCosto()*-1);
+            }
+            else{
+                if(sc.getCosto()>=0)
+                    in+=sc.getCosto();
+                else
+                    out+=(sc.getCosto()*-1);
+            }
+            //Log.e("date", sc.getData());
+        }
+        singleDayValue.add(String.valueOf(in));
+        singleDayValue.add(String.valueOf(out));
+        singleDayValue.add(attualedata);
+        valoriv2.add(singleDayValue);
+        return valoriv2;
     }
 
     @Override
