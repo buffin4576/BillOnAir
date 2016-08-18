@@ -72,6 +72,7 @@ public class ConnectionController extends AsyncTask<Object, Void, String>
 
     public String doGet(String url) throws IOException {
         InitConnection(url, "GET");
+        connection.setDoInput(true);
         connection.connect();
         int HttpResult = connection.getResponseCode();
         StringBuilder sb = new StringBuilder();

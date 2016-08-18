@@ -8,9 +8,14 @@ import android.util.Log;
 
 import com.btd.billonair.Conto;
 import com.btd.billonair.MyApplication;
+import com.btd.billonair.Query;
+
+import org.json.JSONException;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Buffin on 24/06/2016.
@@ -39,6 +44,20 @@ public class ContoDAO_DB_impl implements ContoDAO{
         insertValues.put("nomeConto",conto.getNomeConto());
         insertValues.put("saldo",conto.getSaldo());
         insertValues.put("colore",conto.getColore());
+
+        String sql = "INSERT INTO conti (nomeConto, saldo, colore) VALUES ('"+conto.getNomeConto()+"',"+conto.getSaldo()+",'"+conto.getColore()+"')";
+        try {
+            Query.SendQuery(sql);
+        }
+        catch (ExecutionException e){}
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.w("SQL",sql);
 
         long i = database.insert("conti",null,insertValues);
         if(i!=-1)
@@ -76,6 +95,18 @@ public class ContoDAO_DB_impl implements ContoDAO{
 
     @Override
     public List<Conto> getAllConti() throws SQLException {
+
+        try {
+            Query.SetLastUpdate("2016-08-18 11:24:15");
+            Query.GetAndExecAllQueries();
+            Log.w("ONLINE","Done");
+        }
+        catch (ExecutionException e){} catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables("conti");
         String sql = queryBuilder.buildQuery(allColumns,null,null,null,null,null);

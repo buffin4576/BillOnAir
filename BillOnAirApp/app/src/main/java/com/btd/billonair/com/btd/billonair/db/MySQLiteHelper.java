@@ -21,7 +21,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static String TABLE_QUERIES = "";
 
     private static final String DATABASE_NAME = "billonair.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
     private static String DATABASE_CREATE= "";
 
@@ -65,7 +65,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
         TABLE_QUERIES="create table queries(" +
                 "query text not null," +
-                "data datetime not null default CURRENT_TIMESTAMP" +
+                "data datetime not null default(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'))" +
                 ");";
 
         //DATABASE_CREATE=TABLE_CONTI+" "+TABLE_SPESECONTI+" "+TABLE_STANZE+" "+TABLE_SPESESTANZA+" "+TABLE_QUERIES;
