@@ -21,6 +21,7 @@ import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO;
 import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
 
 import java.sql.SQLException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 
 /**
@@ -61,10 +62,11 @@ public class AdapterListaSpese extends ArrayAdapter<SpesaConto>
         TextView CostoSpesa=(TextView)view.findViewById(R.id.CostoSpesa);
         TextView DataSpesa=(TextView)view.findViewById(R.id.DataSpesa);
         final ImageView deletespesa=(ImageView)view.findViewById(R.id.deletespesa);
+        Formattazione form=new Formattazione();
 
         NomeSpesa.setText(spesa.getNomeSpesa());
-        CostoSpesa.setText(""+spesa.getCosto());
-        DataSpesa.setText(spesa.getData());
+        CostoSpesa.setText(""+form.Soldi(spesa.getCosto()));
+        DataSpesa.setText(form.Data(spesa.getData()));
 
         deletespesa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
