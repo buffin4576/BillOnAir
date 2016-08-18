@@ -43,12 +43,14 @@ public class ConnectionController extends AsyncTask<Object, Void, String>
                 try {
                     return doGet((String)params[1]);
                 } catch (IOException e) {
+                    Query.SetToOffline();
                     e.printStackTrace();
                 }break;
             case "POST":
                 try {
                     return doPost((String)params[1],(JSONObject)params[2]);
                 } catch (IOException e) {
+                    Query.SetToOffline();
                     e.printStackTrace();
                 }break;
             case "PUT":break;

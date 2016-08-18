@@ -21,7 +21,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static String TABLE_QUERIES = "";
 
     private static final String DATABASE_NAME = "billonair.db";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 1;
 
     private static String DATABASE_CREATE= "";
 

@@ -1,6 +1,7 @@
 package com.btd.billonair;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
 
     ConnectionController connectionController;
 
+    SharedPreferences settings;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,10 @@ public class LoginActivity extends AppCompatActivity {
         linkLogin = (TextView)findViewById(R.id.linkLogin);
         linkOffline = (TextView)findViewById(R.id.linkOffline);
         linkOffline2 = (TextView)findViewById(R.id.linkOffline2);
+
+        //Aggiunta online
+        settings = getSharedPreferences("Shared",0);
+        editor = settings.edit();
 
         //logout per prevenire il pulsante back ?
 
@@ -90,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
             Bundle info = new Bundle();
             info.putString("mode","offline");
             intent.putExtra("info",info);
+            editor.putBoolean("online",false);
+            editor.commit();
             startActivity(intent);
         }
     }
@@ -115,11 +125,13 @@ public class LoginActivity extends AppCompatActivity {
             String p2 = ((EditText)findViewById(R.id.txtRegisterConfirmPassword)).getText().toString();
             if(p1.compareTo(p2)==0)
             {
-                resp = connectionController.execute("POST", "http://10.196.175.26:3000/api/users/register", json).get();
+                resp = connectionController.execute("POST", "http://192.168.1.34:3000/api/users/register", json).get();
                 json = new JSONObject(resp);
                 String res = json.get("Message").toString();
                 if(res.compareTo("Utente inserito")==0)
                 {
+                    editor.putBoolean("online",true);
+                    editor.commit();
                     startActivity(intent);
                 }
             }
@@ -155,11 +167,15 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject json = new JSONObject();
             json.put("password",((EditText)findViewById(R.id.txtLoginPassword)).getText());
             json.put("username",((EditText)findViewById(R.id.txtLoginUsername)).getText());
-            resp = connectionController.execute("POST","http://10.196.175.26:3000/api/users/login",json).get();
+            resp = connectionController.execute("POST","http://192.168.1.34:3000/api/users/login",json).get();
             json = new JSONObject(resp);
             String res = json.get("Message").toString();
             if(res.compareTo("Login")==0)
             {
+                String lastUpdate = settings.getString("lastUpdate","1900-01-01 00:00:00");
+                Query.SetLastUpdate(lastUpdate);
+                editor.putBoolean("online",true);
+                editor.commit();
                 startActivity(intent);
             }
         } catch (InterruptedException e) {

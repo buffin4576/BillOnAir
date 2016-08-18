@@ -47,14 +47,15 @@ public class ContoDAO_DB_impl implements ContoDAO{
 
         String sql = "INSERT INTO conti (nomeConto, saldo, colore) VALUES ('"+conto.getNomeConto()+"',"+conto.getSaldo()+",'"+conto.getColore()+"')";
         try {
-            Query.SendQuery(sql);
+            boolean on = Query.SendQuery(sql);
+            if(!on)
+                Query.AddQuery(sql);
         }
-        catch (ExecutionException e){}
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
+        catch (Exception e){
+            try {
+                Query.AddQuery(sql);
+            }
+            catch (Exception e1){}
         }
 
         Log.w("SQL",sql);
@@ -97,7 +98,7 @@ public class ContoDAO_DB_impl implements ContoDAO{
     public List<Conto> getAllConti() throws SQLException {
 
         try {
-            Query.SetLastUpdate("2016-08-18 11:24:15");
+            //Query.SetLastUpdate("2016-08-18 11:24:15");
             Query.GetAndExecAllQueries();
             Log.w("ONLINE","Done");
         }

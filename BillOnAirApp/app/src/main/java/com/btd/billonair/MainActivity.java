@@ -1,6 +1,7 @@
 package com.btd.billonair;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -36,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        SharedPreferences settings = getSharedPreferences("Shared",0);
+        Query.SetContext(getApplicationContext());
+        if(settings.getBoolean("online",false)) {
+            try {
+                Query.GetAndExecAllQueries();
+                Query.SendQueriesOffline();
+            } catch (Exception e) {
+            }
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {

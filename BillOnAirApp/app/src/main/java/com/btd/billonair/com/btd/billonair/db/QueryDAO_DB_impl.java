@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import com.btd.billonair.MyApplication;
 import com.btd.billonair.Query;
@@ -72,6 +73,7 @@ public class QueryDAO_DB_impl implements QueryDAO{
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             queries.add(cursor.getString(0));
+            Log.w("QUERIES",cursor.getString(0));
             cursor.moveToNext();
         }
         cursor.close();
