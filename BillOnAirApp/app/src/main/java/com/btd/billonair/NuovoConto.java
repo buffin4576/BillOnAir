@@ -1,6 +1,7 @@
 package com.btd.billonair;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -105,7 +106,6 @@ public class NuovoConto extends Activity implements View.OnClickListener {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
                ContoDAO dao = new ContoDAO_DB_impl();
                try {
                    dao.open();
@@ -114,15 +114,7 @@ public class NuovoConto extends Activity implements View.OnClickListener {
                }
                Boolean Ret = dao.insertConto(NConto);
                dao.close();
-                if(Ret)
-                {
-
-                }
-                else
-                {
-
-                }
-              finish();
+               finish();
             }
         });
         CloseButton.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +132,7 @@ public class NuovoConto extends Activity implements View.OnClickListener {
         int Cl =BGColor.getColor();
         Colore = String.format("#%06X", 0xFFFFFF & Cl);
         //((TextView)findViewById(R.id.textView5)).setText(Colore);
-
+        ((TextView)findViewById(R.id.textView5)).setTextColor(Color.parseColor(Colore));
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState)
