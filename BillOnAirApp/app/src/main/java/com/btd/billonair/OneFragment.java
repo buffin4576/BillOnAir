@@ -7,6 +7,7 @@ package com.btd.billonair;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,14 +17,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO;
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO;
+import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
+
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.security.PublicKey;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OneFragment extends Fragment
 {
+    ArrayList<SpesaConto>lusp;
+    ArrayList<Conto> LConti;
     public OneFragment()
     {
     }
@@ -52,26 +60,8 @@ public class OneFragment extends Fragment
         final Button BTEntrata=(Button)getView().findViewById(R.id.BtEntrata);
         final Button BTSpesa=(Button)getView().findViewById(R.id.BtSpesa);
 
-        ContoDAO dao=new ContoDAO_DB_impl();
 
-        try {
-            dao.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        ArrayList<Conto> LConti= null;
-        try {
-            LConti = (ArrayList<Conto>) dao.getAllConti();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        //apro db
-        //creazione array di tipo conto prendendo le info dal db
-        dao.close();
-        //chiudo il db
-        lv.setAdapter(new AdapterListaConti(getContext(),R.layout.rigaconto,LConti));
         final Bundle bund=new Bundle();
-        bund.putSerializable("ListaConti",LConti);
         NCButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int requestCode = 1; // Or some number you choose
@@ -125,35 +115,72 @@ public class OneFragment extends Fragment
         });
     }
 
-    /*public void onActivityResult (int requestCode, int resultCode, Intent data)
-    {
-        getActivity().finish();
-        startActivity(getActivity().getIntent());
-    }*/
+
 
     @Override
     public void onResume() {
         super.onResume();
         ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
         ContoDAO dao=new ContoDAO_DB_impl();
+        TextView TxtSpesa=(TextView)getView().findViewById(R.id.TxtSpesa);
+        TextView TxtEntrata=(TextView)getView().findViewById(R.id.TxtEntrata);
+        ArrayList<SpesaConto>allsc=null;
+        Formattazione form=new Formattazione();
+        String sd;
+        String mese;
+        Date now= new Date();
+        double spese=0;
+        double entrate=0;
 
         try {
             dao.open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ArrayList<Conto> LConti= null;
+        LConti= null;
         try {
             LConti = (ArrayList<Conto>) dao.getAllConti();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //apro db
-        //creazione array di tipo conto prendendo le info dal db
         dao.close();
-        //chiudo il db
+
         lv.setAdapter(new AdapterListaConti(getContext(),R.layout.rigaconto,LConti));
 
+        SpesaContoDAO dao1=new SpesaContoDAO_DB_impl();
+        try {
+            dao1.open();
+            allsc= (ArrayList<SpesaConto>) dao1.getAllSpese();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dao1.close();
+        if((now.getMonth()+1)<10)
+        {
+            mese="0"+(now.getMonth()+1);
+        }
+        else
+        {
+            mese=now.getMonth()+"";
+        }
+        for (int i=0;i<allsc.size();i++)
+        {
+            sd=allsc.get(i).getData();
+
+            if(((sd.split("-"))[1]).equals(mese))
+            {
+                if(allsc.get(i).getCosto()<0)
+                {
+                    spese-=allsc.get(i).getCosto();
+                }
+                else
+                {
+                    entrate+=allsc.get(i).getCosto();
+                }
+            }
+        }
+        TxtSpesa.setText(form.Soldi(spese));
+        TxtEntrata.setText(form.Soldi(entrate));
     }
 
 }

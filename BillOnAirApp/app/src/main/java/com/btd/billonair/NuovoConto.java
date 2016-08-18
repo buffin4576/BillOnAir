@@ -105,7 +105,6 @@ public class NuovoConto extends Activity implements View.OnClickListener {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                ArrayList<Conto> LConti= (ArrayList<Conto>) getIntent().getSerializableExtra("ListaConti");
 
                ContoDAO dao = new ContoDAO_DB_impl();
                try {

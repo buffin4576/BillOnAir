@@ -10,9 +10,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,7 +38,7 @@ public class DettagliConto extends AppCompatActivity {
         setContentView(R.layout.dettagliconto);
 
         conto=(Conto) getIntent().getSerializableExtra("Conto");
-        TextView DNomeConto=(TextView)findViewById(R.id.DettagliNomeConto);
+        final EditText DNomeConto=(EditText)findViewById(R.id.DettagliNomeConto);
         final TextView DSaldoConto=(TextView)findViewById(R.id.DettagliSaldoConto);
         ListView lv= (ListView)findViewById(R.id.DettagliListaSpese);
         Button Indietro=(Button) findViewById(R.id.buttonIndietro);
@@ -60,6 +63,34 @@ public class DettagliConto extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 dao.close();
+            }
+        });
+
+        DNomeConto.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String NuovoNome=DNomeConto.getText().toString();
+                String VecchioNome=conto.getNomeConto();
+                conto.setNomeConto(NuovoNome);
+                ContoDAO dao=new ContoDAO_DB_impl();
+                try {
+                    dao.open();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                dao.updateConto(conto,VecchioNome);
+                dao.close();
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
             }
         });
 
