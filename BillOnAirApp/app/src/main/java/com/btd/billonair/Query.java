@@ -12,8 +12,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.SimpleTimeZone;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -59,10 +64,13 @@ public final class Query {
 
         boolean online = settings.getBoolean("online", false);
         String username = settings.getString("username", "offline");
+        Log.w("SEND","init: "+lastUpdate+" "+online);
 
         if(online) {
             Date now = new Date();
+
             String d = (now.getYear() + 1900) + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+            Log.w("SEND","Orario mandato: "+d);
 
             ConnectionController connectionController = new ConnectionController();
             String url = ipServer+"api/users/query";
@@ -71,6 +79,9 @@ public final class Query {
             jsonObject.put("username", username);
             jsonObject.put("timestamp", d);
             connectionController.execute("POST", url, jsonObject).get();
+            lastUpdate = d;
+            editor.putString("lastUpdate",lastUpdate);
+            editor.commit();
             return true;
         }
         else
@@ -116,6 +127,13 @@ public final class Query {
         if(online) {
 
             Date now = new Date();
+            Log.w("time","ricerco con now: "+now);
+            final Calendar calendar  = Calendar.getInstance();
+            final int      utcOffset = calendar.get(Calendar.ZONE_OFFSET) + calendar.get(Calendar.DST_OFFSET);
+            final long     tempDate  = new Date().getTime();
+            now = new Date(tempDate - utcOffset);
+            Log.w("time","edit ricerco con now: "+now);
+
             String d = (now.getYear() + 1900) + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
             String url = ipServer+"api/query/"+username+"/" + lastUpdate.split(" ")[0] + "%20" + lastUpdate.split(" ")[1];

@@ -39,6 +39,7 @@ public class SpesaContoDAO_DB_impl implements SpesaContoDAO{
                 "VALUES ('"+spesaConto.getNomeSpesa()+"', "+spesaConto.getCosto()+", '"+spesaConto.getData()+"', '"+spesaConto.getNomeConto()+"', '"+spesaConto.getOwner()+"')";
         try {
             boolean on = Query.SendQuery(sql);
+            Log.w("SpesaConto","on: "+on);
             if(!on)
                 Query.AddQuery(sql);
         }

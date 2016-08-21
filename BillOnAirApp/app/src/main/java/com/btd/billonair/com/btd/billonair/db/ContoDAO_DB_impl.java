@@ -71,7 +71,7 @@ public class ContoDAO_DB_impl implements ContoDAO{
     @Override
     public boolean updateConto(Conto conto, String vecchioNomeConto) {
 
-        String sql = "UPDATE conti SET nomeConto='"+conto.getNomeConto()+"' WHERE nomeConto='"+vecchioNomeConto+"' AND owner='"+conto.getOwner()+"'";
+        String sql = "UPDATE conti SET nomeConto='"+conto.getNomeConto()+"', saldo="+conto.getSaldo()+", colore='"+conto.getColore()+"', owner='"+conto.getOwner()+"' WHERE nomeConto='"+vecchioNomeConto+"' AND owner='"+conto.getOwner()+"'";
         try {
             boolean on = Query.SendQuery(sql);
             if(!on)
