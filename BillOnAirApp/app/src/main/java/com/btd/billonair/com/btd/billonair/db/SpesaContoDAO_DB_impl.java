@@ -101,6 +101,7 @@ public class SpesaContoDAO_DB_impl implements SpesaContoDAO{
             cursor.moveToNext();
         }
         cursor.close();
+        Log.w("SpeseConto","size: "+spese.size());
         return spese;
     }
 
