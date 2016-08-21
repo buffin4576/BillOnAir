@@ -99,6 +99,7 @@ public class SpesaContoDAO_DB_impl implements SpesaContoDAO{
             SpesaConto spesa = cursorToSpesaConto(cursor);
             spese.add(spesa);
             cursor.moveToNext();
+            Log.w("SpeseConto","nome: "+spesa.getNomeSpesa()+" owner:"+spesa.getOwner()+" nomeConto: "+spesa.getNomeConto());
         }
         cursor.close();
         Log.w("SpeseConto","size: "+spese.size());

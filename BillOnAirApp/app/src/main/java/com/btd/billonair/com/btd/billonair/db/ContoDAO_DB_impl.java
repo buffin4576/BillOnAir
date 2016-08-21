@@ -117,6 +117,7 @@ public class ContoDAO_DB_impl implements ContoDAO{
         }
 
         String[] params = {conto.getNomeConto(), conto.getOwner()};
+        database.delete("speseconti","nomeConto=? and owner=?",params);
         int i = database.delete("conti","nomeConto=? and owner=?",params);
         if(i>0)
             return true;
