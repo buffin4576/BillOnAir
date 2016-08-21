@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import org.json.JSONStringer;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -141,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                 String res = json.get("Message").toString();
                 if(res.compareTo("Utente inserito")==0)
                 {
+                    Query.SvuotaDBOnline();
                     String lastUpdate = settings.getString("lastUpdate","1900-01-01 00:00:00");
                     Query.SetLastUpdate(lastUpdate);
                     editor.putBoolean("online",true);
@@ -159,6 +161,8 @@ public class LoginActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         Log.d("Debug","Resp: "+ resp);
@@ -187,6 +191,14 @@ public class LoginActivity extends AppCompatActivity {
             String res = json.get("Message").toString();
             if(res.compareTo("Login")==0)
             {
+                String u = ((EditText) findViewById(R.id.txtLoginUsername)).getText()+"";
+                String s = settings.getString("username","offline");
+                if(!u.equals(s)) {
+                    Query.SvuotaDBOnline();
+                    editor.putString("lastUpdate","1900-01-01 00:00:00");
+                    editor.commit();
+                }
+
                 String lastUpdate = settings.getString("lastUpdate","1900-01-01 00:00:00");
                 Query.SetLastUpdate(lastUpdate);
                 editor.putBoolean("online",true);
@@ -200,6 +212,8 @@ public class LoginActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         Log.d("Debug",resp);

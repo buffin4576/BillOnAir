@@ -23,4 +23,6 @@ public interface QueryDAO {
     public ArrayList<String> getAllQueries(String owner);
     public ArrayList<Query> getAllQueriesFromData(String data);
     public void execQueries(ArrayList<String> queries);
+
+    public void deleteAllOnline();
 }

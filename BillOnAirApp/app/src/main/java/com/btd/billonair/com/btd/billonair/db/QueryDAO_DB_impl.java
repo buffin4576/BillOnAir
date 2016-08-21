@@ -88,4 +88,12 @@ public class QueryDAO_DB_impl implements QueryDAO{
         String[] params = {owner};
         database.delete("queries","owner=?", params);
     }
+
+    public void deleteAllOnline(){
+        String[] params = {"offline"};
+        database.delete("conti","owner<>?",params);
+        database.delete("speseconti","owner<>?",params);
+        //database.delete("stanze","owner<>?",params);
+        //database.delete("spesestanza","owner<>?",params);
+    }
 }

@@ -171,4 +171,11 @@ public final class Query {
 
         return "";
     }
+
+    public static void SvuotaDBOnline() throws SQLException {
+        QueryDAO dao = new QueryDAO_DB_impl();
+        dao.open();
+        dao.deleteAllOnline();
+        dao.close();
+    }
 }
