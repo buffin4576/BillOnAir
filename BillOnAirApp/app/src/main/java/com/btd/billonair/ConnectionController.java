@@ -74,9 +74,12 @@ public class ConnectionController extends AsyncTask<Object, Void, String>
 
     public String doGet(String url) throws IOException {
         InitConnection(url, "GET");
+        Log.w("GET","inside get "+url);
         connection.setDoInput(true);
         connection.connect();
         int HttpResult = connection.getResponseCode();
+
+        Log.w("GET","httpresult: "+HttpResult);
         StringBuilder sb = new StringBuilder();
         sb.append("");
         if (HttpResult == HttpURLConnection.HTTP_OK) {
@@ -88,6 +91,7 @@ public class ConnectionController extends AsyncTask<Object, Void, String>
             reader.close();
         }
         connection.disconnect();
+        Log.w("GET",sb.toString());
         return sb.toString();
     }
 
@@ -100,6 +104,8 @@ public class ConnectionController extends AsyncTask<Object, Void, String>
         out.write(json.toString());
         out.close();
 
+        Log.w("JSON",json.toString());
+
         int HttpResult = connection.getResponseCode();
         StringBuilder sb = new StringBuilder();
         sb.append("");
@@ -112,6 +118,8 @@ public class ConnectionController extends AsyncTask<Object, Void, String>
             reader.close();
         }
         connection.disconnect();
+
+        Log.w("POST",sb.toString());
         return sb.toString();
     }
 

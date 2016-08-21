@@ -20,6 +20,9 @@ import java.util.concurrent.ExecutionException;
  * Created by Buffin on 10/08/2016.
  */
 public final class Query {
+
+    private static String ipServer = "https://billonair.herokuapp.com/";
+
     private static String lastUpdate;
     private static Context context;
     private static SharedPreferences settings;
@@ -55,16 +58,17 @@ public final class Query {
     public static boolean SendQuery(String query) throws JSONException, ExecutionException, InterruptedException, SQLException {
 
         boolean online = settings.getBoolean("online", false);
+        String username = settings.getString("username", "username");
 
         if(online) {
             Date now = new Date();
             String d = (now.getYear() + 1900) + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
             ConnectionController connectionController = new ConnectionController();
-            String url = "http://192.168.1.34:3000/api/users/query";
+            String url = ipServer+"api/users/query";
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("query", query);
-            jsonObject.put("username", "buffin");
+            jsonObject.put("username", username);
             jsonObject.put("timestamp", d);
             connectionController.execute("POST", url, jsonObject).get();
             return true;
@@ -103,21 +107,28 @@ public final class Query {
     public static String GetAndExecAllQueries() throws SQLException, ExecutionException, InterruptedException, JSONException {
         //scaricare con data maggiore di ultimo update, eseguire e aggiornare ultimo update
         boolean online = settings.getBoolean("online", false);
+        String username = settings.getString("username", "username");
+
+        Log.w("GETEXEC",online+" "+username);
 
         if(online) {
 
             Date now = new Date();
             String d = (now.getYear() + 1900) + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
-            String url = "http://192.168.1.34:3000/api/query/buffin/" + lastUpdate.split(" ")[0] + "%20" + lastUpdate.split(" ")[1];
+            String url = ipServer+"api/query/"+username+"/" + lastUpdate.split(" ")[0] + "%20" + lastUpdate.split(" ")[1];
+
+            Log.w("GETEXEC",url);
 
             ArrayList<String> queries = new ArrayList<>();
             ConnectionController connectionController = new ConnectionController();
             String resp = connectionController.execute("GET", url).get();
-            resp = resp.substring(0, resp.length() - 1);
-            Log.w("RESP", resp);
+
+            Log.w("GETEXEC",resp);
 
             if (resp.length() > 0) {
+                resp = resp.substring(0, resp.length() - 1);
+
                 JSONArray jsonArray = new JSONArray(resp);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
