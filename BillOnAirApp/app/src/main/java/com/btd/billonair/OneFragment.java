@@ -150,7 +150,7 @@ public class OneFragment extends Fragment
         }
         dao.close();
 
-        lv.setAdapter(new AdapterListaConti(getContext(),R.layout.rigaconto,LConti));
+        lv.setAdapter(new AdapterListaConti(getActivity(),getContext(),R.layout.rigaconto,LConti));
 
         SpesaContoDAO dao1=new SpesaContoDAO_DB_impl();
         try {
