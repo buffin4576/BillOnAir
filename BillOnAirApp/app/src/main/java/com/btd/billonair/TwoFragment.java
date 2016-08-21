@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
 import com.btd.billonair.com.btd.billonair.db.ContoDAO;
@@ -43,7 +44,18 @@ public class TwoFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        //codice stanze
+        final ListView lv=(ListView)getView().findViewById(R.id.ListaStanze);
+        final ImageView addRoom=(ImageView)getView().findViewById(R.id.addRoom);
+        final  Button temp=(Button)getView().findViewById(R.id.button2);
+
+        temp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int requestCode = 1;
+                Intent intent = new Intent(getActivity(),DettagliStanza.class);
+                startActivityForResult(intent, requestCode);
+            }
+        });
+
     }
 
 
