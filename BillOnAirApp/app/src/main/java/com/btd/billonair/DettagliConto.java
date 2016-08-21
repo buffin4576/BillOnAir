@@ -2,6 +2,7 @@ package com.btd.billonair;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -33,6 +34,7 @@ public class DettagliConto extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Conto conto;
+    private String owner;
     Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class DettagliConto extends AppCompatActivity {
         ListView lv= (ListView)findViewById(R.id.DettagliListaSpese);
         Button Indietro=(Button) findViewById(R.id.buttonIndietro);
         AdapterListaSpese adapter=null;
+        SharedPreferences sharedPreferences = getSharedPreferences("Shared",0);
+        owner = sharedPreferences.getString("username","offline");
+
         try {
             adapter=new AdapterListaSpese(context,R.layout.dettaglispesa,conto.getSpeseConto());
         } catch (SQLException e) {
@@ -66,7 +71,7 @@ public class DettagliConto extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 try {
-                    DSaldoConto.setText(dao.getContoByName(conto.getNomeConto()).getSaldo()+"");
+                    DSaldoConto.setText(dao.getContoByName(conto.getNomeConto(),conto.getOwner()).getSaldo()+"");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -88,7 +93,7 @@ public class DettagliConto extends AppCompatActivity {
                     ContoDAO dao=new ContoDAO_DB_impl();
                     try {
                         dao.open();
-                        LC=(ArrayList<Conto>) dao.getAllConti();
+                        LC=(ArrayList<Conto>) dao.getAllConti(owner);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

@@ -34,14 +34,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         TABLE_CONTI="create table conti("
                 +"nomeConto text primary key,"
                 +"saldo decimal(10,2) not null default 0,"
-                +"colore text not null default '#fff'"
+                +"colore text not null default '#fff',"
+                +"owner text not null default 'offline'"
                 +" );";
         TABLE_SPESECONTI="create table speseconti("
                 +"idSC integer primary key autoincrement,"
                 +"nomeSpesa text not null default 'spesa',"
                 +"costo decimal(10,2) not null default 0,"
-                +"data datetime default CURRENT_TIMESTAMP,"
+                +"data datetime default(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'))," //CURRENT_TIMESTAMP
                 +"nomeConto text,"
+                +"owner text not null default 'offline',"
                 +"foreign key(nomeConto) references conti(nomeConto) on delete cascade on update cascade"
                 +");";
         //PRAGMA foreign_keys = ON; da settare ogni volata che si fa la connessione
@@ -57,7 +59,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 "creditore text," +
                 "debitore text," +
                 "dovuto decimal(10,2)," +
-                "data datetime default CURRENT_TIMESTAMP," +
+                "data datetime default(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'))," +
                 "importo decimal(10,2),"+
                 "idStanza integer," +
                 "nome text" +
@@ -65,7 +67,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
         TABLE_QUERIES="create table queries(" +
                 "query text not null," +
-                "data datetime not null default(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'))" +
+                "data datetime not null default(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'))," +
+                "owner text not null default 'offline'"+
                 ");";
 
         //DATABASE_CREATE=TABLE_CONTI+" "+TABLE_SPESECONTI+" "+TABLE_STANZE+" "+TABLE_SPESESTANZA+" "+TABLE_QUERIES;

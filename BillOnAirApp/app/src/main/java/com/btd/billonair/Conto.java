@@ -29,20 +29,22 @@ public class Conto implements Serializable{
     private double saldo;
     private ArrayList<SpesaConto> spese = new ArrayList<>();
     private SpesaConto ultimaSpesa;
+    private String owner;
 
     public Conto(){
 
     };
 
-    public Conto(String nomeConto, double saldo, String colore) throws SQLException {
+    public Conto(String nomeConto, double saldo, String colore, String owner) throws SQLException {
         this.nomeConto = nomeConto;
         this.colore = colore;
         this.saldo = saldo;
+        this.owner=owner;
 
         SpesaContoDAO dao = new SpesaContoDAO_DB_impl();
         dao.open();
         ArrayList<SpesaConto> s = new ArrayList<>();
-        s.addAll(dao.getAllSpeseByConto(nomeConto));
+        s.addAll(dao.getAllSpeseByConto(nomeConto, owner));
         if(s.size()>0)
             this.ultimaSpesa = s.get(s.size()-1);
         else
@@ -64,7 +66,7 @@ public class Conto implements Serializable{
         SpesaContoDAO_DB_impl spesaContoDAODbImpl = new SpesaContoDAO_DB_impl();
         spesaContoDAODbImpl.open();
         ArrayList<SpesaConto> spese = new ArrayList<>();
-        spese.addAll(spesaContoDAODbImpl.getAllSpeseByConto(this.nomeConto));
+        spese.addAll(spesaContoDAODbImpl.getAllSpeseByConto(this.nomeConto,this.owner));
         spesaContoDAODbImpl.close();
         return spese;
     }
@@ -88,6 +90,12 @@ public class Conto implements Serializable{
 
     public void  setUltimaSpesa(SpesaConto ultimaSpesa){
         this.ultimaSpesa = ultimaSpesa;
+    }
+
+    public void setOwner(String owner){ this.owner = owner; }
+
+    public String getOwner() {
+        return owner;
     }
 
     public String toString(){

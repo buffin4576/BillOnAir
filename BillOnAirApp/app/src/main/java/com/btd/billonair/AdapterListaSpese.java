@@ -95,7 +95,7 @@ public class AdapterListaSpese extends ArrayAdapter<SpesaConto>
                             }
                             Conto Con = null;
                             try {
-                                Con = dao2.getContoByName(LSpese.get(pos).getNomeConto());
+                                Con = dao2.getContoByName(LSpese.get(pos).getNomeConto(),LSpese.get(pos).getOwner());
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }

@@ -23,6 +23,6 @@ public interface ContoDAO {
     public boolean updateConto(Conto conto, String vecchioNomeConto);
 
     public boolean deleteConto(Conto conto);
-    public List<Conto> getAllConti() throws SQLException;
-    public Conto getContoByName(String nomeConto) throws SQLException;
+    public List<Conto> getAllConti(String owner) throws SQLException;
+    public Conto getContoByName(String nomeConto, String owner) throws SQLException;
 }

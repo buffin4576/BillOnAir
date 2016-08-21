@@ -16,7 +16,7 @@ public interface SpesaContoDAO {
 
     public boolean insertSpesa(SpesaConto spesaConto);
     public boolean deleteSpesa(SpesaConto spesaConto);
-    public List<SpesaConto> getAllSpese();
+    public List<SpesaConto> getAllSpese(String owner);
     public SpesaConto getSpesaById(int id);
-    public List<SpesaConto> getAllSpeseByConto(String nomeConto);
+    public List<SpesaConto> getAllSpeseByConto(String nomeConto, String owner);
 }

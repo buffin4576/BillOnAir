@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 public class ContoDAO_DB_impl implements ContoDAO{
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
-    private String[] allColumns = {"nomeConto","saldo","colore"};
+    private String[] allColumns = {"nomeConto","saldo","colore","owner"};
 
     @Override
     public void open() throws SQLException {
@@ -44,8 +44,9 @@ public class ContoDAO_DB_impl implements ContoDAO{
         insertValues.put("nomeConto",conto.getNomeConto());
         insertValues.put("saldo",conto.getSaldo());
         insertValues.put("colore",conto.getColore());
+        insertValues.put("owner",conto.getOwner());
 
-        String sql = "INSERT INTO conti (nomeConto, saldo, colore) VALUES ('"+conto.getNomeConto()+"',"+conto.getSaldo()+",'"+conto.getColore()+"')";
+        String sql = "INSERT INTO conti (nomeConto, saldo, colore, owner) VALUES ('"+conto.getNomeConto()+"',"+conto.getSaldo()+",'"+conto.getColore()+"', '"+conto.getOwner()+"')";
         try {
             boolean on = Query.SendQuery(sql);
             if(!on)
@@ -70,14 +71,29 @@ public class ContoDAO_DB_impl implements ContoDAO{
     @Override
     public boolean updateConto(Conto conto, String vecchioNomeConto) {
 
+        String sql = "UPDATE conti SET nomeConto='"+conto.getNomeConto()+"' WHERE nomeConto='"+vecchioNomeConto+"' AND owner='"+conto.getOwner()+"'";
+        try {
+            boolean on = Query.SendQuery(sql);
+            if(!on)
+                Query.AddQuery(sql);
+        }
+        catch (Exception e){
+            try {
+                Query.AddQuery(sql);
+            }
+            catch (Exception e1){}
+        }
+
+
         ContentValues insertValues = new ContentValues();
         insertValues.put("nomeConto",conto.getNomeConto());
         insertValues.put("saldo",conto.getSaldo());
         insertValues.put("colore",conto.getColore());
+        insertValues.put("owner",conto.getOwner());
 
-        String[] params = {vecchioNomeConto};
+        String[] params = {vecchioNomeConto,conto.getOwner()};
 
-        int i = database.update("conti",insertValues,"nomeConto=?",params);
+        int i = database.update("conti",insertValues,"nomeConto=? and owner=?",params);
         if(i>0)
             return true;
 
@@ -86,8 +102,22 @@ public class ContoDAO_DB_impl implements ContoDAO{
 
     @Override
     public boolean deleteConto(Conto conto) {
-        String[] params = {conto.getNomeConto()};
-        int i = database.delete("conti","nomeConto=?",params);
+
+        String sql = "DELETE FROM conti WHERE nomeConto='"+conto.getNomeConto()+"' AND owner='"+conto.getOwner()+"'";
+        try {
+            boolean on = Query.SendQuery(sql);
+            if(!on)
+                Query.AddQuery(sql);
+        }
+        catch (Exception e){
+            try {
+                Query.AddQuery(sql);
+            }
+            catch (Exception e1){}
+        }
+
+        String[] params = {conto.getNomeConto(), conto.getOwner()};
+        int i = database.delete("conti","nomeConto=? and owner=?",params);
         if(i>0)
             return true;
 
@@ -95,12 +125,10 @@ public class ContoDAO_DB_impl implements ContoDAO{
     }
 
     @Override
-    public List<Conto> getAllConti() throws SQLException {
+    public List<Conto> getAllConti(String owner) throws SQLException {
 
         try {
-            //Query.SetLastUpdate("2016-08-18 11:24:15");
             Query.GetAndExecAllQueries();
-            Log.w("ONLINE","Done");
         }
         catch (ExecutionException e){} catch (InterruptedException e) {
             e.printStackTrace();
@@ -108,13 +136,13 @@ public class ContoDAO_DB_impl implements ContoDAO{
             e.printStackTrace();
         }
 
-        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        /*SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables("conti");
-        String sql = queryBuilder.buildQuery(allColumns,null,null,null,null,null);
-        Log.w("SQL",sql);
+        String sql = queryBuilder.buildQuery(allColumns,null,null,null,null,null);*/
 
         List<Conto> conti = new ArrayList<Conto>();
-        Cursor cursor = database.query("conti",allColumns,null,null,null,null,null);
+        String[] params = {owner};
+        Cursor cursor = database.query("conti",allColumns,"owner=?",params,null,null,null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             Conto conto = cursorToConto(cursor);
@@ -129,14 +157,15 @@ public class ContoDAO_DB_impl implements ContoDAO{
         String nomeConto = cursor.getString(0);
         double saldo = Double.parseDouble(cursor.getString(1));
         String colore = cursor.getString(2);
-        return new Conto(nomeConto,saldo,colore);
+        String owner = cursor.getString(3);
+        return new Conto(nomeConto,saldo,colore,owner);
     }
 
     @Override
-    public Conto getContoByName(String nomeConto) throws SQLException {
+    public Conto getContoByName(String nomeConto, String owner) throws SQLException {
         Conto conto = null;
-        String[] params = {nomeConto};
-        Cursor cursor = database.query("conti", allColumns,"nomeConto=?",params,null,null,null);
+        String[] params = {nomeConto,owner};
+        Cursor cursor = database.query("conti", allColumns,"nomeConto=? and owner=?",params,null,null,null);
         cursor.moveToFirst();
         conto = cursorToConto(cursor);
         return conto;

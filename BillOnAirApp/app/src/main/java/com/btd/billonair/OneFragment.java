@@ -6,6 +6,7 @@ package com.btd.billonair;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ public class OneFragment extends Fragment
 {
     ArrayList<SpesaConto>lusp;
     ArrayList<Conto> LConti;
+    String owner="offline";
     public OneFragment()
     {
     }
@@ -132,6 +134,9 @@ public class OneFragment extends Fragment
         double spese=0;
         double entrate=0;
 
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+        owner = sharedPreferences.getString("username","offline");
+
         try {
             dao.open();
         } catch (SQLException e) {
@@ -139,7 +144,7 @@ public class OneFragment extends Fragment
         }
         LConti= null;
         try {
-            LConti = (ArrayList<Conto>) dao.getAllConti();
+            LConti = (ArrayList<Conto>) dao.getAllConti(owner);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -150,7 +155,7 @@ public class OneFragment extends Fragment
         SpesaContoDAO dao1=new SpesaContoDAO_DB_impl();
         try {
             dao1.open();
-            allsc= (ArrayList<SpesaConto>) dao1.getAllSpese();
+            allsc= (ArrayList<SpesaConto>) dao1.getAllSpese(owner);
         } catch (SQLException e) {
             e.printStackTrace();
         }

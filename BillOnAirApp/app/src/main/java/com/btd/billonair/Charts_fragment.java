@@ -1,6 +1,7 @@
 package com.btd.billonair;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import java.util.List;
  */
 public class Charts_fragment extends Fragment {
 
+    String owner="offline";
 
     public Charts_fragment()
     {
@@ -82,9 +84,12 @@ public class Charts_fragment extends Fragment {
         String mese;
         float giorno;
         Date Now=new Date();
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+        owner = sharedPreferences.getString("username","offline");
+
         try {
             dao.open();
-            LConti= (ArrayList<Conto>) dao.getAllConti();
+            LConti= (ArrayList<Conto>) dao.getAllConti(owner);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,7 +97,7 @@ public class Charts_fragment extends Fragment {
 
         try {
             dao2.open();
-            LSpese= (ArrayList<SpesaConto>) dao2.getAllSpese();
+            LSpese= (ArrayList<SpesaConto>) dao2.getAllSpese(owner);
         } catch (SQLException e) {
             e.printStackTrace();
         }

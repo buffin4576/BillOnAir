@@ -6,6 +6,7 @@ package com.btd.billonair;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -37,6 +38,8 @@ import java.util.Objects;
 
 public class ThreeFragment extends Fragment
 {
+
+    String owner ="offline";
     public ThreeFragment()
     {
     }
@@ -79,13 +82,16 @@ public class ThreeFragment extends Fragment
         valori.add(singleDayValue2);
         extraData.put("valori",valori);*/
 
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+        owner = sharedPreferences.getString("username","offline");
+
         //Denis' work
         SpesaContoDAO dao=new SpesaContoDAO_DB_impl();
         try {
             dao.open();
             HashMap<String, Object> extraData = (HashMap<String, Object>) caldroidFragment.getExtraData();
             List<SpesaConto> allconti;
-            allconti=dao.getAllSpese();
+            allconti=dao.getAllSpese(owner);
             ArrayList<ArrayList> valoriv2=new ArrayList<>();
             valoriv2=riempiValori(allconti);
             extraData.put("valori",valoriv2);

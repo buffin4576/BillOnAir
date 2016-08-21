@@ -19,7 +19,7 @@ public class QueryDAO_DB_impl implements QueryDAO{
 
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
-    private String[] allColumns = {"query","data"};
+    private String[] allColumns = {"query","data","owner"};
 
     @Override
     public void open() throws SQLException {
@@ -34,9 +34,10 @@ public class QueryDAO_DB_impl implements QueryDAO{
     }
 
     @Override
-    public boolean insertQuery(String query) {
+    public boolean insertQuery(String query, String owner) {
         ContentValues insertValues = new ContentValues();
         insertValues.put("query",query);
+        insertValues.put("owner",owner);
 
         long i = database.insert("queries",null,insertValues);
         if(i!=-1)
@@ -66,10 +67,11 @@ public class QueryDAO_DB_impl implements QueryDAO{
     }
 
     @Override
-    public ArrayList<String> getAllQueries(){
+    public ArrayList<String> getAllQueries(String owner){
         ArrayList<String> queries = new ArrayList<>();
+        String[] params = {owner};
 
-        Cursor cursor = database.query("queries",allColumns,null,null,null,null,null);
+        Cursor cursor = database.query("queries",allColumns,"owner=?",params,null,null,null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             queries.add(cursor.getString(0));
@@ -82,7 +84,8 @@ public class QueryDAO_DB_impl implements QueryDAO{
     }
 
     @Override
-    public void deleteAllQueries(){
-        database.delete("queries",null,null);
+    public void deleteAllQueries(String owner){
+        String[] params = {owner};
+        database.delete("queries","owner=?", params);
     }
 }

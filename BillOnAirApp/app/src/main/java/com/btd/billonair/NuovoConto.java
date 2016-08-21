@@ -1,6 +1,7 @@
 package com.btd.billonair;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 public class NuovoConto extends Activity implements View.OnClickListener {
 
     String Colore;
+    String owner="offline";
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
@@ -93,7 +95,8 @@ public class NuovoConto extends Activity implements View.OnClickListener {
         final ImageView colore20 = (ImageView)findViewById(R.id.colore20);
         colore20.setOnClickListener(this);
 
-
+        SharedPreferences sharedPreferences = getSharedPreferences("Shared",0);
+        owner = sharedPreferences.getString("username","offline");
 
         AggiungiButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -102,7 +105,7 @@ public class NuovoConto extends Activity implements View.OnClickListener {
               Double Saldo=Double.parseDouble(SaldoS);
                 Conto NConto= null;
                 try {
-                    NConto = new Conto(Nome,Saldo,Colore);
+                    NConto = new Conto(Nome,Saldo,Colore,owner);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

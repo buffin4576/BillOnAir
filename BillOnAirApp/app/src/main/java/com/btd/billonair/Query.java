@@ -58,7 +58,7 @@ public final class Query {
     public static boolean SendQuery(String query) throws JSONException, ExecutionException, InterruptedException, SQLException {
 
         boolean online = settings.getBoolean("online", false);
-        String username = settings.getString("username", "username");
+        String username = settings.getString("username", "offline");
 
         if(online) {
             Date now = new Date();
@@ -78,10 +78,11 @@ public final class Query {
     }
 
     public static void SendQueriesOffline() throws SQLException, InterruptedException, ExecutionException, JSONException {
+        String owner = settings.getString("username", "offline");
         QueryDAO dao = new QueryDAO_DB_impl();
         ArrayList<String> queries = new ArrayList<>();
         dao.open();
-        queries.addAll(dao.getAllQueries());
+        queries.addAll(dao.getAllQueries(owner));
         dao.close();
         Log.w("SENDOffline:",queries.size()+"");
         for(String q:queries){
@@ -89,7 +90,7 @@ public final class Query {
             Log.w("SENDOffline:",q);
         }
         dao.open();
-        dao.deleteAllQueries();
+        dao.deleteAllQueries(owner);
         dao.close();
     }
 
@@ -98,16 +99,17 @@ public final class Query {
     }
 
     public static void AddQuery(String query) throws SQLException {
+        String owner = settings.getString("username", "offline");
         QueryDAO dao = new QueryDAO_DB_impl();
         dao.open();
-        dao.insertQuery(query);
+        dao.insertQuery(query,owner);
         dao.close();
     }
 
     public static String GetAndExecAllQueries() throws SQLException, ExecutionException, InterruptedException, JSONException {
         //scaricare con data maggiore di ultimo update, eseguire e aggiornare ultimo update
         boolean online = settings.getBoolean("online", false);
-        String username = settings.getString("username", "username");
+        String username = settings.getString("username", "offline");
 
         Log.w("GETEXEC",online+" "+username);
 

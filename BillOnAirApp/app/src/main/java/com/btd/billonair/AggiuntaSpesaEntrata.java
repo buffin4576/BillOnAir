@@ -2,6 +2,7 @@ package com.btd.billonair;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -27,6 +28,8 @@ import java.util.List;
  * Created by ernrico on 10/07/2016.
  */
 public class AggiuntaSpesaEntrata extends Activity {
+
+    String owner="offline";
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -57,9 +60,12 @@ public class AggiuntaSpesaEntrata extends Activity {
 
         ContoDAO dao=new ContoDAO_DB_impl();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("Shared",0);
+        owner = sharedPreferences.getString("username","offline");
+
         try {
            dao.open();
-           LConti1=(ArrayList<Conto>) dao.getAllConti();
+           LConti1=(ArrayList<Conto>) dao.getAllConti(owner);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,18 +133,18 @@ public class AggiuntaSpesaEntrata extends Activity {
                 SpesaConto sc;
                 if(data.getMonth()+1<10){
                     if(data.getDate()<10){
-                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-0"+(data.getMonth()+1)+"-0"+data.getDate(),selezionato.getNomeConto());
+                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-0"+(data.getMonth()+1)+"-0"+data.getDate(),selezionato.getNomeConto(),selezionato.getOwner());
                     }
                     else {
-                        sc = new SpesaConto(1, TxtDettagli.getText().toString(), importo, (data.getYear() + 1900) + "-0" + (data.getMonth() + 1) + "-" + data.getDate(), selezionato.getNomeConto());
+                        sc = new SpesaConto(1, TxtDettagli.getText().toString(), importo, (data.getYear() + 1900) + "-0" + (data.getMonth() + 1) + "-" + data.getDate(), selezionato.getNomeConto(),selezionato.getOwner());
                     }
                 }
                 else{
                     if(data.getDate()<10){
-                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-0"+data.getDate(),selezionato.getNomeConto());
+                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-0"+data.getDate(),selezionato.getNomeConto(),selezionato.getOwner());
                     }
                     else{
-                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-"+data.getDate(),selezionato.getNomeConto());
+                        sc=new SpesaConto(1,TxtDettagli.getText().toString(),importo,(data.getYear()+1900)+"-"+(data.getMonth()+1)+"-"+data.getDate(),selezionato.getNomeConto(),selezionato.getOwner());
                     }
                 }
 

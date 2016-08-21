@@ -68,7 +68,11 @@ public class LoginActivity extends AppCompatActivity {
         settings = getSharedPreferences("Shared",0);
         editor = settings.edit();
 
-        ((TextView)findViewById(R.id.txtLoginUsername)).setText(settings.getString("username","Username"));
+        String userSetted = settings.getString("username","Username");
+        if(!userSetted.equals("offline"))
+            ((TextView)findViewById(R.id.txtLoginUsername)).setText(userSetted);
+        else
+            ((TextView)findViewById(R.id.txtLoginUsername)).setText("Username");
         ((TextView)findViewById(R.id.txtLoginPassword)).setText(settings.getString("password","password"));
 
         //logout per prevenire il pulsante back ?
@@ -105,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             info.putString("mode","offline");
             intent.putExtra("info",info);
             editor.putBoolean("online",false);
+            editor.putString("username","offline");
             editor.commit();
             startActivity(intent);
         }

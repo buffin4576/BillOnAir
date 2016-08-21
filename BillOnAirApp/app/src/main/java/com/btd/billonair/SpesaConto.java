@@ -13,6 +13,7 @@ public class SpesaConto implements Serializable {
     private double costo;
     private String data;
     private String nomeConto;
+    private String owner;
 
 
     /*protected SpesaConto(Parcel in) {
@@ -22,12 +23,13 @@ public class SpesaConto implements Serializable {
 
     public SpesaConto(){}
 
-    public SpesaConto(int idSC, String nomeSpesa, double costo, String data, String nomeConto){
+    public SpesaConto(int idSC, String nomeSpesa, double costo, String data, String nomeConto, String owner){
         this.idSC = idSC;
         this.nomeSpesa = nomeSpesa;
         this.costo = costo;
         this.data = data;
         this.nomeConto = nomeConto;
+        this.owner = owner;
     }
 
     public String getNomeSpesa(){
@@ -68,5 +70,11 @@ public class SpesaConto implements Serializable {
 
     public void setNomeConto(String nomeConto){
         this.nomeConto = nomeConto;
+    }
+
+    public void setOwner(String owner){ this.owner = owner; }
+
+    public String getOwner() {
+        return owner;
     }
 }

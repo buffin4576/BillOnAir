@@ -15,12 +15,12 @@ public interface QueryDAO {
     public void open() throws SQLException;
     public void close();
 
-    public boolean insertQuery(String query);
+    public boolean insertQuery(String query, String owner);
     public void deleteQueriesOlderThanDate(String data);
 
-    public void deleteAllQueries();
+    public void deleteAllQueries(String owner);
 
-    public ArrayList<String> getAllQueries();
+    public ArrayList<String> getAllQueries(String owner);
     public ArrayList<Query> getAllQueriesFromData(String data);
     public void execQueries(ArrayList<String> queries);
 }
