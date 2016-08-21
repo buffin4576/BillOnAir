@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.btd.myapplication.MainActivity">
+    <item
+        android:id="@+id/add_spesa"
+        android:orderInCategory="100"
+        android:title="aggiungi spesa"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/delete_room"
+        android:orderInCategory="100"
+        android:title="esci dalla stanza"
+        app:showAsAction="never" />
+</menu>

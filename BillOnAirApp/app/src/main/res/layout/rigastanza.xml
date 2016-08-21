@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="170px"
+        android:layout_height="170px"
+        android:id="@+id/imageView2"
+        android:src="@drawable/abc_btn_radio_material" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N"
+        android:id="@+id/TxtIniziale"
+        android:textIsSelectable="false"
+        android:textSize="40dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="28dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome Stanza"
+        android:id="@+id/txtNomeStanza"
+        android:layout_alignBottom="@+id/TxtIniziale"
+        android:layout_toEndOf="@+id/imageView2"
+        android:textSize="35dp"
+        android:textColor="#000000" />
+
+</RelativeLayout>

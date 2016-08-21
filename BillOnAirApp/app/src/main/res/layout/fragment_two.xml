@@ -7,8 +7,33 @@
         android:layout_height="wrap_content"
         android:text="Stanze"
         android:id="@+id/textView9"
+        android:textSize="40dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="79dp"
-        android:textSize="40dp" />
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="170px"
+        android:layout_height="170px"
+        android:id="@+id/addRoom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@android:drawable/ic_menu_add"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListaStanze"
+        android:layout_below="@+id/textView9"
+        android:layout_toStartOf="@+id/addRoom"
+        android:layout_alignEnd="@+id/addRoom"
+        android:layout_above="@+id/addRoom" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button2"
+        android:layout_below="@+id/ListaStanze"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
