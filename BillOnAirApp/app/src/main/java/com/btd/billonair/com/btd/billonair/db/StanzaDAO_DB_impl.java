@@ -72,6 +72,6 @@ public class StanzaDAO_DB_impl implements StanzaDAO{
         String username = cursor.getString(1);
         String nome = cursor.getString(2);
 
-        return new Stanza(nome,username,idStanza);
+        return new Stanza(nome,username,idStanza,false);
     }
 }

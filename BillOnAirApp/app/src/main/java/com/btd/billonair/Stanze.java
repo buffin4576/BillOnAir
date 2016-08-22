@@ -47,7 +47,7 @@ public class Stanze {
                     stanza.setIdStanza(jsonObject.getInt("idStanza"));
                     stanza.setUsername(jsonObject.getString("username"));
                     stanza.setNome(jsonObject.getString("nome"));
-                    
+
                     stanza.setNotifica(false);
 
                     stanze.add(stanza);
