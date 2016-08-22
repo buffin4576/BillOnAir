@@ -50,8 +50,6 @@ public class TwoFragment extends Fragment
         final ImageView addRoom=(ImageView)getView().findViewById(R.id.addRoom);
         final  Button temp=(Button)getView().findViewById(R.id.button2);
 
-
-
         temp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int requestCode = 1;
@@ -71,6 +69,10 @@ public class TwoFragment extends Fragment
         Stanze Lst=new Stanze(username);
         LStanza=Lst.getStanze();
         Log.w("ListaStanze",""+LStanza.size());
+
+        final ListView lv=(ListView)getView().findViewById(R.id.ListaStanze);
+        AdapterListaStanze adapterListaStanze = new AdapterListaStanze(getActivity(),getContext(),R.layout.rigastanza,LStanza);
+        lv.setAdapter(adapterListaStanze);
     }
 
 }
