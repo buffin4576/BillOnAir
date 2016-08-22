@@ -59,6 +59,7 @@ public class TwoFragment extends Fragment
         });
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -74,5 +75,20 @@ public class TwoFragment extends Fragment
         AdapterListaStanze adapterListaStanze = new AdapterListaStanze(getActivity(),getContext(),R.layout.rigastanza,LStanza);
         lv.setAdapter(adapterListaStanze);
     }
+/*
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            String username;
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+            username = sharedPreferences.getString("username","offline");
+            ArrayList<Stanza> LStanza;
+            Stanze Lst=new Stanze(username);
+            LStanza=Lst.getStanze();
+            Log.w("ListaStanze",""+LStanza.size());
+        }
+        else {
+        }
+    }*/
 
 }

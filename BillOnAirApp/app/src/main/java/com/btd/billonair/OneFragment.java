@@ -121,71 +121,80 @@ public class OneFragment extends Fragment
 
     @Override
     public void onResume() {
+    //public void setUserVisibleHint(boolean isVisibleToUser) {
+        //super.setUserVisibleHint(isVisibleToUser);
+        //if (isVisibleToUser) {
         super.onResume();
-        ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
-        ContoDAO dao=new ContoDAO_DB_impl();
-        TextView TxtSpesa=(TextView)getView().findViewById(R.id.TxtSpesa);
-        TextView TxtEntrata=(TextView)getView().findViewById(R.id.TxtEntrata);
-        ArrayList<SpesaConto>allsc=null;
-        Formattazione form=new Formattazione();
-        String sd;
-        String mese;
-        Date now= new Date();
-        double spese=0;
-        double entrate=0;
+            ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
+            ContoDAO dao=new ContoDAO_DB_impl();
+            TextView TxtSpesa=(TextView)getView().findViewById(R.id.TxtSpesa);
+            TextView TxtEntrata=(TextView)getView().findViewById(R.id.TxtEntrata);
+            ArrayList<SpesaConto>allsc=null;
+            Formattazione form=new Formattazione();
+            String sd;
+            String mese;
+            Date now= new Date();
+            double spese=0;
+            double entrate=0;
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
-        owner = sharedPreferences.getString("username","offline");
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+            owner = sharedPreferences.getString("username","offline");
 
-        try {
-            dao.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        LConti= null;
-        try {
-            LConti = (ArrayList<Conto>) dao.getAllConti(owner);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        dao.close();
+            try {
+                dao.open();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            LConti= null;
+            try {
+                LConti = (ArrayList<Conto>) dao.getAllConti(owner);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            dao.close();
 
-        lv.setAdapter(new AdapterListaConti(getActivity(),getContext(),R.layout.rigaconto,LConti));
+            lv.setAdapter(new AdapterListaConti(getActivity(),getContext(),R.layout.rigaconto,LConti));
 
-        SpesaContoDAO dao1=new SpesaContoDAO_DB_impl();
-        try {
-            dao1.open();
-            allsc= (ArrayList<SpesaConto>) dao1.getAllSpese(owner);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        dao1.close();
-        if((now.getMonth()+1)<10)
-        {
-            mese="0"+(now.getMonth()+1);
-        }
-        else
-        {
-            mese=now.getMonth()+"";
-        }
-        for (int i=0;i<allsc.size();i++)
-        {
-            sd=allsc.get(i).getData();
-
-            if(((sd.split("-"))[1]).equals(mese))
+            SpesaContoDAO dao1=new SpesaContoDAO_DB_impl();
+            try {
+                dao1.open();
+                allsc= (ArrayList<SpesaConto>) dao1.getAllSpese(owner);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            dao1.close();
+            if((now.getMonth()+1)<10)
             {
-                if(allsc.get(i).getCosto()<0)
+                mese="0"+(now.getMonth()+1);
+            }
+            else
+            {
+                mese=now.getMonth()+"";
+            }
+            for (int i=0;i<allsc.size();i++)
+            {
+                sd=allsc.get(i).getData();
+
+                if(((sd.split("-"))[1]).equals(mese))
                 {
-                    spese-=allsc.get(i).getCosto();
-                }
-                else
-                {
-                    entrate+=allsc.get(i).getCosto();
+                    if(allsc.get(i).getCosto()<0)
+                    {
+                        spese-=allsc.get(i).getCosto();
+                    }
+                    else
+                    {
+                        entrate+=allsc.get(i).getCosto();
+                    }
                 }
             }
-        }
-        TxtSpesa.setText(form.Soldi(spese));
-        TxtEntrata.setText(form.Soldi(entrate));
-    }
+            TxtSpesa.setText(form.Soldi(spese));
+            TxtEntrata.setText(form.Soldi(entrate));
 
+        //}
+        //else {
+        //}
+    }
 }
+
+
+
