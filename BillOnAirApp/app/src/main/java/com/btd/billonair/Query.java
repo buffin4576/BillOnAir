@@ -112,8 +112,6 @@ public final class Query {
 
     public static void SetLastUpdate(String date){
         lastUpdate = date;
-        editor.putString("lastUpdate",lastUpdate);
-        editor.commit();
     }
 
     public static void AddQuery(String query) throws SQLException {
