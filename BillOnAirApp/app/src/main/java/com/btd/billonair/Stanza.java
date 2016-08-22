@@ -1,31 +1,37 @@
 package com.btd.billonair;
 
+import android.util.Log;
+
 import com.btd.billonair.com.btd.billonair.db.SpesaStanzaDAO_DB_impl;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Buffin on 09/08/2016.
  */
-public class Stanza {
+public class Stanza implements Serializable{
 
     private String nome;
     private String username;
     private int idStanza;
+    private boolean notifica;
     private ArrayList<SpesaStanza> speseStanza = new ArrayList<>();
+    private ArrayList<Notifica> notifiche = new ArrayList<>();
 
     public Stanza(){}
 
-    public Stanza(String nome, String username, int idStanza) throws SQLException {
+    public Stanza(String nome, String username, int idStanza, boolean notifica) {
         this.nome=nome;
         this.idStanza=idStanza;
         this.username=username;
-
-        SpesaStanzaDAO_DB_impl spesaStanzaDAODbImpl = new SpesaStanzaDAO_DB_impl();
-        spesaStanzaDAODbImpl.open();
-        this.speseStanza.addAll(spesaStanzaDAODbImpl.getAllSpesaStanza(idStanza));
-        spesaStanzaDAODbImpl.close();
+        this.notifica = notifica;
     }
 
     public void setNome(String nome){
@@ -52,11 +58,58 @@ public class Stanza {
         return this.idStanza;
     }
 
+    public boolean isNotifica() {
+        return notifica;
+    }
+
+    public void setNotifica(boolean notifica) {
+        this.notifica = notifica;
+    }
+
     public void setSpeseStanza(ArrayList<SpesaStanza> speseStanza){
         this.speseStanza.addAll(speseStanza);
     }
 
     public ArrayList<SpesaStanza> getSpeseStanza(){
-        return this.speseStanza;
+        ArrayList<SpesaStanza> speseStanza = new ArrayList<>();
+        String url = "https://billonair.herokuapp.com/api/spesestanza/"+this.idStanza;
+        ConnectionController connectionController = new ConnectionController();
+        try {
+            String resp = connectionController.execute("GET", url).get();
+            if (resp.length() > 0) {
+                resp = resp.substring(0, resp.length() - 1);
+
+                JSONArray jsonArray = new JSONArray(resp);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    SpesaStanza spesa = new SpesaStanza();
+
+                    spesa.setIdSpesa(jsonObject.getInt("idspesa"));
+                    spesa.setCreditore(jsonObject.getString("creditore"));
+                    spesa.setDebitore(jsonObject.getString("debitore"));
+                    spesa.setNome(jsonObject.getString("nome"));
+                    spesa.setDovuto(jsonObject.getDouble("dovuto"));
+                    spesa.setData(jsonObject.getString("data"));
+                    spesa.setIdStanza(jsonObject.getInt("idstanza"));
+                    spesa.setImporto(jsonObject.getDouble("importo"));
+
+                    speseStanza.add(spesa);
+                }
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return speseStanza;
+    }
+
+    public void setNotifiche(ArrayList<Notifica> notifiche) {
+        this.notifiche = notifiche;
     }
 }
