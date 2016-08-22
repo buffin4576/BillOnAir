@@ -69,6 +69,11 @@ public final class Query {
         if(online) {
             Date now = new Date();
 
+            final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            final String utcTime = sdf.format(new Date());
+            Log.w("SEND","UTC: "+utcTime);
+
             String d = (now.getYear() + 1900) + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
             Log.w("SEND","Orario mandato: "+d);
 
@@ -77,9 +82,9 @@ public final class Query {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("query", query);
             jsonObject.put("username", username);
-            jsonObject.put("timestamp", d);
+            jsonObject.put("timestamp", utcTime);
             connectionController.execute("POST", url, jsonObject).get();
-            lastUpdate = d;
+            lastUpdate = utcTime;
             editor.putString("lastUpdate",lastUpdate);
             editor.commit();
             return true;
