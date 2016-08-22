@@ -50,6 +50,8 @@ public class TwoFragment extends Fragment
         final ImageView addRoom=(ImageView)getView().findViewById(R.id.addRoom);
         final  Button temp=(Button)getView().findViewById(R.id.button2);
 
+
+
         temp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int requestCode = 1;
@@ -59,9 +61,9 @@ public class TwoFragment extends Fragment
         });
 
     }
-
     @Override
     public void onResume() {
+        super.onResume();
         String username;
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
         username = sharedPreferences.getString("username","offline");
@@ -70,7 +72,5 @@ public class TwoFragment extends Fragment
         LStanza=Lst.getStanze();
         Log.w("ListaStanze",""+LStanza.size());
     }
-
-
 
 }
