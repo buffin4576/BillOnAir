@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,12 +49,7 @@ public class TwoFragment extends Fragment
         final ListView lv=(ListView)getView().findViewById(R.id.ListaStanze);
         final ImageView addRoom=(ImageView)getView().findViewById(R.id.addRoom);
         final  Button temp=(Button)getView().findViewById(R.id.button2);
-        String username;
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
-        username = sharedPreferences.getString("username","offline");
-        ArrayList<Stanza> LStanza;
-        Stanze Lst=new Stanze(username);
-        LStanza=Lst.getStanze();
+
         temp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int requestCode = 1;
@@ -63,6 +59,18 @@ public class TwoFragment extends Fragment
         });
 
     }
+
+    @Override
+    public void onResume() {
+        String username;
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+        username = sharedPreferences.getString("username","offline");
+        ArrayList<Stanza> LStanza;
+        Stanze Lst=new Stanze(username);
+        LStanza=Lst.getStanze();
+        Log.w("ListaStanze",""+LStanza.size());
+    }
+
 
 
 }
