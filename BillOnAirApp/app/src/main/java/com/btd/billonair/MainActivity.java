@@ -112,11 +112,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        /*if (id == R.id.login_menu)
+        if (id == R.id.login_menu)
         {
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
-        }*/
+        }
         if(id==R.id.logout_menu)
         {
             SharedPreferences settings = getSharedPreferences("Shared",0);
