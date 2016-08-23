@@ -112,4 +112,35 @@ public class Stanza implements Serializable{
     public void setNotifiche(ArrayList<Notifica> notifiche) {
         this.notifiche = notifiche;
     }
+
+    public ArrayList<String> getUsers(){
+        ArrayList<String> users = new ArrayList<>();
+
+        String url = "https://billonair.herokuapp.com/api/stanza/"+this.idStanza+"/users";
+        ConnectionController connectionController = new ConnectionController();
+        try {
+            String resp = connectionController.execute("GET", url).get();
+            if (resp.length() > 0) {
+                resp = resp.substring(0, resp.length() - 1);
+
+                JSONArray jsonArray = new JSONArray(resp);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    String user = jsonObject.getString("username");
+
+                    users.add(user);
+                }
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
 }

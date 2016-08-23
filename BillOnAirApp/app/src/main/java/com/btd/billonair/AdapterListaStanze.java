@@ -70,7 +70,7 @@ public class AdapterListaStanze extends ArrayAdapter<Stanza>
         final Bundle bund=new Bundle();
         freccia.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent=new Intent(mContext,DettagliConto.class);
+                Intent intent=new Intent(mContext,DettagliStanza.class);
                 bund.putSerializable("Stanza",stanza);
                 intent.putExtras(bund);
                 mContext.startActivity(intent);

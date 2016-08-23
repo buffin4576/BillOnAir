@@ -74,6 +74,8 @@ public class TwoFragment extends Fragment
         final ListView lv=(ListView)getView().findViewById(R.id.ListaStanze);
         AdapterListaStanze adapterListaStanze = new AdapterListaStanze(getActivity(),getContext(),R.layout.rigastanza,LStanza);
         lv.setAdapter(adapterListaStanze);
+
+
     }
 /*
     public void setUserVisibleHint(boolean isVisibleToUser) {
