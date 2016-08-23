@@ -77,4 +77,5 @@ public class DettagliStanza extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_stanza, menu);
         return true;
     }
+
 }
