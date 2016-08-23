@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +35,7 @@ public class OneFragment extends Fragment
     ArrayList<SpesaConto>lusp;
     ArrayList<Conto> LConti;
     String owner="offline";
+    boolean started=false;
     public OneFragment()
     {
     }
@@ -61,7 +63,7 @@ public class OneFragment extends Fragment
         final Button NCButton=(Button)getView().findViewById(R.id.NCButton);
         final Button BTEntrata=(Button)getView().findViewById(R.id.BtEntrata);
         final Button BTSpesa=(Button)getView().findViewById(R.id.BtSpesa);
-
+        started=true;
 
         final Bundle bund=new Bundle();
         NCButton.setOnClickListener(new View.OnClickListener() {
@@ -115,16 +117,34 @@ public class OneFragment extends Fragment
                 return true;
             }
         });
+
+
     }
 
 
 
     @Override
-    public void onResume() {
-    //public void setUserVisibleHint(boolean isVisibleToUser) {
-        //super.setUserVisibleHint(isVisibleToUser);
-        //if (isVisibleToUser) {
+    public void setUserVisibleHint(boolean visible)
+    {
+        super.setUserVisibleHint(visible);
+        if (visible && isResumed())
+        {
+            //Only manually call onResume if fragment is already visible
+            //Otherwise allow natural fragment lifecycle to call onResume
+            onResume();
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
         super.onResume();
+        if (!getUserVisibleHint())
+        {
+            return;
+        }
+
+            started=false;
             ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
             ContoDAO dao=new ContoDAO_DB_impl();
             TextView TxtSpesa=(TextView)getView().findViewById(R.id.TxtSpesa);
@@ -190,10 +210,15 @@ public class OneFragment extends Fragment
             TxtSpesa.setText(form.Soldi(spese));
             TxtEntrata.setText(form.Soldi(entrate));
 
-        //}
-        //else {
-        //}
+
+        //INSERT CUSTOM CODE HERE
     }
+
+
+
+
+
+
 }
 
 
