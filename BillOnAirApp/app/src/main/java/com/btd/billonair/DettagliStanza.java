@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.support.v7.app.ActionBar;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,6 +39,10 @@ public class DettagliStanza extends AppCompatActivity {
         users.addAll(stanza.getUsers());
 
         ArrayList<SpesaStanza> spese = stanza.getSpeseStanza();
+
+        ListView lv = (ListView)findViewById(R.id.listSpeseStanza);
+        AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, spese);
+        lv.setAdapter(adapterListaSpeseStanza);
 
         ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
         for(Object[] o:saldi){
