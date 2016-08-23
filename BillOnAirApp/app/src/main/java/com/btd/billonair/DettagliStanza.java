@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.support.v7.app.ActionBar;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,13 +37,19 @@ public class DettagliStanza extends AppCompatActivity {
         TextView txtNomeStanza = (TextView)findViewById(R.id.DettagliNomeStanza);
         txtNomeStanza.setText(stanza.getNome());
         users.addAll(stanza.getUsers());
-        ArrayList<Object[]> saldi = CalcolaSaldoUtente(stanza.getSpeseStanza(),users,user);
+
+        ArrayList<SpesaStanza> spese = stanza.getSpeseStanza();
+
+        ListView lv = (ListView)findViewById(R.id.listSpeseStanza);
+        AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, spese);
+        lv.setAdapter(adapterListaSpeseStanza);
+
+        ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
         for(Object[] o:saldi){
             TextView txtUser = new TextView(this);
             txtUser.setText(o[0]+": "+o[1]);
             txtUser.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
             linearUsers.addView(txtUser);
-            Log.w("Stanza",o[0]+": "+o[1]);
         }
     }
 
@@ -50,17 +57,18 @@ public class DettagliStanza extends AppCompatActivity {
         ArrayList<Object[]> totali = new ArrayList<>();
 
         for(int i = 0; i < users.size(); i++){
-            if(users.get(i)!=user){
+            if(!users.get(i).equals(user)){
                 double tot=0;
                 for(int j = 0; j < spese.size(); j++){
-                    if(spese.get(j).getCreditore()==user && spese.get(j).getDebitore()==users.get(i)){
+                    if(spese.get(j).getCreditore().equals(user) && spese.get(j).getDebitore().equals(users.get(i))){
                         tot+=spese.get(j).getImporto();
                     }
-                    if(spese.get(j).getCreditore()==users.get(i) && spese.get(j).getDebitore()==user){
+                    if(spese.get(j).getCreditore().equals(users.get(i)) && spese.get(j).getDebitore().equals(user)){
                         tot-=spese.get(j).getImporto();
                     }
                 }
                 Object[] o = new Object[]{users.get(i),tot};
+
                 totali.add(o);
             }
         }
