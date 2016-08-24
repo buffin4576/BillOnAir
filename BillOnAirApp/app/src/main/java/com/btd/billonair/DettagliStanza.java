@@ -48,6 +48,30 @@ public class DettagliStanza extends AppCompatActivity {
         final Bundle bund=new Bundle();
         bund.putSerializable("stanza",stanza);
 
+        ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
+        for(Object[] o:saldi){
+            LinearLayout hor = new LinearLayout(this);
+            hor.setOrientation(LinearLayout.HORIZONTAL);
+            TextView txtUser = new TextView(this);
+            txtUser.setText(o[0]+": "+o[1]);
+            txtUser.setTag("stanza"+o[0]);
+            txtUser.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            Button Btn=new Button(this);
+            Btn.setText("Salda");
+            Btn.setTag("Btn"+o[0]);
+            Btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    intent.putExtras(bund);
+                    startActivity(intent);
+                }
+            });
+            hor.addView(txtUser);
+            hor.addView(Btn);
+            linearUsers.addView(hor);
+        }
+
+
+
         assert addspesa!=null;
         addspesa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -84,14 +108,7 @@ public class DettagliStanza extends AppCompatActivity {
         //AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, table);
         //lv.setAdapter(adapterListaSpeseStanza);
 
-        ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
-        for(Object[] o:saldi){
-            TextView txtUser = new TextView(this);
-            txtUser.setText(o[0]+": "+o[1]);
-            txtUser.setTag("stanza"+o[0]);
-            txtUser.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-            linearUsers.addView(txtUser);
-        }
+
     }
 
     private ArrayList<Object[]> CalcolaSaldoUtente(ArrayList<SpesaStanza> spese, ArrayList<String> users, String user){
@@ -137,7 +154,11 @@ public class DettagliStanza extends AppCompatActivity {
         }
         if(id==R.id.add_spesa)
         {
-
+            Intent intent=new Intent(this,AggiungiSpesaStanza.class);
+            Bundle bund=new Bundle();
+            bund.putSerializable("stanza",stanza);
+            intent.putExtras(bund);
+            startActivity(intent);
         }
         if(id==R.id.delete_room)
         {
