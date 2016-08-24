@@ -131,5 +131,17 @@ public class SpesaStanza {
         Log.w("Spesa",resp);
     }
 
-
+    public void AggiornaSpesaStanza(SpesaStanza spesaStanza) throws JSONException, ExecutionException, InterruptedException {
+        ConnectionController connectionController = new ConnectionController();
+        String url = "https://billonair.herokuapp.com/api/spesestanza/spesa/"+spesaStanza.getIdSpesa();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("nome", spesaStanza.getNome());
+        jsonObject.put("creditore", spesaStanza.getCreditore());
+        jsonObject.put("debitore", spesaStanza.getDebitore());
+        jsonObject.put("dovuto", spesaStanza.getDovuto());
+        jsonObject.put("idStanza", spesaStanza.getIdStanza());
+        jsonObject.put("importo", spesaStanza.getImporto());
+        jsonObject.put("idSpesa", spesaStanza.getIdSpesa());
+        String resp = connectionController.execute("PUT", url, jsonObject).get();
+    }
 }
