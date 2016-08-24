@@ -137,7 +137,11 @@ public class DettagliStanza extends AppCompatActivity {
         }
         if(id==R.id.add_spesa)
         {
-
+            Intent intent=new Intent(this,AggiungiSpesaStanza.class);
+            Bundle bund=new Bundle();
+            bund.putSerializable("stanza",stanza);
+            intent.putExtras(bund);
+            startActivity(intent);
         }
         if(id==R.id.delete_room)
         {
