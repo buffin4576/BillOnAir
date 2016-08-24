@@ -47,17 +47,15 @@ public class TwoFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         final ListView lv=(ListView)getView().findViewById(R.id.ListaStanze);
-        final ImageView addRoom=(ImageView)getView().findViewById(R.id.addRoom);
-        final  Button temp=(Button)getView().findViewById(R.id.button2);
+        final Button addroom=(Button)getView().findViewById(R.id.aggiungistanza);
 
-        temp.setOnClickListener(new View.OnClickListener() {
+        addroom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int requestCode = 1;
+                /*int requestCode = 1;
                 Intent intent = new Intent(getActivity(),DettagliStanza.class);
-                startActivityForResult(intent, requestCode);
+                startActivityForResult(intent, requestCode);*/
             }
         });
-
     }
 
     @Override

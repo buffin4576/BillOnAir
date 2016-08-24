@@ -1,6 +1,7 @@
 package com.btd.billonair;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +11,9 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.app.ActionBar;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ public class DettagliStanza extends AppCompatActivity {
         setContentView(R.layout.stanza);
         sharedPreferences = getSharedPreferences("Shared",0);
         user = sharedPreferences.getString("username","offline");
+        Button addspesa=(Button)findViewById(R.id.addspesastanza);
 
         stanza= (Stanza) getIntent().getSerializableExtra("Stanza");
         LinearLayout linearUsers = (LinearLayout)findViewById(R.id.linearUtentiStanza);
@@ -39,6 +43,15 @@ public class DettagliStanza extends AppCompatActivity {
         users.addAll(stanza.getUsers());
 
         ArrayList<SpesaStanza> spese = stanza.getSpeseStanza();
+
+        addspesa.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                /*int requestCode = 1;
+                Intent intent = new Intent(getActivity(),DettagliStanza.class);
+                startActivityForResult(intent, requestCode);*/
+            }
+        });
+
 
         ListView lv = (ListView)findViewById(R.id.listSpeseStanza);
         AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, spese);
@@ -82,5 +95,26 @@ public class DettagliStanza extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_stanza, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.add_persona)
+        {
+
+        }
+        if(id==R.id.add_spesa)
+        {
+
+        }
+        if(id==R.id.delete_room)
+        {
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }
