@@ -143,4 +143,13 @@ public class Stanza implements Serializable{
 
         return users;
     }
+
+    public void CreaStanza(String nome, String username) throws JSONException, ExecutionException, InterruptedException {
+        ConnectionController connectionController = new ConnectionController();
+        String url = "https://billonair.herokuapp.com/api/stanza";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("nome", nome);
+        jsonObject.put("username", username);
+        connectionController.execute("POST", url, jsonObject).get();
+    }
 }

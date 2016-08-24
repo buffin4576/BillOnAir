@@ -1,5 +1,12 @@
 package com.btd.billonair;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by Buffin on 09/08/2016.
  */
@@ -89,5 +96,37 @@ public class SpesaStanza {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int CreaSpesaStanza(String creditore, String debitore, String nome, double dovuto, int idStanza, double importo) throws JSONException, ExecutionException, InterruptedException {
+        ConnectionController connectionController = new ConnectionController();
+        String url = "https://billonair.herokuapp.com/api/spesastanza/spesa";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("nome", nome);
+        jsonObject.put("creditore", creditore);
+        jsonObject.put("debitore", debitore);
+        jsonObject.put("dovuto", dovuto);
+        jsonObject.put("idStanza", idStanza);
+        jsonObject.put("importo", importo);
+        jsonObject.put("idSpesa", -1);
+        String resp = connectionController.execute("POST", url, jsonObject).get();
+        Log.w("Crea",resp);
+        JSONObject j = new JSONObject(resp);
+        int id = j.getInt("idSpesa");
+        return id;
+    }
+
+    public void AggiungiSpesaUtente(int idSpesa, String creditore, String debitore, String nome, double dovuto, int idStanza, double importo) throws JSONException, ExecutionException, InterruptedException {
+        ConnectionController connectionController = new ConnectionController();
+        String url = "https://billonair.herokuapp.com/api/spesastanza/spesa";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("nome", nome);
+        jsonObject.put("creditore", creditore);
+        jsonObject.put("debitore", debitore);
+        jsonObject.put("dovuto", dovuto);
+        jsonObject.put("idStanza", idStanza);
+        jsonObject.put("importo", importo);
+        jsonObject.put("idSpesa", idSpesa);
+        connectionController.execute("POST", url, jsonObject).get();
     }
 }
