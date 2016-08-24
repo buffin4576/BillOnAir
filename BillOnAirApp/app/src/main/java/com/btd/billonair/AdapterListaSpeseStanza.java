@@ -32,9 +32,9 @@ import java.util.Date;
 /**
  * Created by ernrico on 08/06/2016.
  */
-public class AdapterListaSpeseStanza extends ArrayAdapter<SpesaStanza>
+public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>>
 {
-    private ArrayList<SpesaStanza> LStanza;
+    private ArrayList<ArrayList<SpesaStanza>> LStanza;
     private Context mContext= null;
     private int mRowLayout;
     private AdapterListaSpeseStanza myadapter;
@@ -44,7 +44,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<SpesaStanza>
     private String username="offline";
 
 
-    public AdapterListaSpeseStanza(Activity activity, Context context, int resource, ArrayList<SpesaStanza> objects)
+    public AdapterListaSpeseStanza(Activity activity, Context context, int resource, ArrayList<ArrayList<SpesaStanza>> objects)
     {
         super(context, resource, objects);
         LStanza=objects;
@@ -60,36 +60,34 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<SpesaStanza>
     public View getView(final int pos, View view, final ViewGroup parent) {
         LayoutInflater vi = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = vi.inflate(mRowLayout, null);
-        final SpesaStanza spstanza = LStanza.get(pos);
+        final ArrayList<SpesaStanza> spstanza = LStanza.get(pos);
         TextView creditore=(TextView)view.findViewById(R.id.txtcreditore);
         TextView causale=(TextView)view.findViewById(R.id.txtcausale);
         TextView data=(TextView)view.findViewById(R.id.txtdataspesa);
         Formattazione form=new Formattazione();
 
-        creditore.setText(spstanza.getCreditore());
-        causale.setText(spstanza.getNome());
+        creditore.setText(spstanza.get(0).getCreditore());
+        causale.setText(spstanza.get(0).getNome());
 
         LinearLayout l = (LinearLayout)view.findViewById(R.id.verticalListautentiSpesa);
 
         LinearLayout h = new LinearLayout(view.getContext());
         h.setOrientation(LinearLayout.VERTICAL);
-        h.setTag("layout"+LStanza.get(pos).getNome());
+        h.setTag("layout"+LStanza.get(pos).get(0).getNome());
 
-        for(SpesaStanza spesaStanza:LStanza){
-            if(spesaStanza.getIdSpesa()==LStanza.get(pos).getIdSpesa()){
-                if(!spesaStanza.getDebitore().equals(username)) {
-                    TextView u = new TextView(getContext());
-                    u.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                    u.setText(spesaStanza.getDebitore() + " deve " + spesaStanza.getDovuto());
-                    int c = Color.parseColor("#555555");
-                    u.setTextColor(c);
-                    h.addView(u);
-                }
+        for(SpesaStanza spesaStanza:spstanza){
+            if(!spesaStanza.getDebitore().equals(username)) {
+                TextView u = new TextView(getContext());
+                u.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                u.setText(spesaStanza.getDebitore() + " deve " + spesaStanza.getDovuto());
+                int c = Color.parseColor("#555555");
+                u.setTextColor(c);
+                h.addView(u);
             }
         }
         l.addView(h);
 
-        String[] d = spstanza.getData().split("T");
+        String[] d = spstanza.get(0).getData().split("T");
         String dataFormattata = d[0].split("-")[2]+"/"+d[0].split("-")[1]+"/"+d[0].split("-")[0];
         data.setText(dataFormattata);
         return view;

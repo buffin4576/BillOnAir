@@ -59,8 +59,30 @@ public class DettagliStanza extends AppCompatActivity {
 
         ListView lv = (ListView)findViewById(R.id.listSpeseStanza);
 
-        AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, spese);
-        lv.setAdapter(adapterListaSpeseStanza);
+        /***************/
+
+        /*ArrayList<ArrayList<SpesaStanza>> table = new ArrayList<>();
+        int lastId=-1;
+        ArrayList<SpesaStanza> riga = new ArrayList<>();
+        for(int i = 0; i < spese.size(); i++){
+            if(lastId!=spese.get(i).getIdSpesa()){
+                table.add(riga);
+                riga = new ArrayList<>();
+                riga.add(spese.get(i));
+                lastId=spese.get(i).getIdSpesa();
+            }
+            else
+            {
+                riga.add(spese.get(i));
+            }
+        }
+        table.add(riga);
+        table.remove(0);
+        Log.w("Table",table.size()+"");*/
+        /***************/
+
+        //AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, table);
+        //lv.setAdapter(adapterListaSpeseStanza);
 
         ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
         for(Object[] o:saldi){
@@ -132,7 +154,29 @@ public class DettagliStanza extends AppCompatActivity {
         ArrayList<SpesaStanza> spese = stanza.getSpeseStanza();
         LinearLayout linearUsers = (LinearLayout)findViewById(R.id.linearUtentiStanza);
         ListView lv = (ListView)findViewById(R.id.listSpeseStanza);
-        AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, spese);
+
+        /***************/
+
+        ArrayList<ArrayList<SpesaStanza>> table = new ArrayList<>();
+        int lastId=-1;
+        ArrayList<SpesaStanza> riga = new ArrayList<>();
+        for(int i = 0; i < spese.size(); i++){
+            if(lastId!=spese.get(i).getIdSpesa()){
+                table.add(riga);
+                riga = new ArrayList<>();
+                riga.add(spese.get(i));
+                lastId=spese.get(i).getIdSpesa();
+            }
+            else
+            {
+                riga.add(spese.get(i));
+            }
+        }
+        table.remove(0);
+        table.add(riga);
+        /***************/
+
+        AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, table);
         lv.setAdapter(adapterListaSpeseStanza);
 
         ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
