@@ -14,19 +14,46 @@
         android:focusableInTouchMode="true"
         android:focusable="true">
 
-    <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Aggiungi stanza"
+            android:id="@+id/textView16"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Nome"
+            android:id="@+id/textView17"
+            android:labelFor="@id/txtAddNomeStanza"
+            android:layout_alignBaseline="@+id/txtAddNomeStanza"
+            android:layout_marginLeft="10dp" />
+
+        <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/txtAddNomeStanza" />
+            android:ems="10"
+        android:id="@+id/txtAddNomeStanza"
+            android:layout_below="@+id/textView16"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/textView17" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
+            android:text="Crea stanza"
             android:id="@+id/btnAddStanza"
-            android:layout_below="@+id/txtAddNomeStanza" />
+            android:layout_below="@+id/txtAddNomeStanza"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp" />
     </RelativeLayout>
 </ScrollView>
