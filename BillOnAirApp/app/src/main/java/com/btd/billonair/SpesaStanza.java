@@ -130,4 +130,6 @@ public class SpesaStanza {
         String resp = connectionController.execute("POST", url, jsonObject).get();
         Log.w("Spesa",resp);
     }
+
+
 }

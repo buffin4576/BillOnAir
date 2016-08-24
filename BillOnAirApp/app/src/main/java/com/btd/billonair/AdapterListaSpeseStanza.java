@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -83,6 +84,19 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                 int c = Color.parseColor("#555555");
                 u.setTextColor(c);
                 h.addView(u);
+                if(spesaStanza.getCreditore().equals(username)){
+                    //mostro pulsanti paga
+                    Button btnPaga = new Button(getContext());
+                    btnPaga.setText("Paga");
+                    btnPaga.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+                    h.addView(btnPaga);
+                }
             }
         }
         l.addView(h);
