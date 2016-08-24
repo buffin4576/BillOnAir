@@ -29,14 +29,14 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aggiuntaspesastanza);
 
-        EditText causale=(EditText)findViewById(R.id.txtCausaleSpesaStanza);
+        final EditText causale=(EditText)findViewById(R.id.txtCausaleSpesaStanza);
         final EditText importo=(EditText)findViewById(R.id.txtImportSpesaStanza);
         final Stanza stanza =(Stanza) getIntent().getSerializableExtra("stanza");
         Button Aggiungi=(Button)findViewById(R.id.btnAddSpesaStanza);
         final SpesaStanza Sp=new SpesaStanza();
         final SharedPreferences preferences=getSharedPreferences("Shared",0);
         final String username=preferences.getString("username","offline");
-        final String StCausale=causale.getText().toString();
+
 
         final ArrayList<String> users = stanza.getUsers();
         LinearLayout layoutUtenti = (LinearLayout)findViewById(R.id.verticalUtentiAggiungiStanza);
@@ -95,6 +95,7 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
                     int id=0;
                     double dimporto=Double.parseDouble(importo.getText().toString());
                     double dovuto=Double.parseDouble(Editt.getText().toString());
+                    String StCausale=causale.getText().toString();
                     id=Sp.CreaSpesaStanza(username,username,StCausale,(-1)*(dimporto-dovuto),stanza.getIdStanza(),dimporto);
                     for (int i=0;i<users.size();i++)
                     {
@@ -113,6 +114,7 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                finish();
             }
         });
         /*SpesaStanza Sp=new SpesaStanza();
