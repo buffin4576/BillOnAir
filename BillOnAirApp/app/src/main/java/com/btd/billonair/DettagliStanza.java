@@ -150,6 +150,9 @@ public class DettagliStanza extends AppCompatActivity {
         if (id == R.id.add_persona)
         {
             Intent intent = new Intent(this,AggiungiUtente.class);
+            Bundle bund=new Bundle();
+            bund.putSerializable("stanza",stanza);
+            intent.putExtras(bund);
             startActivity(intent);
         }
         if(id==R.id.add_spesa)

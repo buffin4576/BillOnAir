@@ -153,13 +153,16 @@ public class Stanza implements Serializable{
         connectionController.execute("POST", url, jsonObject).get();
     }
 
-    public void AggiungiUtente(String nome, String username, int idStanza) throws JSONException, ExecutionException, InterruptedException {
+    public void AggiungiUtente(String nome, ArrayList<String> usernames, int idStanza) throws JSONException, ExecutionException, InterruptedException {
         //da fare
         ConnectionController connectionController = new ConnectionController();
         String url = "https://billonair.herokuapp.com/api/stanza/"+idStanza;
         JSONObject jsonObject = new JSONObject();
         JSONArray array = new JSONArray();
-        array.put(username);
+        for(int i = 0; i < usernames.size(); i++){
+            array.put(usernames.get(i));
+        }
+        //array.put(username);
         jsonObject.put("nome", nome);
         jsonObject.put("utenti", array);
         connectionController.execute("POST", url, jsonObject).get();
