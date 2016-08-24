@@ -32,7 +32,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Nome"
             android:id="@+id/textView17"
-            android:labelFor="@id/txtAddNomeStanza"
             android:layout_alignBaseline="@+id/txtAddNomeStanza"
             android:layout_marginLeft="10dp" />
 
