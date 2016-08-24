@@ -57,6 +57,7 @@ public class DettagliStanza extends AppCompatActivity {
 
 
         ListView lv = (ListView)findViewById(R.id.listSpeseStanza);
+
         AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, spese);
         lv.setAdapter(adapterListaSpeseStanza);
 

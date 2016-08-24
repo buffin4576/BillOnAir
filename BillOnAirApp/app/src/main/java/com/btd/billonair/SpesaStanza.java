@@ -116,17 +116,18 @@ public class SpesaStanza {
         return id;
     }
 
-    public void AggiungiSpesaUtente(int idSpesa, String creditore, String debitore, String nome, double dovuto, int idStanza, double importo) throws JSONException, ExecutionException, InterruptedException {
+    public void AggiungiSpesaUtente(int idSpesa, String creditore, String debitore, String nome, double dovuto, int idStanza, double imp) throws JSONException, ExecutionException, InterruptedException {
         ConnectionController connectionController = new ConnectionController();
-        String url = "https://billonair.herokuapp.com/api/spesastanza/spesa";
+        String url = "https://billonair.herokuapp.com/api/spesestanza/spesa";
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("nome", nome);
         jsonObject.put("creditore", creditore);
         jsonObject.put("debitore", debitore);
         jsonObject.put("dovuto", dovuto);
         jsonObject.put("idStanza", idStanza);
-        jsonObject.put("importo", importo);
+        jsonObject.put("importo", imp);
         jsonObject.put("idSpesa", idSpesa);
-        connectionController.execute("POST", url, jsonObject).get();
+        String resp = connectionController.execute("POST", url, jsonObject).get();
+        Log.w("Spesa",resp);
     }
 }
