@@ -39,7 +39,7 @@
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:ems="10"
-                android:id="@+id/editText"
+                android:id="@+id/txtCausaleSpesaStanza"
                 android:layout_alignBaseline="@+id/textView21"
                 android:layout_toRightOf="@+id/textView21"
                 android:layout_marginLeft="10dp"
@@ -51,7 +51,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Importo"
                 android:id="@+id/textView20"
-                android:layout_below="@+id/editText"
+                android:layout_below="@+id/txtCausaleSpesaStanza"
                 android:layout_marginTop="20dp" />
 
             <EditText
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:ems="10"
-                android:id="@+id/editText3"
+                android:id="@+id/txtImportSpesaStanza"
                 android:layout_toRightOf="@+id/textView20"
                 android:layout_alignBaseline="@+id/textView20"
                 android:layout_marginLeft="10dp"
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:ems="10"
-                    android:id="@+id/editText2"
+                    android:id="@+id/txtDovutoSpesaStanza"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp" />
             </LinearLayout>
