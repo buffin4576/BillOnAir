@@ -43,12 +43,15 @@ public class DettagliStanza extends AppCompatActivity {
         users.addAll(stanza.getUsers());
 
         ArrayList<SpesaStanza> spese = stanza.getSpeseStanza();
+        final Intent intent=new Intent(this,AggiungiSpesaStanza.class);
+        final Bundle bund=new Bundle();
+        bund.putSerializable("stanza",stanza);
 
+        assert addspesa!=null;
         addspesa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*int requestCode = 1;
-                Intent intent = new Intent(getActivity(),DettagliStanza.class);
-                startActivityForResult(intent, requestCode);*/
+                intent.putExtras(bund);
+                startActivity(intent);
             }
         });
 

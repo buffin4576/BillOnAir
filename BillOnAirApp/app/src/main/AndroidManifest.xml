@@ -26,6 +26,7 @@
         <activity android:name=".DettagliStanza"></activity>
         <activity android:name=".AggiungiStanza"></activity>
         <activity android:name=".AggiungiUtente"></activity>
+        <activity android:name=".AggiungiSpesaStanza"></activity>
     </application>
 
 </manifest>
