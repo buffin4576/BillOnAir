@@ -36,14 +36,27 @@ public class PagaSpesa extends AppCompatActivity {
                     for (int i=0;i<Tutte.size() && pagato>0;i++)
                     {
                         SpesaStanza sel=Tutte.get(i);
+                        double dd=sel.getDovuto();
+                        String sss=sel.getDebitore();
+                        SpesaStanza temp2=null;
+                        SpesaStanza temp3;
                         if((sel.getDebitore().equals(Nome))&&sel.getDovuto()>0)
                         {
                             SpesaStanza temp;
                             if(sel.getDovuto()>pagato)
                             {
+                                for ( int y=0;y<Tutte.size() && pagato>0;y++ )
+                                {
+                                    if(Tutte.get(y).getIdSpesa()==sel.getIdSpesa()&& Tutte.get(y).getCreditore().equals(Tutte.get(y).getDebitore()))
+                                    {
+                                        temp2=Tutte.get(y);
+                                    }
+                                }
                                 temp=new SpesaStanza(sel.getIdSpesa(),sel.getCreditore(),sel.getDebitore(),sel.getNome(),sel.getDovuto()-pagato,sel.getData(),sel.getIdStanza(),sel.getImporto());
+                                temp3=new SpesaStanza(temp2.getIdSpesa(),temp2.getCreditore(),temp2.getDebitore(),temp2.getNome(),temp2.getDovuto()+pagato,temp2.getData(),temp2.getIdStanza(),temp2.getImporto());
                                 try {
                                     temp.AggiornaSpesaStanza(temp);
+                                    temp3.AggiornaSpesaStanza(temp3);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 } catch (ExecutionException e) {
@@ -55,10 +68,20 @@ public class PagaSpesa extends AppCompatActivity {
                             }
                             else
                             {
+                                for ( int y=0;y<Tutte.size() && pagato>0;y++ )
+                                {
+                                    if(Tutte.get(y).getIdSpesa()==sel.getIdSpesa()&& Tutte.get(y).getCreditore().equals(Tutte.get(y).getDebitore()))
+                                    {
+                                        temp2=Tutte.get(y);
+                                    }
+                                }
                                 Double t=sel.getDovuto();
                                 temp=new SpesaStanza(sel.getIdSpesa(),sel.getCreditore(),sel.getDebitore(),sel.getNome(),0,sel.getData(),sel.getIdStanza(),sel.getImporto());
+                                temp3=new SpesaStanza(temp2.getIdSpesa(),temp2.getCreditore(),temp2.getDebitore(),temp2.getNome(),0,temp2.getData(),temp2.getIdStanza(),temp2.getImporto());
+
                                 try {
                                     temp.AggiornaSpesaStanza(temp);
+                                    temp3.AggiornaSpesaStanza(temp3);
                                 } catch (JSONException e) {
                                   e.printStackTrace();
                                 } catch (ExecutionException e) {
@@ -84,11 +107,23 @@ public class PagaSpesa extends AppCompatActivity {
             BtnPagato.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     double pagato=Double.parseDouble(importo.getText().toString());
+                    ArrayList<SpesaStanza>Tutte=(ArrayList<SpesaStanza>)getIntent().getSerializableExtra("lista");
                     if(!(pagato>sel.getDovuto()))
                     {
+                        SpesaStanza temp2=null;
+                        SpesaStanza temp3=null;
+                        for ( int y=0;y<Tutte.size() && pagato>0;y++ )
+                        {
+                            if(Tutte.get(y).getIdSpesa()==sel.getIdSpesa()&& Tutte.get(y).getCreditore().equals(Tutte.get(y).getDebitore()))
+                            {
+                                temp2=Tutte.get(y);
+                            }
+                        }
                         SpesaStanza t=new SpesaStanza(sel.getIdSpesa(),sel.getCreditore(),sel.getDebitore(),sel.getNome(),sel.getDovuto()-pagato,sel.getData(),sel.getIdStanza(),sel.getImporto());
+                        temp3=new SpesaStanza(temp2.getIdSpesa(),temp2.getCreditore(),temp2.getDebitore(),temp2.getNome(),temp2.getDovuto()+pagato,temp2.getData(),temp2.getIdStanza(),temp2.getImporto());
                         try {
                             t.AggiornaSpesaStanza(t);
+                            temp3.AggiornaSpesaStanza(temp3);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (ExecutionException e) {
