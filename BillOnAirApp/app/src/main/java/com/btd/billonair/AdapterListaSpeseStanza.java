@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,15 +80,29 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
 
         for(final SpesaStanza spesaStanza:spstanza){
             if(!spesaStanza.getDebitore().equals(username)) {
+                LinearLayout oriz = new LinearLayout(view.getContext());
+                oriz.setOrientation(LinearLayout.HORIZONTAL);
+
                 TextView u = new TextView(getContext());
                 u.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                u.setText(spesaStanza.getDebitore() + " deve " + spesaStanza.getDovuto());
+                if(spesaStanza.getDovuto()<0)
+                {
+                    u.setText("Devo " + (spesaStanza.getDovuto()*(-1))+ " a "+spesaStanza.getDebitore());
+                }
+                else
+                    u.setText(spesaStanza.getDebitore() + " deve " + spesaStanza.getDovuto());
                 int c = Color.parseColor("#555555");
+                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                u.setLayoutParams(lp);
                 u.setTextColor(c);
-                h.addView(u);
+                oriz.addView(u);
+
+
                 if(spesaStanza.getCreditore().equals(username)){
                     //mostro pulsanti paga
                     Button btnPaga = new Button(getContext());
+                    btnPaga.setLayoutParams(lp);
+                    int btnColor = Color.parseColor("#d6d7d7");
                     btnPaga.setText("Paga");
                     btnPaga.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -101,8 +116,10 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                         }
                     });
 
-                    h.addView(btnPaga);
+                    oriz.addView(btnPaga);
                 }
+
+                h.addView(oriz);
             }
         }
         l.addView(h);
