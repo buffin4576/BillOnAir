@@ -89,15 +89,15 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                     //mostro pulsanti paga
                     Button btnPaga = new Button(getContext());
                     btnPaga.setText("Paga");
+                    final Bundle bund=new Bundle();
                     btnPaga.setOnClickListener(new View.OnClickListener() {
-                        @Override
                         public void onClick(View v) {
-                            final Intent intent2=new Intent(mContext,PagaSpesa.class);
-                            final Bundle bund2=new Bundle();
-                            bund2.putCharSequence("type","selected");
-                            bund2.putSerializable("spesa",spesaStanza);
-                            intent2.putExtras(bund2);
-                            getContext().startActivity(intent2);
+                            Intent intent=new Intent(mContext,PagaSpesa.class);
+                            bund.putCharSequence("type","nottotal");
+                            bund.putSerializable("spesa",spesaStanza);
+                            intent.putExtras(bund);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(intent);
                         }
                     });
 
