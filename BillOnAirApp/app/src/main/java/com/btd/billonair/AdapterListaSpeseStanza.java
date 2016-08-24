@@ -23,7 +23,9 @@ import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO;
 import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by ernrico on 08/06/2016.
@@ -64,7 +66,10 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<SpesaStanza>
         debito.setText(spstanza.getImporto()+"");
         creditore.setText(spstanza.getCreditore());
         causale.setText(spstanza.getNome());
-        data.setText(spstanza.getData());
+
+        String[] d = spstanza.getData().split("T");
+        String dataFormattata = d[0].split("-")[2]+"/"+d[0].split("-")[1]+"/"+d[0].split("-")[0];
+        data.setText(dataFormattata);
         return view;
 
     }
