@@ -79,7 +79,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
         h.setTag("layout"+LStanza.get(pos).get(0).getNome());
 
         for(final SpesaStanza spesaStanza:spstanza){
-            if(!spesaStanza.getDebitore().equals(username)) {
+            if(!spesaStanza.getDebitore().equals(username) && spesaStanza.getDovuto()!=0) {
                 LinearLayout oriz = new LinearLayout(view.getContext());
                 oriz.setOrientation(LinearLayout.HORIZONTAL);
 
