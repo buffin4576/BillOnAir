@@ -25,6 +25,7 @@ import com.btd.billonair.com.btd.billonair.db.ContoDAO_DB_impl;
 import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO;
 import com.btd.billonair.com.btd.billonair.db.SpesaContoDAO_DB_impl;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
         h.setOrientation(LinearLayout.VERTICAL);
         h.setTag("layout"+LStanza.get(pos).get(0).getNome());
 
-        for(SpesaStanza spesaStanza:spstanza){
+        for(final SpesaStanza spesaStanza:spstanza){
             if(!spesaStanza.getDebitore().equals(username)) {
                 TextView u = new TextView(getContext());
                 u.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
@@ -91,7 +92,12 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                     btnPaga.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            final Intent intent2=new Intent(mContext,PagaSpesa.class);
+                            final Bundle bund2=new Bundle();
+                            bund2.putCharSequence("type","selected");
+                            bund2.putSerializable("spesa",spesaStanza);
+                            intent2.putExtras(bund2);
+                            getContext().startActivity(intent2);
                         }
                     });
 
