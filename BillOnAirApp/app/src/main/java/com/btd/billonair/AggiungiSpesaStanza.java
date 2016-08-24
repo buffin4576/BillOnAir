@@ -1,5 +1,6 @@
 package com.btd.billonair;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +8,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,7 +31,12 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
 
         EditText causale=(EditText)findViewById(R.id.txtCausaleSpesaStanza);
         final EditText importo=(EditText)findViewById(R.id.txtImportSpesaStanza);
-        Stanza stanza =(Stanza) getIntent().getSerializableExtra("stanza");
+        final Stanza stanza =(Stanza) getIntent().getSerializableExtra("stanza");
+        Button Aggiungi=(Button)findViewById(R.id.btnAddSpesaStanza);
+        final SpesaStanza Sp=new SpesaStanza();
+        final SharedPreferences preferences=getSharedPreferences("Shared",0);
+        final String username=preferences.getString("username","offline");
+        final String StCausale=causale.getText().toString();
 
         final ArrayList<String> users = stanza.getUsers();
         LinearLayout layoutUtenti = (LinearLayout)findViewById(R.id.verticalUtentiAggiungiStanza);
@@ -78,7 +86,35 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
                 }
             });
         }
+        final LinearLayout vertical=(LinearLayout)findViewById(R.id.verticalUtentiAggiungiStanza);
+        final EditText Editt=(EditText)vertical.findViewWithTag("edit"+username);
 
+        Aggiungi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    int id=0;
+                    double dimporto=Double.parseDouble(importo.getText().toString());
+                    double dovuto=Double.parseDouble(Editt.getText().toString());
+                    id=Sp.CreaSpesaStanza(username,username,StCausale,(-1)*(dimporto-dovuto),stanza.getIdStanza(),dimporto);
+                    for (int i=0;i<users.size();i++)
+                    {
+                        if(!users.get(i).equals(username))
+                        {
+                            EditText Edittuser=(EditText)vertical.findViewWithTag("edit"+users.get(i));
+                            double ddovuto=Double.parseDouble(Edittuser.getText().toString());
+                            Sp.AggiungiSpesaUtente(id,username,users.get(i),StCausale,ddovuto,stanza.getIdStanza(),ddovuto);
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         /*SpesaStanza Sp=new SpesaStanza();
         int i=-1;
         try {
