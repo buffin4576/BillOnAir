@@ -76,28 +76,6 @@
             android:layout_marginTop="20dp"
             android:layout_below="@+id/datiAggiungiSpesa">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Utente"
-                    android:id="@+id/textView18" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:ems="10"
-                    android:id="@+id/txtDovutoSpesaStanza"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-            </LinearLayout>
-
         </LinearLayout>
 
         <Button

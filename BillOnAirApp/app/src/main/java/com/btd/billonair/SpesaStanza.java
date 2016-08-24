@@ -100,7 +100,7 @@ public class SpesaStanza {
 
     public int CreaSpesaStanza(String creditore, String debitore, String nome, double dovuto, int idStanza, double importo) throws JSONException, ExecutionException, InterruptedException {
         ConnectionController connectionController = new ConnectionController();
-        String url = "https://billonair.herokuapp.com/api/spesastanza/spesa";
+        String url = "https://billonair.herokuapp.com/api/spesestanza/spesa";
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("nome", nome);
         jsonObject.put("creditore", creditore);
