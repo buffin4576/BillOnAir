@@ -110,6 +110,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                             Intent intent=new Intent(mContext,PagaSpesa.class);
                             bund.putCharSequence("type","nottotal");
                             bund.putSerializable("spesa",spesaStanza);
+                            bund.putSerializable("lista",LStanza.get(pos));
                             intent.putExtras(bund);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             mContext.startActivity(intent);
