@@ -51,9 +51,8 @@ public class TwoFragment extends Fragment
 
         addroom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*int requestCode = 1;
-                Intent intent = new Intent(getActivity(),DettagliStanza.class);
-                startActivityForResult(intent, requestCode);*/
+                Intent intent = new Intent(getActivity(),AggiungiStanza.class);
+                startActivity(intent);
             }
         });
     }

@@ -102,7 +102,8 @@ public class DettagliStanza extends AppCompatActivity {
 
         if (id == R.id.add_persona)
         {
-
+            Intent intent = new Intent(this,AggiungiUtente.class);
+            startActivity(intent);
         }
         if(id==R.id.add_spesa)
         {

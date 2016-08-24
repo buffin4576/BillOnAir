@@ -24,6 +24,8 @@
         <activity android:name=".NuovoConto"></activity>
         <activity android:name=".AggiuntaSpesaEntrata"></activity>
         <activity android:name=".DettagliStanza"></activity>
+        <activity android:name=".AggiungiStanza"></activity>
+        <activity android:name=".AggiungiUtente"></activity>
     </application>
 
 </manifest>
