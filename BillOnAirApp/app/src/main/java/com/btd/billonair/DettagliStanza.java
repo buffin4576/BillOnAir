@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -65,6 +66,7 @@ public class DettagliStanza extends AppCompatActivity {
         for(Object[] o:saldi){
             TextView txtUser = new TextView(this);
             txtUser.setText(o[0]+": "+o[1]);
+            txtUser.setTag("stanza"+o[0]);
             txtUser.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
             linearUsers.addView(txtUser);
         }
@@ -92,6 +94,8 @@ public class DettagliStanza extends AppCompatActivity {
 
         return totali;
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -122,4 +126,20 @@ public class DettagliStanza extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ArrayList<SpesaStanza> spese = stanza.getSpeseStanza();
+        LinearLayout linearUsers = (LinearLayout)findViewById(R.id.linearUtentiStanza);
+        ListView lv = (ListView)findViewById(R.id.listSpeseStanza);
+        AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, spese);
+        lv.setAdapter(adapterListaSpeseStanza);
+
+        ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
+        for(Object[] o:saldi){
+            TextView temp=(TextView)linearUsers.findViewWithTag("stanza"+o[0]);
+            temp.setText(o[0]+": "+o[1]);
+        }
+
+    }
 }
