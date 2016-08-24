@@ -56,17 +56,26 @@ public class DettagliStanza extends AppCompatActivity {
             txtUser.setText(o[0]+": "+o[1]);
             txtUser.setTag("stanza"+o[0]);
             txtUser.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-            Button Btn=new Button(this);
-            Btn.setText("Salda");
-            Btn.setTag("Btn"+o[0]);
-            Btn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    intent.putExtras(bund);
-                    startActivity(intent);
-                }
-            });
             hor.addView(txtUser);
-            hor.addView(Btn);
+            if((double)o[1]>0)
+            {
+                final Intent intent2=new Intent(this,PagaSpesa.class);
+                final Bundle bund2=new Bundle();
+                bund2.putCharSequence("type","total");
+                bund2.putSerializable("stanza",stanza);
+                bund2.putCharSequence("nome",o[0]+"");
+                bund2.putDouble("debito",(Double)o[1]);
+                intent2.putExtras(bund2);
+                Button Btn = new Button(this);
+                Btn.setText("Salda");
+                Btn.setTag("Btn" + o[0]);
+                Btn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        startActivity(intent2);
+                    }
+                });
+                hor.addView(Btn);
+            }
             linearUsers.addView(hor);
         }
 

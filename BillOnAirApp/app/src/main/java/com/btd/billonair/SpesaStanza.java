@@ -5,12 +5,13 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Buffin on 09/08/2016.
  */
-public class SpesaStanza {
+public class SpesaStanza implements Serializable {
 
     private int idSpesa;
     private String creditore;
