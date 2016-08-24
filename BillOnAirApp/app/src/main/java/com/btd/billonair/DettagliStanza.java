@@ -205,12 +205,14 @@ public class DettagliStanza extends AppCompatActivity {
                 riga.add(spese.get(i));
             }
         }
-        table.remove(0);
+        if(table.size()>0)
+            table.remove(0);
         table.add(riga);
         /***************/
 
         AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, table);
-        lv.setAdapter(adapterListaSpeseStanza);
+        if(table.get(0).size()>0)
+            lv.setAdapter(adapterListaSpeseStanza);
 
         ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
         for(Object[] o:saldi){
