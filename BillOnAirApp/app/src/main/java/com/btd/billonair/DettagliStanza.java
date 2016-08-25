@@ -115,10 +115,10 @@ public class DettagliStanza extends AppCompatActivity {
                 double tot=0;
                 for(int j = 0; j < spese.size(); j++){
                     if(spese.get(j).getCreditore().equals(user) && spese.get(j).getDebitore().equals(users.get(i))){
-                        tot+=spese.get(j).getImporto();
+                        tot+=spese.get(j).getDovuto();
                     }
                     if(spese.get(j).getCreditore().equals(users.get(i)) && spese.get(j).getDebitore().equals(user)){
-                        tot-=spese.get(j).getImporto();
+                        tot-=spese.get(j).getDovuto();
                     }
                 }
                 Object[] o = new Object[]{users.get(i),tot};
