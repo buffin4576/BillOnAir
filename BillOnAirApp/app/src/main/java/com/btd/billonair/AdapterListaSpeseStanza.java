@@ -81,6 +81,43 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
         h.setOrientation(LinearLayout.VERTICAL);
         h.setTag("layout"+LStanza.get(pos).get(0).getNome());
 
+        deleteSpesa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDlg=new AlertDialog.Builder(getContext());
+                alertDlg.setMessage("Sei sicuto di volere cancellare questa spesa?");
+
+                alertDlg.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        try {
+                            spstanza.get(0).DeleteSpesaStanza(spstanza.get(0));
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        LStanza.remove(spstanza);
+                        myadapter.notifyDataSetChanged();
+                        if(mOnDataChangeListener != null){
+                            mOnDataChangeListener.onDataChanged(LStanza.size());
+                        }
+                    }
+                });
+
+                alertDlg.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDlg.create().show();
+            }
+        });
+
         for(final SpesaStanza spesaStanza:spstanza){
             if(!spesaStanza.getDebitore().equals(username) && spesaStanza.getDovuto()!=0) {
                 LinearLayout oriz = new LinearLayout(view.getContext());
@@ -121,43 +158,6 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                     });
 
                     oriz.addView(btnPaga);
-
-                    deleteSpesa.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            AlertDialog.Builder alertDlg=new AlertDialog.Builder(mContext);
-                            alertDlg.setMessage("Sei sicuto di volere cancellare questa spesa?");
-
-                            alertDlg.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                    try {
-                                        spesaStanza.DeleteSpesaStanza(spesaStanza);
-                                    } catch (ExecutionException e) {
-                                        e.printStackTrace();
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    LStanza.remove(spstanza);
-                                    myadapter.notifyDataSetChanged();
-                                    if(mOnDataChangeListener != null){
-                                        mOnDataChangeListener.onDataChanged(LStanza.size());
-                                    }
-                                }
-                            });
-
-                            alertDlg.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            });
-
-                            alertDlg.create().show();
-                        }
-                    });
                 }
 
                 h.addView(oriz);
