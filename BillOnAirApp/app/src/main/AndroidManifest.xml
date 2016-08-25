@@ -29,6 +29,7 @@
         <activity android:name=".AggiungiUtente"></activity>
         <activity android:name=".AggiungiSpesaStanza"></activity>
         <activity android:name=".PagaSpesa"></activity>
+        <activity android:name="NotificheActivity"></activity>
     </application>
 
 </manifest>

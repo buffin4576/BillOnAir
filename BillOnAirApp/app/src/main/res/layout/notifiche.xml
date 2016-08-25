@@ -14,7 +14,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/listanotifiche"
         android:layout_below="@+id/txtNomestanza"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="102dp" />
