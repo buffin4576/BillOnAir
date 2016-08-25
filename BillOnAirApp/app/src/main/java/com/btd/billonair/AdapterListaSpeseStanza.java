@@ -84,7 +84,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
         deleteSpesa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertDlg=new AlertDialog.Builder(getContext());
+                AlertDialog.Builder alertDlg=new AlertDialog.Builder(v.getRootView().getContext());
                 alertDlg.setMessage("Sei sicuto di volere cancellare questa spesa?");
 
                 alertDlg.setPositiveButton("Si", new DialogInterface.OnClickListener() {
