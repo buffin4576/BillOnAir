@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/txtNomeSpesaDay"
+        android:textSize="20dp"
+        android:textColor="@color/caldroid_555"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/txtImportoSpesaDay"
+        android:layout_toRightOf="@+id/txtNomeSpesaDay"
+        android:layout_alignTop="@+id/txtNomeSpesaDay"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/caldroid_555" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/txtDataSpesaDay"
+        android:layout_below="@+id/txtNomeSpesaDay"
+        android:layout_alignLeft="@+id/txtNomeSpesaDay"
+        android:textSize="18dp"
+        android:textColor="@color/caldroid_gray"
+        android:layout_marginBottom="10dp" />
+</RelativeLayout>

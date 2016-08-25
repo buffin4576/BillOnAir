@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -164,7 +165,7 @@ public class DettagliStanza extends AppCompatActivity {
         }
         if(id==R.id.delete_room)
         {
-            AlertDialog.Builder alertDlg=new AlertDialog.Builder(getApplicationContext());
+            AlertDialog.Builder alertDlg=new AlertDialog.Builder(this);
             alertDlg.setMessage("Sei sicuto di volere uscire dalla stanza?");
 
             alertDlg.setPositiveButton("Si", new DialogInterface.OnClickListener() {

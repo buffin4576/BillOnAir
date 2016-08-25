@@ -1,8 +1,11 @@
 package com.btd.billonair;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +58,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         tv1.setTextColor(Color.BLACK);
 
         // Get dateTime of this cell
-        DateTime dateTime = this.datetimeList.get(position);
+        final DateTime dateTime = this.datetimeList.get(position);
         Resources resources = context.getResources();
 
         // Set color of the dates in previous / next month
@@ -135,6 +138,18 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         double d_tot= (double)myData.get(0) - (double)myData.get(1);
         String tot = String.format("%.2f", d_tot);
         tvTot.setText("Tot: "+tot);*/
+
+        cellView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Bundle bund=new Bundle();
+                Intent intent = new Intent(context,CalendarShowDay.class);
+                bund.putString("data",dateTime.format("YYYY-MM-DD"));
+                Log.w("Cal",dateTime.format("YYYY-MM-DD"));
+                intent.putExtras(bund);
+                context.startActivity(intent);
+            }
+        });
 
         // Somehow after setBackgroundResource, the padding collapse.
         // This is to recover the padding

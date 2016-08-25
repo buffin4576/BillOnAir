@@ -30,6 +30,7 @@
         <activity android:name=".AggiungiSpesaStanza"></activity>
         <activity android:name=".PagaSpesa"></activity>
         <activity android:name="NotificheActivity"></activity>
+        <activity android:name=".CalendarShowDay"></activity>
     </application>
 
 </manifest>
