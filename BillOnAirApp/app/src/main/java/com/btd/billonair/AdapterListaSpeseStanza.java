@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by ernrico on 08/06/2016.
@@ -67,6 +69,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
         TextView creditore=(TextView)view.findViewById(R.id.txtcreditore);
         TextView causale=(TextView)view.findViewById(R.id.txtcausale);
         TextView data=(TextView)view.findViewById(R.id.txtdataspesa);
+        ImageView deleteSpesa=(ImageView) view.findViewById(R.id.deleteSpesaStanza);
         Formattazione form=new Formattazione();
 
         creditore.setText(spstanza.get(0).getCreditore());
@@ -84,7 +87,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                 oriz.setOrientation(LinearLayout.HORIZONTAL);
 
                 TextView u = new TextView(getContext());
-                u.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                u.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 if(spesaStanza.getDovuto()<0)
                 {
                     u.setText("Devo " + (spesaStanza.getDovuto()*(-1))+ " a "+spesaStanza.getDebitore());
@@ -100,7 +103,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
 
                 if(spesaStanza.getCreditore().equals(username)){
                     //mostro pulsanti paga
-                    Button btnPaga = new Button(getContext());
+                    Button btnPaga = new Button(mContext);
                     btnPaga.setLayoutParams(lp);
                     int btnColor = Color.parseColor("#d6d7d7");
                     btnPaga.setText("Paga");
@@ -118,6 +121,46 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                     });
 
                     oriz.addView(btnPaga);
+
+                    deleteSpesa.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog.Builder alertDlg=new AlertDialog.Builder(mContext);
+                            alertDlg.setMessage("Sei sicuto di volere cancellare questa spesa?");
+
+                            alertDlg.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    try {
+                                        spesaStanza.DeleteSpesaStanza(spesaStanza);
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    LStanza.remove(spstanza);
+                                    myadapter.notifyDataSetChanged();
+                                    if(mOnDataChangeListener != null){
+                                        mOnDataChangeListener.onDataChanged(LStanza.size());
+                                    }
+                                }
+                            });
+
+                            alertDlg.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+
+                            alertDlg.create().show();
+                        }
+                    });
+                }
+                else{
+                    ((ViewManager)deleteSpesa.getParent()).removeView(deleteSpesa);
                 }
 
                 h.addView(oriz);
@@ -130,6 +173,15 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
         data.setText(dataFormattata);
         return view;
 
+    }
+
+    public interface OnDataChangeListener{
+        public void onDataChanged(int size);
+    }
+
+    OnDataChangeListener mOnDataChangeListener;
+    public void setOnDataChangeListener(OnDataChangeListener onDataChangeListener){
+        mOnDataChangeListener = onDataChangeListener;
     }
 
 }

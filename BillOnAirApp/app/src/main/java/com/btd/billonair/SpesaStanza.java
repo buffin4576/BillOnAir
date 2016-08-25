@@ -145,4 +145,10 @@ public class SpesaStanza implements Serializable {
         jsonObject.put("idSpesa", spesaStanza.getIdSpesa());
         String resp = connectionController.execute("PUT", url, jsonObject).get();
     }
+
+    public void DeleteSpesaStanza(SpesaStanza spesaStanza) throws ExecutionException, InterruptedException {
+        ConnectionController connectionController = new ConnectionController();
+        String url = "https://billonair.herokuapp.com/api/spesestanza/"+spesaStanza.getIdSpesa();
+        connectionController.execute("DELETE",url).get();
+    }
 }

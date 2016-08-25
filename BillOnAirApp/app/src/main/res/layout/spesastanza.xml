@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/scrollView"
+    android:fillViewport="true" >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
@@ -6,10 +11,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtcausale"
-        android:textSize="26dp"
+        android:textSize="22dp"
         android:layout_alignParentStart="true"
         android:text="causale"
         android:textColor="@color/caldroid_555" />
+
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:id="@+id/deleteSpesaStanza"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@mipmap/trash"
+        android:layout_alignTop="@+id/txtcausale"
+        android:layout_marginTop="4dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +53,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/txtdataspesa"
         android:layout_marginTop="10dp"
         android:id="@+id/verticalListautentiSpesa">
@@ -45,3 +61,4 @@
     </LinearLayout>
 
 </RelativeLayout>
+    </ScrollView>
