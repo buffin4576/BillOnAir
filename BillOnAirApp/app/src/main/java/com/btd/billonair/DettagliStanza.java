@@ -29,6 +29,7 @@ public class DettagliStanza extends AppCompatActivity {
     ArrayList<String> users = new ArrayList<>();
     SharedPreferences sharedPreferences;
     String user;
+    Bundle bund;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,24 +58,11 @@ public class DettagliStanza extends AppCompatActivity {
             txtUser.setTag("stanza"+o[0]);
             txtUser.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
             hor.addView(txtUser);
-            final Intent intent2=new Intent(this,PagaSpesa.class);
-            final Bundle bund2=new Bundle();
-            bund2.putCharSequence("type","total");
-            bund2.putSerializable("stanza",stanza);
-            bund2.putCharSequence("nome",o[0]+"");
-            bund2.putDouble("debito",(Double)o[1]);
-            intent2.putExtras(bund2);
             Button Btn = new Button(this);
             Btn.setText("Salda");
             Btn.setTag("Btn" + o[0]);
             Btn.setClickable(false);
-            Btn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    startActivity(intent2);
-                }
-            });
             hor.addView(Btn);
-
             linearUsers.addView(hor);
         }
 
@@ -214,10 +202,23 @@ public class DettagliStanza extends AppCompatActivity {
             lv.setAdapter(adapterListaSpeseStanza);
 
         ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
-        for(Object[] o:saldi){
+        for(final Object[] o:saldi){
             TextView temp=(TextView)linearUsers.findViewWithTag("stanza"+o[0]);
             temp.setText(o[0]+": "+o[1]);
             Button Bt=(Button)linearUsers.findViewWithTag("Btn" + o[0]);
+
+            Bt.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    final Intent intent2=new Intent(getApplicationContext(),PagaSpesa.class);
+                    final Bundle bund2=new Bundle();
+                    bund2.putCharSequence("type","total");
+                    bund2.putSerializable("stanza",stanza);
+                    bund2.putCharSequence("nome",o[0]+"");
+                    bund2.putDouble("debito",(Double)o[1]);
+                    intent2.putExtras(bund2);
+                    startActivity(intent2);
+                }
+            });
             if((Double)o[1]>0)
             {
                 Bt.setClickable(true);
