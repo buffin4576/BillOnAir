@@ -172,6 +172,7 @@ public class DettagliStanza extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     try {
                         stanza.RimuoviUtente(user);
+                        finish();
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
