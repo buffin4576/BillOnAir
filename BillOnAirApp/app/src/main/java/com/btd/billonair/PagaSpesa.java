@@ -8,7 +8,10 @@ import android.widget.EditText;
 
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -57,6 +60,14 @@ public class PagaSpesa extends AppCompatActivity {
                                 try {
                                     temp.AggiornaSpesaStanza(temp);
                                     temp3.AggiornaSpesaStanza(temp3);
+
+                                    final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                                    final String utcTime = sdf.format(new Date());
+                                    String testo=temp.getCreditore()+" ti ha saldato "+pagato+"€ per la spesa "+temp.getNome();
+                                    Notifica n = new Notifica(temp.getNome(),temp.getDebitore(),temp.getDovuto(),utcTime, -1, temp.getIdStanza(),testo);
+
+                                    n.SendNotifica();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 } catch (ExecutionException e) {
@@ -82,6 +93,14 @@ public class PagaSpesa extends AppCompatActivity {
                                 try {
                                     temp.AggiornaSpesaStanza(temp);
                                     temp3.AggiornaSpesaStanza(temp3);
+
+                                    final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                                    final String utcTime = sdf.format(new Date());
+                                    String testo=temp.getCreditore()+" ti ha saldato "+pagato+"€ per la spesa "+temp.getNome();
+                                    Notifica n = new Notifica(temp.getNome(),temp.getDebitore(),temp.getDovuto(),utcTime, -1, temp.getIdStanza(),testo);
+
+                                    n.SendNotifica();
                                 } catch (JSONException e) {
                                   e.printStackTrace();
                                 } catch (ExecutionException e) {
@@ -124,6 +143,14 @@ public class PagaSpesa extends AppCompatActivity {
                         try {
                             t.AggiornaSpesaStanza(t);
                             temp3.AggiornaSpesaStanza(temp3);
+
+                            final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                            final String utcTime = sdf.format(new Date());
+                            String testo=t.getCreditore()+" ti ha saldato "+pagato+"€ per la spesa "+t.getNome();
+                            Notifica n = new Notifica(t.getNome(),t.getDebitore(),t.getDovuto(),utcTime, -1, t.getIdStanza(),testo);
+
+                            n.SendNotifica();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (ExecutionException e) {

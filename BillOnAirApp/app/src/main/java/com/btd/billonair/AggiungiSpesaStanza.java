@@ -17,7 +17,10 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -104,6 +107,14 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
                             EditText Edittuser=(EditText)vertical.findViewWithTag("edit"+users.get(i));
                             double ddovuto=Double.parseDouble(Edittuser.getText().toString());
                             Sp.AggiungiSpesaUtente(id,username,users.get(i),StCausale,ddovuto,stanza.getIdStanza(),ddovuto);
+
+                            final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                            final String utcTime = sdf.format(new Date());
+                            String testo=username +" ha aggiunto una spesa di "+ddovuto+"€ per "+StCausale;
+                            Notifica n = new Notifica(StCausale,users.get(i),ddovuto,utcTime, -1, stanza.getIdStanza(),testo);
+
+                            n.SendNotifica();
                         }
                     }
 

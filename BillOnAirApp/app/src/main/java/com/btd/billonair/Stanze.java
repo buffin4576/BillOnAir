@@ -27,14 +27,14 @@ public class Stanze {
     public ArrayList<Notifica> getNotifiche(){
         ArrayList<Notifica> notifiche = new ArrayList<>();
 
-        Date now = new Date();
+       /* Date now = new Date();
         final Calendar calendar  = Calendar.getInstance();
         final int      utcOffset = calendar.get(Calendar.ZONE_OFFSET) + calendar.get(Calendar.DST_OFFSET);
         final long     tempDate  = new Date().getTime();
         now = new Date(tempDate - utcOffset);
         String d = (now.getYear() + 1900) + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-
-        String url = "https://billonair.herokuapp.com/api/notifiche/"+this.username+"/"+d;
+*/
+        String url = "https://billonair.herokuapp.com/api/notifiche/"+this.username;
 
         ConnectionController connectionController = new ConnectionController();
         try {
@@ -48,12 +48,13 @@ public class Stanze {
 
                     Notifica notifica = new Notifica();
 
-                    notifica.setNomeSpesa(jsonObject.getString("nomeSpesa"));
+                    notifica.setNomeSpesa(jsonObject.getString("nomespesa"));
                     notifica.setUsername(jsonObject.getString("username"));
                     notifica.setDovuto(jsonObject.getDouble("dovuto"));
                     notifica.setData(jsonObject.getString("data"));
-                    notifica.setIdNotifica(jsonObject.getInt("idNotifica"));
-                    notifica.setIdStanza(jsonObject.getInt("idStanza"));
+                    notifica.setIdNotifica(jsonObject.getInt("idnotifica"));
+                    notifica.setIdStanza(jsonObject.getInt("idstanza"));
+                    notifica.setTesto(jsonObject.getString("testo"));
 
                     notifiche.add(notifica);
                 }

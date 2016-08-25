@@ -7,9 +7,14 @@
         android:layout_height="wrap_content"
         android:text="Notifiche Stanza: Nomestanza"
         android:id="@+id/txtNomestanza"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp" />
+        android:textSize="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -17,5 +22,7 @@
         android:id="@+id/listanotifiche"
         android:layout_below="@+id/txtNomestanza"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="102dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 </RelativeLayout>
