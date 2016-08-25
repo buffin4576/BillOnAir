@@ -58,7 +58,8 @@ public class DettagliStanza extends AppCompatActivity {
             LinearLayout hor = new LinearLayout(this);
             hor.setOrientation(LinearLayout.HORIZONTAL);
             TextView txtUser = new TextView(this);
-            txtUser.setText(o[0]+": "+o[1]);
+            String d = o[1]+"";
+            txtUser.setText(o[0]+": "+  String.format("%.2f", Double.parseDouble(d))+"€");
             txtUser.setTag("stanza"+o[0]);
             txtUser.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
             hor.addView(txtUser);
@@ -232,7 +233,9 @@ public class DettagliStanza extends AppCompatActivity {
         ArrayList<Object[]> saldi = CalcolaSaldoUtente(spese,users,user);
         for(final Object[] o:saldi){
             TextView temp=(TextView)linearUsers.findViewWithTag("stanza"+o[0]);
-            temp.setText(o[0]+": "+o[1]);
+            //temp.setText(o[0]+": "+o[1]);
+            String d = o[1]+"";
+            temp.setText(o[0]+": "+  String.format("%.2f", Double.parseDouble(d))+"€");
             Button Bt=(Button)linearUsers.findViewWithTag("Btn" + o[0]);
 
             Bt.setOnClickListener(new View.OnClickListener() {
