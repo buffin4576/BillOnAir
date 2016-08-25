@@ -1,6 +1,8 @@
 package com.btd.billonair;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by ernrico on 21/08/2016.
@@ -161,7 +164,30 @@ public class DettagliStanza extends AppCompatActivity {
         }
         if(id==R.id.delete_room)
         {
+            AlertDialog.Builder alertDlg=new AlertDialog.Builder(getApplicationContext());
+            alertDlg.setMessage("Sei sicuto di volere uscire dalla stanza?");
 
+            alertDlg.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    try {
+                        stanza.RimuoviUtente(user);
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            alertDlg.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            alertDlg.create().show();
         }
 
         return super.onOptionsItemSelected(item);

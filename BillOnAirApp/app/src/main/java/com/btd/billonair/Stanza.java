@@ -154,7 +154,6 @@ public class Stanza implements Serializable{
     }
 
     public void AggiungiUtente(String nome, ArrayList<String> usernames, int idStanza) throws JSONException, ExecutionException, InterruptedException {
-        //da fare
         ConnectionController connectionController = new ConnectionController();
         String url = "https://billonair.herokuapp.com/api/stanza/"+idStanza;
         JSONObject jsonObject = new JSONObject();
@@ -166,5 +165,18 @@ public class Stanza implements Serializable{
         jsonObject.put("nome", nome);
         jsonObject.put("utenti", array);
         connectionController.execute("POST", url, jsonObject).get();
+    }
+
+    public void RimuoviUtente(String username) throws ExecutionException, InterruptedException {
+        ConnectionController connectionController = new ConnectionController();
+        String url = "https://billonair.herokuapp.com/api/stanza/"+this.idStanza+"/"+username;
+        connectionController.execute("DELETE", url).get();
+
+        ArrayList<String> users = getUsers();
+        if(users.size()==0){
+            connectionController = new ConnectionController();
+            String url2 = "https://billonair.herokuapp.com/api/stanza/"+this.idStanza;
+            connectionController.execute("DELETE", url2).get();
+        }
     }
 }
