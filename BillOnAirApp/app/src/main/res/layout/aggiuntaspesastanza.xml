@@ -65,6 +65,25 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Conto"
+                android:id="@+id/textView23"
+                android:layout_below="@+id/textView20"
+                android:layout_marginTop="20dp" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerContiStanza"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/textView20"
+                android:layout_toRightOf="@+id/textView23"
+                android:layout_marginTop="20dp" />
+
         </RelativeLayout>
 
         <LinearLayout

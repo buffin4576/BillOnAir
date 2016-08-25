@@ -83,11 +83,12 @@
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/DettagliListaSpesetext"
             android:layout_toStartOf="@+id/DettagliListaSpesetext"
-            android:layout_alignParentEnd="false"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp" />
 
     </RelativeLayout>
 
