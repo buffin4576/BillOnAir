@@ -162,7 +162,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
 
                 h.addView(oriz);
             }
-            if(spesaStanza.getCreditore().equals(username)&&spesaStanza.getDebitore().equals(username)){
+            if(!spesaStanza.getCreditore().equals(username)&&spesaStanza.getDebitore().equals(username)){
                 ((ViewManager)deleteSpesa.getParent()).removeView(deleteSpesa);
             }
         }
