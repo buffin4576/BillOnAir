@@ -223,7 +223,7 @@ public class DettagliStanza extends AppCompatActivity {
         table.add(riga);
         /***************/
 
-        AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, table);
+        AdapterListaSpeseStanza adapterListaSpeseStanza = new AdapterListaSpeseStanza(getParent(),getApplicationContext(),R.layout.spesastanza, table,this);
         if(table.get(0).size()>0)
             lv.setAdapter(adapterListaSpeseStanza);
 
