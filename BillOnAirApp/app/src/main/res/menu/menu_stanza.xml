@@ -5,16 +5,16 @@
     <item
         android:id="@+id/add_spesa"
         android:orderInCategory="100"
-        android:title="aggiungi spesa"
+        android:title="Aggiungi spesa"
         app:showAsAction="never" />
     <item
         android:id="@+id/add_persona"
         android:orderInCategory="100"
-        android:title="aggiungi persona"
+        android:title="Aggiungi persona"
         app:showAsAction="never" />
     <item
         android:id="@+id/delete_room"
         android:orderInCategory="100"
-        android:title="esci dalla stanza"
+        android:title="Esci dalla stanza"
         app:showAsAction="never" />
 </menu>
