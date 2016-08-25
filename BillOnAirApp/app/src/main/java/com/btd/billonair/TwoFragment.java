@@ -32,7 +32,12 @@ public class TwoFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_two, container, false);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+        String username = sharedPreferences.getString("username","offline");
+        if(!username.equals("offline"))
+            return inflater.inflate(R.layout.fragment_two, container, false);
+        else
+            return inflater.inflate(R.layout.void_layout, container, false);
 
     }
 
@@ -46,15 +51,19 @@ public class TwoFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        final ListView lv=(ListView)getView().findViewById(R.id.ListaStanze);
-        final Button addroom=(Button)getView().findViewById(R.id.aggiungistanza);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+        String username = sharedPreferences.getString("username","offline");
+        if(!username.equals("offline")) {
+            final ListView lv = (ListView) getView().findViewById(R.id.ListaStanze);
+            final Button addroom = (Button) getView().findViewById(R.id.aggiungistanza);
 
-        addroom.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AggiungiStanza.class);
-                startActivity(intent);
-            }
-        });
+            addroom.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), AggiungiStanza.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
@@ -75,16 +84,16 @@ public class TwoFragment extends Fragment
         String username;
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
         username = sharedPreferences.getString("username","offline");
-        ArrayList<Stanza> LStanza;
-        Stanze Lst=new Stanze(username);
-        LStanza=Lst.getStanze();
-        Log.w("ListaStanze",""+LStanza.size());
+        if(!username.equals("offline")) {
+            ArrayList<Stanza> LStanza;
+            Stanze Lst = new Stanze(username);
+            LStanza = Lst.getStanze();
+            Log.w("ListaStanze", "" + LStanza.size());
 
-        final ListView lv=(ListView)getView().findViewById(R.id.ListaStanze);
-        AdapterListaStanze adapterListaStanze = new AdapterListaStanze(getActivity(),getContext(),R.layout.rigastanza,LStanza);
-        lv.setAdapter(adapterListaStanze);
-
-
+            final ListView lv = (ListView) getView().findViewById(R.id.ListaStanze);
+            AdapterListaStanze adapterListaStanze = new AdapterListaStanze(getActivity(), getContext(), R.layout.rigastanza, LStanza);
+            lv.setAdapter(adapterListaStanze);
+        }
     }
 /*
     public void setUserVisibleHint(boolean isVisibleToUser) {
