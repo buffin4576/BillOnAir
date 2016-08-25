@@ -58,6 +58,8 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
 
         final Spinner spinnerConti = (Spinner)findViewById(R.id.spinnerContiStanza);
 
+        importo.setText("0");
+
         ContoDAO dao=new ContoDAO_DB_impl();
         final ArrayList<Conto> LConti=new ArrayList<>();
         ArrayList<Conto> LConti1= null;
@@ -124,7 +126,9 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s) {
                     LinearLayout l = (LinearLayout)findViewById(R.id.verticalUtentiAggiungiStanza);
-                    double d = Double.parseDouble(importo.getText()+"");
+                    double d = 0;
+                    if(!(importo.getText()+"").equals(""))
+                        d = Double.parseDouble(importo.getText()+"");
                     d=d/users.size();
                     for (int i = 0; i< users.size(); i++){
                         EditText editText = (EditText) l.findViewWithTag("edit"+users.get(i));
