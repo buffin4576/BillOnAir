@@ -47,9 +47,10 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
     private String[] myColors= {"#1256b4","#b41256","#12b456"};
     private ArrayList<Object[]> lista = new ArrayList<>();
     private String username="offline";
+    private Activity myactivity;
 
 
-    public AdapterListaSpeseStanza(Activity activity, Context context, int resource, ArrayList<ArrayList<SpesaStanza>> objects)
+    public AdapterListaSpeseStanza(Activity activity, Context context, int resource, ArrayList<ArrayList<SpesaStanza>> objects,Activity mact)
     {
         super(context, resource, objects);
         LStanza=objects;
@@ -59,6 +60,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
         mactivity=activity;
         SharedPreferences sharedPreferences = context.getSharedPreferences("Shared",0);
         username = sharedPreferences.getString("username","offline");
+        myactivity=mact;
     }
 
     @Override
@@ -98,7 +100,13 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
+                        LinearLayout temp=(LinearLayout) myactivity.findViewById(R.id.linearUtentiStanza);
+                        TextView txttemp=(TextView) temp.findViewWithTag("stanza"+spstanza.get(0).getDebitore());
+                        String[]tempor=(txttemp.getText().toString()).split(":");
+                        tempor[1]=tempor[1].replace(" ","");
+                        double debito=Double.parseDouble(tempor[1]);
+                        debito-=spstanza.get(0).getDovuto();
+                        txttemp.setText(tempor[0]+": "+debito);
                         LStanza.remove(spstanza);
                         myadapter.notifyDataSetChanged();
                         if(mOnDataChangeListener != null){
