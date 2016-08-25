@@ -14,21 +14,26 @@ import java.util.List;
  */
 public class AdapterListaNotifiche extends ArrayAdapter<Notifica>
 {
-    private ArrayList<Conto> LConti;
+    private ArrayList<Notifica> LNotifiche;
     private Context mContext= null;
     private int mRowLayout;
-    private AdapterListaConti myadapter;
+    private AdapterListaNotifiche myadapter;
     private Activity mactivity=null;
 
     public AdapterListaNotifiche (Activity activity, Context context, int resource,ArrayList<Notifica> objects)
     {
         super(context,resource,objects);
-
+        LNotifiche=objects;
+        mContext=context;
+        mRowLayout=resource;
+        myadapter=this;
+        mactivity=activity;
 
     }
     @Override
     public View getView(final int pos, View view, final ViewGroup parent) {
-        
         return view;
+        
+
     }
 }

@@ -18,7 +18,6 @@ public class NotificheActivity extends AppCompatActivity {
 
         Stanza s=(Stanza) getIntent().getSerializableExtra("stanza");
 
-
     }
 }
 
