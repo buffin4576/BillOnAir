@@ -159,11 +159,11 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                         }
                     });
                 }
-                else{
-                    ((ViewManager)deleteSpesa.getParent()).removeView(deleteSpesa);
-                }
 
                 h.addView(oriz);
+            }
+            if(spesaStanza.getCreditore().equals(username)&&spesaStanza.getDebitore().equals(username)){
+                ((ViewManager)deleteSpesa.getParent()).removeView(deleteSpesa);
             }
         }
         l.addView(h);
