@@ -53,7 +53,7 @@ public class Stanze {
                     notifica.setDovuto(jsonObject.getDouble("dovuto"));
                     notifica.setData(jsonObject.getString("data"));
                     notifica.setIdNotifica(jsonObject.getInt("idNotifica"));
-                    notifica.setIdStanza(jsonObject.getInt("idstanza"));
+                    notifica.setIdStanza(jsonObject.getInt("idStanza"));
 
                     notifiche.add(notifica);
                 }
@@ -72,8 +72,6 @@ public class Stanze {
 
     public ArrayList<Stanza> getStanze() {
         ArrayList<Notifica> notifiche = getNotifiche();
-
-
         ArrayList<Stanza> stanze = new ArrayList<>();
 
         String url = "https://billonair.herokuapp.com/api/stanza/user/"+this.username;

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,12 +56,31 @@ public class AdapterListaStanze extends ArrayAdapter<Stanza>
         final Stanza stanza = LStanza.get(pos);
         TextView nomeStanza=(TextView)view.findViewById(R.id.txtNomeStanza);
         TextView iniziale=(TextView)view.findViewById(R.id.TxtIniziale);
+        ImageView imgNotifica = (ImageView)view.findViewById(R.id.imgNotifica);
         Formattazione form=new Formattazione();
 
 
         iniziale.setText(stanza.getNome().substring(0,1).toUpperCase());
         String upperNomeConto = stanza.getNome().substring(0,1).toUpperCase() + stanza.getNome().substring(1);
         nomeStanza.setText(upperNomeConto);
+
+        if(!stanza.isNotifica())
+        {
+            ((ViewManager)imgNotifica.getParent()).removeView(imgNotifica);
+        }
+        else {
+
+            imgNotifica.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Bundle bund=new Bundle();
+                    Intent intent=new Intent(mContext,NotificheActivity.class);
+                    bund.putSerializable("Stanza",stanza);
+                    intent.putExtras(bund);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
 
         GradientDrawable shapeDrawable = (GradientDrawable )iniziale.getBackground();
         String c = myColors[pos%3];

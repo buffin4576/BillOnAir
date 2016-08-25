@@ -113,6 +113,10 @@ public class Stanza implements Serializable{
         this.notifiche = notifiche;
     }
 
+    public ArrayList<Notifica> getNotifiche(){
+        return notifiche;
+    }
+
     public ArrayList<String> getUsers(){
         ArrayList<String> users = new ArrayList<>();
 
