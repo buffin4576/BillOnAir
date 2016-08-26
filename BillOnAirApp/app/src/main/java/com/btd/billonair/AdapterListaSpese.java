@@ -67,7 +67,6 @@ public class AdapterListaSpese extends ArrayAdapter<SpesaConto>
         NomeSpesa.setText(spesa.getNomeSpesa());
         CostoSpesa.setText(""+form.Soldi(spesa.getCosto()));
         DataSpesa.setText(form.Data(spesa.getData()));
-
         deletespesa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

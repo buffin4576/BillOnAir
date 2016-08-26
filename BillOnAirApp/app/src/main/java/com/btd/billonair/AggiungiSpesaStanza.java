@@ -159,7 +159,7 @@ public class AggiungiSpesaStanza extends AppCompatActivity {
                             final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                             final String utcTime = sdf.format(new Date());
-                            String testo=username +" ha aggiunto una spesa di "+ddovuto+"€ per "+StCausale;
+                            String testo=username +" ha aggiunto una spesa di "+ddovuto+"per "+StCausale;
                             Notifica n = new Notifica(StCausale,users.get(i),ddovuto,utcTime, -1, stanza.getIdStanza(),testo);
 
                             n.SendNotifica();

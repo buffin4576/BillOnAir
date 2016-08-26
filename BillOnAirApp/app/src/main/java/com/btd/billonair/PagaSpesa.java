@@ -108,7 +108,7 @@ public class PagaSpesa extends AppCompatActivity {
                                     final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                                     final String utcTime = sdf.format(new Date());
-                                    String testo=temp.getCreditore()+" ti ha saldato "+pagato+"€ per la spesa "+temp.getNome();
+                                    String testo=temp.getCreditore()+" ti ha saldato "+pagato+" per la spesa "+temp.getNome();
                                     Notifica n = new Notifica(temp.getNome(),temp.getDebitore(),temp.getDovuto(),utcTime, -1, temp.getIdStanza(),testo);
 
                                     n.SendNotifica();
@@ -146,7 +146,7 @@ public class PagaSpesa extends AppCompatActivity {
                                     final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                                     final String utcTime = sdf.format(new Date());
-                                    String testo=temp.getCreditore()+" ti ha saldato "+pagato+"€ per la spesa "+temp.getNome();
+                                    String testo=temp.getCreditore()+" ti ha saldato "+pagato+" per la spesa "+temp.getNome();
                                     Notifica n = new Notifica(temp.getNome(),temp.getDebitore(),temp.getDovuto(),utcTime, -1, temp.getIdStanza(),testo);
 
                                     n.SendNotifica();
@@ -199,7 +199,7 @@ public class PagaSpesa extends AppCompatActivity {
                             final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                             final String utcTime = sdf.format(new Date());
-                            String testo=t.getCreditore()+" ti ha saldato "+pagato+"€ per la spesa "+t.getNome();
+                            String testo=t.getCreditore()+" ti ha saldato "+pagato+" per la spesa "+t.getNome();
                             Notifica n = new Notifica(t.getNome(),t.getDebitore(),t.getDovuto(),utcTime, -1, t.getIdStanza(),testo);
 
                             n.SendNotifica();

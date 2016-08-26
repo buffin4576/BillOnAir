@@ -39,7 +39,7 @@ public class AdapterListaDay extends ArrayAdapter<SpesaConto> {
         TextView txtData = (TextView)view.findViewById(R.id.txtDataSpesaDay);
 
         txtNome.setText(LSpese.get(pos).getNomeSpesa());
-        String d = String.format("%.2f", Double.parseDouble(LSpese.get(pos).getCosto()+""))+"€";
+        String d = String.format("%.2f", Double.parseDouble(LSpese.get(pos).getCosto()+""));
         txtImporto.setText(d);
         String data = LSpese.get(pos).getData()+"";
         txtData.setText(data.split("-")[2]+"/"+data.split("-")[1]+"/"+data.split("-")[0]);

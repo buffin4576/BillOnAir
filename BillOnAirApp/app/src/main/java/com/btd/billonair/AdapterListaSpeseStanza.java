@@ -137,10 +137,10 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                 u.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 if(spesaStanza.getDovuto()<0)
                 {
-                    u.setText("Devo " + String.format("%.2f", Double.parseDouble((spesaStanza.getDovuto()*(-1))+""))+"€"+ " a "+spesaStanza.getDebitore());
+                    u.setText("Devo " + String.format("%.2f", Double.parseDouble((spesaStanza.getDovuto()*(-1))+""))+" a "+spesaStanza.getDebitore());
                 }
                 else
-                    u.setText(spesaStanza.getDebitore() + " deve " + String.format("%.2f", Double.parseDouble((spesaStanza.getDovuto()+"")))+"€");
+                    u.setText(spesaStanza.getDebitore() + " deve " + String.format("%.2f", Double.parseDouble((spesaStanza.getDovuto()+""))));
                 int c = Color.parseColor("#555555");
                 ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 u.setLayoutParams(lp);

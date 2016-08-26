@@ -49,7 +49,7 @@ public class DettagliConto extends AppCompatActivity {
         AdapterListaSpese adapter=null;
         SharedPreferences sharedPreferences = getSharedPreferences("Shared",0);
         owner = sharedPreferences.getString("username","offline");
-
+        final Formattazione form=new Formattazione();
         try {
             adapter=new AdapterListaSpese(context,R.layout.dettaglispesa,conto.getSpeseConto());
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class DettagliConto extends AppCompatActivity {
 
 
         DNomeConto.setText(conto.getNomeConto());
-        DSaldoConto.setText(""+conto.getSaldo());
+        DSaldoConto.setText(""+form.Soldi(conto.getSaldo()));
         lv.setAdapter(adapter);
 
 
@@ -71,7 +71,7 @@ public class DettagliConto extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 try {
-                    DSaldoConto.setText(dao.getContoByName(conto.getNomeConto(),conto.getOwner()).getSaldo()+"");
+                    DSaldoConto.setText(form.Soldi(dao.getContoByName(conto.getNomeConto(),conto.getOwner()).getSaldo())+"");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
