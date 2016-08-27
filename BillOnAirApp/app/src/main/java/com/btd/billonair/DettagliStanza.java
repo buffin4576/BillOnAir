@@ -252,11 +252,12 @@ public class DettagliStanza extends AppCompatActivity {
             });
             if((Double)o[1]>0)
             {
-                Bt.setClickable(true);
+                Bt.setVisibility(View.VISIBLE);
             }
             else
             {
-                Bt.setClickable(false);
+                Bt.setVisibility(View.GONE);
+                //Bt.setClickable(false);
             }
         }
 
