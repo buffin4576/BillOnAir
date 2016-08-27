@@ -154,7 +154,7 @@ public class DettagliStanza extends AppCompatActivity {
             Bundle bund=new Bundle();
             bund.putSerializable("stanza",stanza);
             intent.putExtras(bund);
-            startActivity(intent);
+            startActivityForResult(intent,1);
         }
         if(id==R.id.add_spesa)
         {
@@ -194,6 +194,16 @@ public class DettagliStanza extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            Intent refresh = new Intent(this, DettagliStanza.class);
+            startActivity(refresh);
+            this.finish();
+        }
     }
 
 
