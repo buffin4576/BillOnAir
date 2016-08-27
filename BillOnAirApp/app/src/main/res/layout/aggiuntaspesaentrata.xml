@@ -72,7 +72,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nome"
+        android:text="Causale"
         android:id="@+id/textView8"
         android:textSize="18sp"
         android:layout_below="@+id/SpinnerConti"
@@ -90,7 +90,8 @@
         android:layout_alignBaseline="@+id/textView8"
         android:layout_alignLeft="@+id/SpinnerConti"
         android:layout_alignStart="@+id/SpinnerConti"
-        android:inputType="text" />
+        android:inputType="text"
+        android:hint="es. Bolletta luce" />
 
     <LinearLayout
         android:orientation="horizontal"

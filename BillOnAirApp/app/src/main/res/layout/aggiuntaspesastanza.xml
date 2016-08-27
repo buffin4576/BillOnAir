@@ -37,13 +37,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="Name"
                 android:ems="10"
                 android:id="@+id/txtCausaleSpesaStanza"
                 android:layout_alignBaseline="@+id/textView21"
                 android:layout_toRightOf="@+id/textView21"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp" />
+                android:layout_marginRight="20dp"
+                android:hint="es. spesa" />
 
             <TextView
                 android:layout_width="wrap_content"

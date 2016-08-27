@@ -29,7 +29,7 @@ public class NuovoConto extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-
+        Colore="#555555";
 
 /*
         DisplayMetrics DM=new DisplayMetrics();

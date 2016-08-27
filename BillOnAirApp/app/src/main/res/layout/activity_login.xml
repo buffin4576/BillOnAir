@@ -37,12 +37,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="Username"
                 android:ems="10"
                 android:id="@+id/txtLoginUsername"
                 android:layout_centerVertical="true"
                 android:layout_alignLeft="@+id/txtLoginPassword"
-                android:layout_alignStart="@+id/txtLoginPassword" />
+                android:layout_alignStart="@+id/txtLoginPassword"
+                android:hint="Username" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -50,9 +50,9 @@
                 android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/txtLoginPassword"
-                android:text="Password"
                 android:layout_below="@+id/txtLoginUsername"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:hint="Password" />
 
             <Button
                 android:layout_width="215dp"

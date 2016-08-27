@@ -45,7 +45,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="40dp"
             android:layout_alignBaseline="@+id/textView3"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:hint="es. Carta Credito" />
 
         <TextView
             android:layout_width="wrap_content"

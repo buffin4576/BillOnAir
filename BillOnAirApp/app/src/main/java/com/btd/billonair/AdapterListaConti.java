@@ -96,8 +96,10 @@ public class AdapterListaConti extends ArrayAdapter<Conto>
                         SharedPreferences spr= getContext().getSharedPreferences("Shared",0);
                         TextView en=(TextView)mactivity.findViewById(R.id.TxtEntrata);
                         TextView sp=(TextView)mactivity.findViewById(R.id.TxtSpesa);
-                        double spesa=Double.parseDouble(sp.getText().toString());
-                        double entrata=Double.parseDouble(en.getText().toString());
+                        String sptext=sp.getText()+"";
+                        String entext=en.getText()+"";
+                        double spesa=Double.parseDouble(sptext.replace(',','.'));
+                        double entrata=Double.parseDouble(entext.replace(',','.'));
                         String owner="offline";
                         try {
                             dao.open();

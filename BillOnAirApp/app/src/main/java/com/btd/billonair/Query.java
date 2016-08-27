@@ -66,7 +66,7 @@ public final class Query {
         String username = settings.getString("username", "offline");
         Log.w("SEND","init: "+lastUpdate+" "+online);
 
-        if(online) {
+        //if(online) {
             Date now = new Date();
 
             final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -83,14 +83,23 @@ public final class Query {
             jsonObject.put("query", query);
             jsonObject.put("username", username);
             jsonObject.put("timestamp", utcTime);
-            connectionController.execute("POST", url, jsonObject).get();
+            String resp = connectionController.execute("POST", url, jsonObject).get();
+            if(resp.length()<=0) {
+                editor.putBoolean("online",false);
+                editor.commit();
+                return false;
+            }
+            else {
+                editor.putBoolean("online",true);
+                editor.commit();
+            }
             lastUpdate = utcTime;
             editor.putString("lastUpdate",lastUpdate);
             editor.commit();
             return true;
-        }
+       /* }
         else
-            return false;
+            return false;*/
     }
 
     public static void SendQueriesOffline() throws SQLException, InterruptedException, ExecutionException, JSONException {

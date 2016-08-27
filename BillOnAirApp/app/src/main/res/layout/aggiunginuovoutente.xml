@@ -39,7 +39,8 @@
                 android:layout_toRightOf="@+id/textView13"
                 android:layout_below="@+id/textView12"
                 android:layout_alignBaseline="@+id/textView13"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:hint="Useraname" />
 
             <Button
                 android:layout_width="30dp"

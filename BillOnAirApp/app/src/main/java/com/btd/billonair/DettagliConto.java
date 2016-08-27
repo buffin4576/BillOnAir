@@ -42,7 +42,7 @@ public class DettagliConto extends AppCompatActivity {
         setContentView(R.layout.dettagliconto);
         context=this;
         conto=(Conto) getIntent().getSerializableExtra("Conto");
-        final EditText DNomeConto=(EditText)findViewById(R.id.DettagliNomeConto);
+        final TextView DNomeConto=(TextView)findViewById(R.id.DettagliNomeConto);
         final TextView DSaldoConto=(TextView)findViewById(R.id.DettagliSaldoConto);
         ListView lv= (ListView)findViewById(R.id.DettagliListaSpese);
         Button Indietro=(Button) findViewById(R.id.buttonIndietro);
@@ -80,7 +80,7 @@ public class DettagliConto extends AppCompatActivity {
         });
 
 
-
+/*
         DNomeConto.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -120,7 +120,7 @@ public class DettagliConto extends AppCompatActivity {
                     dao.close();
                 }
             }
-        });
+        });*/
 
         Indietro.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

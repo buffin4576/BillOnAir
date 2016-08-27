@@ -144,6 +144,14 @@ public class OneFragment extends Fragment
             return;
         }
 
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
+        if(sharedPreferences.getBoolean("online",false)) {
+            try {
+                Query.GetAndExecAllQueries();
+                Query.SendQueriesOffline();
+            } catch (Exception e) {
+            }
+        }
             started=false;
             ListView lv = (ListView) getView().findViewById(R.id.ListaConti);
             ContoDAO dao=new ContoDAO_DB_impl();
@@ -157,7 +165,6 @@ public class OneFragment extends Fragment
             double spese=0;
             double entrate=0;
 
-            SharedPreferences sharedPreferences = getContext().getSharedPreferences("Shared",0);
             owner = sharedPreferences.getString("username","offline");
 
             try {

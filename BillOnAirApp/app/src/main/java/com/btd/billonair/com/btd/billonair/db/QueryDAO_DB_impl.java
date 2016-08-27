@@ -71,7 +71,8 @@ public class QueryDAO_DB_impl implements QueryDAO{
         ArrayList<String> queries = new ArrayList<>();
         String[] params = {owner};
 
-        Cursor cursor = database.query("queries",allColumns,"owner=?",params,null,null,null);
+        //Cursor cursor = database.query("queries",allColumns,"owner=?",params,null,null,null);
+        Cursor cursor = database.query("queries",allColumns,"owner<>?",new String[]{"offline"},null,null,null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             queries.add(cursor.getString(0));

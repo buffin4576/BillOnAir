@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         Query.SetContext(getApplicationContext());
         if(settings.getBoolean("online",false)) {
             try {
-                Query.GetAndExecAllQueries();
-                Query.SendQueriesOffline();
+              // Query.GetAndExecAllQueries();
+              // Query.SendQueriesOffline();
             } catch (Exception e) {
             }
         }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            //getMenuInflater().inflate(R.menu.menu_main_offline, menu);
+            getMenuInflater().inflate(R.menu.menu_main_offline, menu);
         }
 
         return true;
@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences settings = getSharedPreferences("Shared",0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("online",false);
-            editor.putString("username","offline");
             editor.commit();
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
