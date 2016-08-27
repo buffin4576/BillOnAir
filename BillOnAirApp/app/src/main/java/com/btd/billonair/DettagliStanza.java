@@ -199,11 +199,13 @@ public class DettagliStanza extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
+            Bundle bund=new Bundle();
+            bund.putSerializable("Stanza",stanza);
             Intent refresh = new Intent(this, DettagliStanza.class);
+            refresh.putExtras(bund);
             startActivity(refresh);
             this.finish();
-        }
+
     }
 
 
