@@ -106,6 +106,7 @@ public class AdapterListaSpeseStanza extends ArrayAdapter<ArrayList<SpesaStanza>
                         TextView txttemp=(TextView) temp.findViewWithTag("stanza"+spstanza.get(0).getDebitore());
                         String[]tempor=(txttemp.getText().toString()).split(":");
                         tempor[1]=tempor[1].replace(" ","");
+                        tempor[1]=tempor[1].replace(",",".");
                         double debito=Double.parseDouble(tempor[1]);
                         debito-=spstanza.get(0).getDovuto();
                         txttemp.setText(tempor[0]+": "+debito);
